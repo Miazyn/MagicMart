@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
-    [SerializeField] GameObject textBox;
+    [SerializeField] GameObject dialogSystemHeader;
     [SerializeField] TextMeshProUGUI nameBox;
     [SerializeField] TextMeshProUGUI dialogueBox;
     [SerializeField] float typingSpeedInSeconds = 0.05f;
+
+    Sprite savedSprite;
+    [SerializeField] GameObject spriteShownInGame;
 
     //Choices
     [SerializeField] GameObject choiceBottom;
@@ -20,15 +23,15 @@ public class DialogueManager : MonoBehaviour
     Coroutine displayCoroutine;
     public bool typerRunning = false;
 
+
     private void Awake()
     {
-        Instance = this;
         WarnCheck();
     }
 
     private void WarnCheck()
     {
-        if (!textBox)
+        if (!dialogSystemHeader)
         {
             Debug.LogWarning("No Default TextBox is defined.");
         }
@@ -41,37 +44,50 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogWarning("No Default DialogueBox is defined.");
         }
+        if (!spriteShownInGame)
+        {
+            Debug.LogWarning("No Default SpriteBox is defined.");
+        }
     }
 
-    public void TextReceived(ScriptableDialogue dialogue, int counter)
+    public void TextReceived(SO_Dialog dialogue, int counter)
     {
+        DisplayCharacterSprite(dialogue, counter);
         nameBox.text = dialogue.nameOfSpeaker;
         if (!typerRunning)
         {
             if (dialogue != null || dialogue.lines[counter] != "")
             {
-                textBox.SetActive(true);
+                dialogSystemHeader.SetActive(true);
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
-                textBox.SetActive(false);
+                EndDialog();
             }
-            //else if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count != 0)
-            //{
-            //    //Code how to handle choices.
-            //    dialogueBox.text = dialogue.dialogueChoices[0].choiceLine;
-            //}
+            else if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count != 0)
+            {
+                Debug.Log("Here would be logic for a dialog");
+                EndDialog();
+                //Code how to handle choices.
+               // dialogueBox.text = dialogue.dialogueChoices[0].choiceLine;
+            }
             else
             {
                 if (displayCoroutine != null)
                 {
                     StopCoroutine(TypeEffect(dialogue.lines[counter]));
                 }
-                
+
                 displayCoroutine = StartCoroutine(TypeEffect(dialogue.lines[counter]));
             }
         }
-        
+
+    }
+
+    void EndDialog()
+    {
+        dialogSystemHeader.SetActive(false);
+        spriteShownInGame.SetActive(false);
     }
 
     public IEnumerator TypeEffect(string line)
@@ -88,7 +104,7 @@ public class DialogueManager : MonoBehaviour
         typerRunning = false;
     }
 
-    public void StopTypeEffect(ScriptableDialogue dialogue, int counter)
+    public void StopTypeEffect(SO_Dialog dialogue, int counter)
     {
         if (displayCoroutine != null)
         {
@@ -99,19 +115,35 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    //public void SetUpChoices()
-    //{
-    //    Debug.Log("Setting up choices");
-    //}
+    public void DisplayCharacterSprite(SO_Dialog dialogue, int counter)
+    {
+        if (dialogue.keyForCharacterDisplay != null && dialogue.spriteForCharacterDisplay != null)
+        {
+            for (int i = 0; i < dialogue.keyForCharacterDisplay.Count; i++)
+            {
+                if (dialogue.keyForCharacterDisplay[i] == counter)
+                {
+                    savedSprite = dialogue.spriteForCharacterDisplay[i];
+                    spriteShownInGame.GetComponent<Image>().sprite = savedSprite;
+                    spriteShownInGame.SetActive(true);
 
-    //public void FindNextDialogue(ChoiceHolder choiceHolder)
-    //{
-    //    ScriptableChoice choice = choiceHolder.choiceHeld;
-    //    if(choice.followingDialogue != null)
-    //    {
-    //        Debug.Log(choice.followingDialogue.lines[0]);
-    //    }
-    //}
+                    break;
+                }
+                else
+                {
+                    if (savedSprite)
+                    {
+                        spriteShownInGame.GetComponent<Image>().sprite = savedSprite;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("THERE IS NO SPRITE FOR THIS CHARACTER YET SET.");
+                    }
+                }
+            }
 
-    
+        }
+    }
+
+
 }

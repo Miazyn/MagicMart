@@ -4,8 +4,9 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Choice", menuName = "Scriptables/Choice")]
-public class ScriptableChoice : ScriptableObject
+public class SO_Choice : ScriptableObject
 {
+    [TextArea(5, 10)]
     public string choiceLine;
-    public ScriptableDialogue followingDialogue;
+    public SO_Dialog followingDialogue;
 }

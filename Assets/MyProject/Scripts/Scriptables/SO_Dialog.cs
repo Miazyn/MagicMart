@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dialogue", menuName ="Scriptables/Dialogue")]
-public class ScriptableDialogue : ScriptableObject
+public class SO_Dialog : ScriptableObject
 {
     public string nameOfSpeaker;
 
@@ -13,5 +13,5 @@ public class ScriptableDialogue : ScriptableObject
     [TextArea(5,20)]
     public List<string> lines;
 
-    public List<ScriptableChoice> dialogueChoices;
+    public List<SO_Choice> dialogueChoices;
 }

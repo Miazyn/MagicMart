@@ -6,17 +6,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-
-    public ScriptableDialogue myDialog;
+    [SerializeField] DialogueManager dialogManager;
+    [SerializeField] SO_Dialog currentDialog;
     int counter = 0;
 
     private void Awake()
     {
         Instance = this;
+        if (!dialogManager)
+        {
+            Debug.LogError("DialogSystem cannot function without DialogManager!!!");
+        }
     }
 
     void Update()
     {
+        //TRIGGER FOR DIALOGUE ++ get dialog
         if (Input.GetMouseButtonDown(0))
         {
             InteractionDialogue();
@@ -25,20 +30,16 @@ public class GameManager : MonoBehaviour
 
     void InteractionDialogue()
     {
-        if (counter <= myDialog.lines.Count && !DialogueManager.Instance.typerRunning)
+        Debug.Log(counter);
+        if (counter <= currentDialog.lines.Count && !dialogManager.typerRunning)
         {
-            DialogueManager.Instance.TextReceived(myDialog, counter);
+            dialogManager.TextReceived(currentDialog, counter);
             counter++;
         }
-        else if (DialogueManager.Instance.typerRunning)
+        else if (dialogManager.typerRunning)
         {
-            DialogueManager.Instance.StopTypeEffect(myDialog, counter);
+            dialogManager.StopTypeEffect(currentDialog, counter);
         }
 
-        //if(counter > myDialog.lines.Count && myDialog.dialogueChoices.Count != 0)
-        //{
-        //    Debug.Log("Need to recall my function with new dialog lines!");
-        //    DialogueManager.Instance.SetUpChoices();
-        //}
     }
 }

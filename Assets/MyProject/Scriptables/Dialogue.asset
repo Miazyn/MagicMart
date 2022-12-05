@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   nameOfSpeaker: Tester
-  keyForCharacterDisplay: 
-  spriteForCharacterDisplay: []
+  keyForCharacterDisplay: 0000000001000000
+  spriteForCharacterDisplay:
+  - {fileID: 21300000, guid: 55f74d192fa8d1148977d6d8445b7500, type: 3}
+  - {fileID: 21300000, guid: c1e1de1b757b50040a39de2697443b7f, type: 3}
   lines:
-  - "Hi this is a test \u0389\u03A3\u14AA\u14AA\u04E8dsfdsafsafdasdasdjksasjkd"
+  - Hi this is a test dsfdsafsafdasdasdjksasjkd
   - Does this work
   dialogueChoices: []
