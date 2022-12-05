@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
+
 
     public ScriptableDialogue myDialog;
     int counter = 0;
@@ -19,21 +19,26 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (counter <= myDialog.lines.Count && !DialogueManager.Instance.typerRunning)
-            {
-                DialogueManager.Instance.TextReceived(myDialog, counter);
-                counter++;
-            }
-            else if (DialogueManager.Instance.typerRunning)
-            {
-                DialogueManager.Instance.StopTypeEffect(myDialog, counter);
-            }
-
-            //if(counter > myDialog.lines.Count && myDialog.dialogueChoices.Count != 0)
-            //{
-            //    Debug.Log("Need to recall my function with new dialog lines!");
-            //    DialogueManager.Instance.SetUpChoices();
-            //}
+            InteractionDialogue();
         }
+    }
+
+    void InteractionDialogue()
+    {
+        if (counter <= myDialog.lines.Count && !DialogueManager.Instance.typerRunning)
+        {
+            DialogueManager.Instance.TextReceived(myDialog, counter);
+            counter++;
+        }
+        else if (DialogueManager.Instance.typerRunning)
+        {
+            DialogueManager.Instance.StopTypeEffect(myDialog, counter);
+        }
+
+        //if(counter > myDialog.lines.Count && myDialog.dialogueChoices.Count != 0)
+        //{
+        //    Debug.Log("Need to recall my function with new dialog lines!");
+        //    DialogueManager.Instance.SetUpChoices();
+        //}
     }
 }
