@@ -20,4 +20,5 @@ MonoBehaviour:
   lines:
   - Hi this is a test dsfdsafsafdasdasdjksasjkd
   - Does this work
-  dialogueChoices: []
+  dialogueChoices:
+  - {fileID: 11400000, guid: b83b30b260fdade42ab717b14cdf040c, type: 2}

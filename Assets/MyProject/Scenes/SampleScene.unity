@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 1899725496}
-  myDialog: {fileID: 11400000, guid: d37e9a3bd7da60d4fb9a6c2c1bb72261, type: 2}
+  currentDialog: {fileID: 11400000, guid: d37e9a3bd7da60d4fb9a6c2c1bb72261, type: 2}
 --- !u!4 &1899725498
 Transform:
   m_ObjectHideFlags: 0
