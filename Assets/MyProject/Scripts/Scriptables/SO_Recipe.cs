@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SO_Recipe : MonoBehaviour
+[CreateAssetMenu(fileName = "New Recipe", menuName = "Cooking/Recipe")]
+public class SO_Recipe : ScriptableObject
 {
     public string recipeName;
     [TextArea(5,10)]

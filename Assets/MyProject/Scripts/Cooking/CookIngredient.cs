@@ -46,6 +46,8 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+
+        Destroy(gameObject);
     }
 
 }

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class IngredientSpawner : MonoBehaviour, IInitializePotentialDragHandler, IDragHandler
+public class IngredientSpawner : MonoBehaviour, IInitializePotentialDragHandler, IDragHandler, IPointerDownHandler
 {
     [SerializeField] GameObject ingredientPrefab;
     [SerializeField] SO_Ingredient ingredientToSpawn;
@@ -13,20 +14,32 @@ public class IngredientSpawner : MonoBehaviour, IInitializePotentialDragHandler,
     CookIngredient ingredientScript;
     GameObject instantiatedObject;
 
+    Vector2 currentpos;
+
+    void Awake()
+    {
+        GetComponent<Image>().sprite = ingredientToSpawn.ingredientSprite;
+    }
+
     public void OnInitializePotentialDrag(PointerEventData eventData)
     {
         instantiatedObject = Instantiate(ingredientPrefab, prefabParent);
+        instantiatedObject.transform.position = transform.position;
         ingredientScript = instantiatedObject.GetComponent<CookIngredient>();
         ingredientScript.ingredient = ingredientToSpawn;
         ingredientScript.canvas = canvas;
 
-        ingredientPrefab.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-
+        currentpos = GetComponent<RectTransform>().anchoredPosition;
         eventData.pointerDrag = instantiatedObject;
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        currentpos = ingredientPrefab.GetComponent<RectTransform>().anchoredPosition;
+    }
 }
