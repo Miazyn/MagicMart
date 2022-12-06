@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class CookingPot : MonoBehaviour, IDropHandler
 {
 
     [SerializeField] List<SO_Ingredient> ingredients = new List<SO_Ingredient>();
+    SO_Ingredient lastIngredient;
     int counter = 0;
 
     [SerializeField] RecipeBoard currentRecipe;
@@ -16,28 +18,57 @@ public class CookingPot : MonoBehaviour, IDropHandler
         Debug.Log("Dropped: " + eventData.pointerDrag);
 
         ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
+        lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
+        if (!IngredientCheck())
+        {
+            Debug.Log("invalid ingredient");
+        }
+
         if (ingredients.Count == currentRecipe.recipe.ingredients.Length)
         {
-            CheckRecipe();
+            if (CheckRecipe())
+            {
+                Debug.Log("Same recipe");
+            }
+            else
+            {
+                Debug.Log("Not same recipe");
+            }
         }
         counter++;
         Destroy(eventData.pointerDrag);
     }
 
-    void CheckRecipe()
+    bool IngredientCheck()
     {
+        bool foundIngredient = false;
         foreach(var item in currentRecipe.recipe.ingredients)
         {
-            for (int i = 0; i < ingredients.Count; i++)
+            if (lastIngredient.CompareIngredient(item))
             {
-                if (ingredients[i].ingredientName != item.ingredientName)
-                {
-                    Debug.Log("Not same ingredient: " + ingredients[i] + "recipe was: " + item);
-                }
-                Debug.Log("Same ingredient: " + ingredients[i] + "recipe is: " + item);
-
+                foundIngredient = true;
             }
         }
-       // Debug.Log("Same recipe");
+        return foundIngredient;
+    }
+
+    bool CheckRecipe()
+    {
+        foreach (var item in currentRecipe.recipe.ingredients)
+        {
+            bool foundIngredient = false;
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                if (ingredients[i].CompareIngredient(item))
+                {
+                    foundIngredient = true;
+                }
+            }
+            if (!foundIngredient)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

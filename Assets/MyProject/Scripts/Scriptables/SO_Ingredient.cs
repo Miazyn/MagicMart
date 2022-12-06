@@ -9,4 +9,16 @@ public class SO_Ingredient : ScriptableObject
     public Sprite ingredientSprite;
     //[TextArea(5,10)]
     //public string ingredientDescription
+
+    public bool CompareIngredient(SO_Ingredient compareTo)
+    {
+        if(ingredientName == compareTo.ingredientName)
+        {
+            if(ingredientSprite == compareTo.ingredientSprite)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
