@@ -1,14 +1,21 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler, IDropHandler
+public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     RectTransform rect;
     Vector2 originalPosition;
-    [SerializeField] Canvas canvas;
+
+    [SerializeField] SO_Ingredient ingredient;
+
+    public Canvas canvas;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] float onDragAlpha;
+
+
+    GameObject prefab;
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -18,10 +25,10 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         {
             Debug.LogWarning("NO CANVAS FOR SCALE DEFINED");
         }
+        GetComponent<Image>().sprite = ingredient.ingredientSprite;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         canvasGroup.alpha = onDragAlpha;
         canvasGroup.blocksRaycasts = false;
     }
@@ -29,26 +36,12 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public void OnDrag(PointerEventData eventData)
     {
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        Debug.Log("Dragging");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-      //  Debug.Log("Pointer down");
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        Debug.Log("Item has been dropped");
-        // Back to original position
-       // rect.anchoredPosition = originalPosition;
     }
 }

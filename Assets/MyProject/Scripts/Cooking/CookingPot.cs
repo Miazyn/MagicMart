@@ -10,7 +10,6 @@ public class CookingPot : MonoBehaviour, IDropHandler
         Debug.Log("Dropping at: Script from: " +  name);
         if(eventData.pointerDrag != null)
         {
-            Debug.Log(GetComponent<RectTransform>().anchoredPosition);
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
     }

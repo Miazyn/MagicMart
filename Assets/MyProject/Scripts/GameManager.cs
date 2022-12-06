@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DialogueManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [SerializeField] DialogueManager dialogManager;
+    DialogueManager dialogManager;
     [SerializeField] SO_Dialog currentDialog;
     int counter = 0;
 
     private void Awake()
     {
         Instance = this;
+        dialogManager = GetComponent<DialogueManager>();
+
         if (!dialogManager)
         {
             Debug.LogError("DialogSystem cannot function without DialogManager!!!");
@@ -30,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     void InteractionDialogue()
     {
-        Debug.Log(counter);
         if (counter <= currentDialog.lines.Count && !dialogManager.typerRunning)
         {
             dialogManager.TextReceived(currentDialog, counter);
