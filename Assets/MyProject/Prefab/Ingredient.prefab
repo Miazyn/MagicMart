@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 646.3149, y: 43.218624}
+  m_AnchoredPosition: {x: 550, y: 127}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2723138715192044123
@@ -93,8 +93,6 @@ MonoBehaviour:
   canvas: {fileID: 0}
   canvasGroup: {fileID: 0}
   onDragAlpha: 0.7
-  ingredientPrefab: {fileID: 2723138715192044120}
-  ingredientParent: {fileID: 0}
 --- !u!225 &2723138715192044125
 CanvasGroup:
   m_ObjectHideFlags: 0

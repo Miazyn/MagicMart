@@ -7,10 +7,11 @@ public class CookingPot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Dropping at: Script from: " +  name);
-        if(eventData.pointerDrag != null)
-        {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-        }
+        //if(eventData.pointerDrag != null)
+        //{
+        //    eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            
+        //}
+        Destroy(eventData.pointerDrag);
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    RectTransform rect;
-    Vector2 originalPosition;
+    public RectTransform rect;
+    //public Vector2 originalPosition;
 
-    [SerializeField] SO_Ingredient ingredient;
+    public SO_Ingredient ingredient;
 
     public Canvas canvas;
-    [SerializeField] CanvasGroup canvasGroup;
-    [SerializeField] float onDragAlpha;
+    public CanvasGroup canvasGroup;
+    public float onDragAlpha;
 
 
     GameObject prefab;
@@ -20,11 +20,15 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        originalPosition = rect.anchoredPosition;
+        //originalPosition = rect.anchoredPosition;
         if (!canvas)
         {
             Debug.LogWarning("NO CANVAS FOR SCALE DEFINED");
         }
+        
+    }
+    private void Start()
+    {
         GetComponent<Image>().sprite = ingredient.ingredientSprite;
     }
     public void OnBeginDrag(PointerEventData eventData)
@@ -42,6 +46,6 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-
     }
+
 }
