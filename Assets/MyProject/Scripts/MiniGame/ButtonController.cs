@@ -1,58 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    [SerializeField] Image up, down, left, right;
-    Sprite upDefault, downDefault, leftDefault, rightDefault;
-    [SerializeField] Sprite upPress, downPress, leftPress, rightPress;
+    SpriteRenderer spriteRenderer;
+    Sprite defaultSprite;
+    [SerializeField] Sprite pressedSprite;
+
+    [SerializeField] KeyCode keyToPress;
 
     private void Start()
     {
-        upDefault = up.sprite;
-        downDefault = down.sprite;
-        leftDefault = left.sprite;
-        rightDefault = right.sprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultSprite = spriteRenderer.sprite;
     }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(keyToPress))
         {
-            up.sprite = upPress;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            up.sprite = upDefault;
+            spriteRenderer.sprite = pressedSprite;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyUp(keyToPress))
         {
-            down.sprite = downPress;
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            down.sprite = downDefault;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            left.sprite = leftPress;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            left.sprite = leftDefault;
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            right.sprite = rightPress;
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            right.sprite = rightDefault;
+            spriteRenderer.sprite = defaultSprite;
         }
     }
 }

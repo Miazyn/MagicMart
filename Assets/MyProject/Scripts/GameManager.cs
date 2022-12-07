@@ -7,12 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Dialog")]
     DialogueManager dialogManager;
     [SerializeField] SO_Dialog currentDialog;
     int counter = 0;
 
     public delegate void OnItemMenuToggle();
     public OnItemMenuToggle onItemMenuToggleCallback;
+
 
     private void Awake()
     {
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
         {
             //Close menus
         }
+
+        
     }
 
     void InteractionDialogue()

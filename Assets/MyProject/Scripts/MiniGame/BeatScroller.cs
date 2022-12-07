@@ -6,28 +6,26 @@ public class BeatScroller : MonoBehaviour
 {
     [SerializeField] float beatTempo = 120f;
 
-    [SerializeField] bool HasStarted;
-    RectTransform noteRect;
+    public bool HasStarted;
 
     private void Start()
     {
         beatTempo /= 60f;
-        noteRect = GetComponent<RectTransform>();
     }
 
     private void Update()
     {
         if (!HasStarted)
         {
-            if (Input.anyKeyDown)
-            {
-                HasStarted = true;
-            }
+            //if (Input.anyKeyDown)
+            //{
+            //    HasStarted = true;
+            //}
         }
         else
         {
             //Start moving down
-            noteRect.anchoredPosition -= new Vector2(0f, beatTempo * Time.deltaTime);
+            transform.position -= new Vector3(0f, beatTempo * Time.deltaTime, 0f);
         }
     }
 }
