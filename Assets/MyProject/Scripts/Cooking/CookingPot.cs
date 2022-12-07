@@ -11,6 +11,9 @@ public class CookingPot : MonoBehaviour, IDropHandler
     SO_Ingredient lastIngredient;
     int counter = 0;
 
+    [SerializeField] Animator ruehrstabAnimator;
+    string ruehrAnim = "MixingAnimation";
+
     [SerializeField] RecipeBoard currentRecipe;
 
     public void OnDrop(PointerEventData eventData)
@@ -29,6 +32,7 @@ public class CookingPot : MonoBehaviour, IDropHandler
             if (CheckRecipe())
             {
                 Debug.Log("Same recipe");
+                ruehrstabAnimator.Play(ruehrAnim);
             }
             else
             {

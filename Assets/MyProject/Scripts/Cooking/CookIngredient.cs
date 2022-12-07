@@ -21,15 +21,16 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         //originalPosition = rect.anchoredPosition;
-        if (!canvas)
-        {
-            Debug.LogWarning("NO CANVAS FOR SCALE DEFINED");
-        }
+        
         
     }
     private void Start()
     {
         GetComponent<Image>().sprite = ingredient.ingredientSprite;
+        if (!canvas)
+        {
+            Debug.LogWarning("NO CANVAS FOR SCALE DEFINED");
+        }
     }
     public void OnBeginDrag(PointerEventData eventData)
     {

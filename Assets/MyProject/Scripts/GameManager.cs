@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] SO_Dialog currentDialog;
     int counter = 0;
 
+    public delegate void OnItemMenuToggle();
+    public OnItemMenuToggle onItemMenuToggleCallback;
+
     private void Awake()
     {
         Instance = this;
@@ -27,7 +30,12 @@ public class GameManager : MonoBehaviour
         //TRIGGER FOR DIALOGUE ++ get dialog
         if (Input.GetMouseButtonDown(0))
         {
-            InteractionDialogue();
+            //InteractionDialogue();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Close menus
         }
     }
 
