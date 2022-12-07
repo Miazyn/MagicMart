@@ -12,6 +12,8 @@ public class NoteObject : MonoBehaviour
     bool HasHitNote;
     [SerializeField] float keyYValue;
 
+    [Header("Game SFX")]
+    [SerializeField] GameObject hitEffect, goodHitEffect, perfectHitEffect, missEffect;
     private void Update()
     {
         if (Input.GetKeyDown(keyToPress))
@@ -21,24 +23,28 @@ public class NoteObject : MonoBehaviour
                 //RhythmGameManager.instance.NoteHit();
                 HasHitNote = true;
                 gameObject.SetActive(false);
-
-                if(Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + toleranceNormalHit))
-                {
-                    //Normal
-                    RhythmGameManager.instance.NormalHit();
-                }
-                else if(Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + toleranceGoodHit))
-                {
-                    //Good
-                    RhythmGameManager.instance.GoodHit();
-
-                }
-                else if (Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + tolerancePerfectHit))
+                if (Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + tolerancePerfectHit))
                 {
                     //Perfect
+                    Instantiate(perfectHitEffect, transform.position, perfectHitEffect.transform.rotation);
                     RhythmGameManager.instance.PerfectHit();
 
                 }
+                else if (Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + toleranceGoodHit))
+                {
+                    //Good
+                    Instantiate(goodHitEffect, transform.position, goodHitEffect.transform.rotation);
+                    RhythmGameManager.instance.GoodHit();
+
+                }
+                else if (Mathf.Abs(transform.position.y) > Mathf.Abs(keyYValue + toleranceNormalHit))
+                {
+                    //Normal
+                    Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
+                    RhythmGameManager.instance.NormalHit();
+                }
+                
+                
             }
         }
     }
@@ -58,6 +64,7 @@ public class NoteObject : MonoBehaviour
             CanBePressed = false;
             if (!HasHitNote)
             {
+                Instantiate(missEffect, transform.position, missEffect.transform.rotation);
                 RhythmGameManager.instance.NoteMiss();
             }
         }

@@ -57,17 +57,22 @@ public class RhythmGameManager : MonoBehaviour
     }
 
     public void NormalHit()
-    { 
+    {
+        Debug.Log("Normal");
         currentScore += scorePerNote * currentMultiplier; 
         NoteHit(); 
     }
     public void GoodHit() 
     {
+        Debug.Log("Good");
+
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit(); 
     }
     public void PerfectHit() 
     {
+        Debug.Log("Perfect");
+
         currentScore += scorePerPerfectNote * currentMultiplier; 
         NoteHit(); 
     }

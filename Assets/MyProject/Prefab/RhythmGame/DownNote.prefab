@@ -96,11 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c5990086c3d5845855901d5e27bd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toleranceNormalHit: 0.25
-  toleranceGoodHit: 0.15
+  toleranceNormalHit: 0.5
+  toleranceGoodHit: 0.25
   tolerancePerfectHit: 0.1
   keyToPress: 274
   keyYValue: -4
+  hitEffect: {fileID: 6956923645762377966, guid: e04083014c7427d4db3ec851c136f9b9, type: 3}
+  goodHitEffect: {fileID: 6454705224513310168, guid: 803f58ead9d533d449d238e449ca3c09, type: 3}
+  perfectHitEffect: {fileID: 6885353956483216958, guid: 9cfead00050cb7c4d9826dc09b553df0, type: 3}
+  missEffect: {fileID: 4592840886990838263, guid: 74aff502e0ef0634691a83f6e44a4c9f, type: 3}
 --- !u!58 &2119565294996329821
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -116,4 +120,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.17
