@@ -13,7 +13,7 @@ public class CSVToSO
 
         foreach (string s in allLines)
         {
-            string[] splitData = s.Split(';');
+            string[] splitData = s.Split(',');
 
             SO_Ingredient tester = ScriptableObject.CreateInstance<SO_Ingredient>();
             tester.ingredientName = splitData[0];
@@ -24,6 +24,7 @@ public class CSVToSO
         }
 
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     [MenuItem("Utilities/GenerateRecipes")]
