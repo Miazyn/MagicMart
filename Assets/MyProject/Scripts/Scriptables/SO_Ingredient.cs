@@ -7,6 +7,8 @@ public class SO_Ingredient : ScriptableObject
 {
     public string ingredientName;
     public Sprite ingredientSprite;
+    public int health;
+    public int mana;
     //[TextArea(5,10)]
     //public string ingredientDescription
 
