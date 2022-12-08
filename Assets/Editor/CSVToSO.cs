@@ -4,33 +4,46 @@ using System.IO;
 
 public class CSVToSO
 {
-    //private static string CSVPath = "/Editor/CSV/MYCSV.csv";
-    [MenuItem("Utilities/GenerateSO")]
+    private static string CSVItems = "/Editor/CSV/ItemsTabelle.csv";
+    [MenuItem("Utilities/GenerateItems")]
     public static void GenerateSO()
     {
+        Debug.Log("Generate Items");
+        string[] allLines = File.ReadAllLines(Application.dataPath + CSVItems);
+
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(';');
+
+            SO_Ingredient tester = ScriptableObject.CreateInstance<SO_Ingredient>();
+            tester.ingredientName = splitData[0];
+
+            //Knowledge of unity of all data //Path has alrdy to be exist
+            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Cooking/{tester.ingredientName}.asset");
+
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Utilities/GenerateRecipes")]
+    public static void GenerateRecipes()
+    {
         Debug.Log("Generate SO");
-        //string[] allLines = File.ReadAllLines(Application.dataPath + CSVPath);
+        string[] allLines = File.ReadAllLines(Application.dataPath + CSVItems);
 
-        //foreach(string s in allLines)
-        //{
-        //    string[] splitData = s.Split(';');
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(';');
 
-        //    if(splitData.Length != 3)
-        //    {
-        //        Debug.Log("not 3 values");
-        //        return;
-        //    }
+            SO_Ingredient tester = ScriptableObject.CreateInstance<SO_Ingredient>();
+            tester.ingredientName = splitData[0];
 
-        //    SO_Tester tester = ScriptableObject.CreateInstance<SO_Tester>();
-        //    tester.testerName = splitData[0];
-        //    tester.damage = int.Parse(splitData[1]);
-        //    tester.health = int.Parse(splitData[2]);
+            //Knowledge of unity of all data //Path has alrdy to be exist
+            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/{tester.ingredientName}.asset");
 
-        //    //Knowledge of unity of all data //Path has alrdy to be exist
-        //    AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/{tester.testerName}.asset");
+        }
 
-        //}
-
-        //AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssets();
     }
 }
