@@ -24,6 +24,8 @@ public class RhythmGameManager : MonoBehaviour
     [SerializeField] NoteSpawner noteSpawn;
 
     [SerializeField] TextMeshProUGUI scoreText;
+
+    bool IsGameFinished = false;
     private void Awake()
     {
         instance = this;
@@ -59,10 +61,35 @@ public class RhythmGameManager : MonoBehaviour
         float playerScore = NotesLeft * scorePerPerfectNote + currentScore;
         playerScore /= onePercent;
         scoreText.text = playerScore.ToString("F2") + "%";
-        //Debug.Log("Mac" + perfectScore + "mine:" + playerScore);
-        //Debug.Log("Score:" + playerScore / onePercent + "%");
-    }
 
+        if(NotesLeft == 0)
+        {
+            IsGameFinished = true;
+
+            for(int i = 0; i < noteSpawn.spawnedNotes.Count; i++)
+            {
+                Destroy(noteSpawn.spawnedNotes[i]);
+            }
+            Debug.Log("Cleaned up all notes");
+
+            if(playerScore > 90)
+            {
+                Debug.Log("PERFECT SCORE");
+            }
+            else if(playerScore > 50)
+            {
+                Debug.Log("GOOD SCORE");
+            }
+            else if(playerScore > 30)
+            {
+                Debug.Log("OKAY SCORE");
+            }
+            else
+            {
+                Debug.Log("FAIL");
+            }
+        }
+    }
     public void NormalHit()
     {
         Debug.Log("Hit");
@@ -83,8 +110,6 @@ public class RhythmGameManager : MonoBehaviour
         currentScore += scorePerPerfectNote; 
         PercentageCalc(); 
     }
-
-
     public void NoteMiss()
     {
         PercentageCalc();

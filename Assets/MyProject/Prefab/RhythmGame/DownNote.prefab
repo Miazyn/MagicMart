@@ -98,10 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toleranceNormalHit: 0.5
   toleranceGoodHit: 0.2
-  tolerancePerfectHit: 0.05
+  tolerancePerfectHit: 0.1
   keyToPress: 274
   keyXValue: -7
-  YPosOfLine: 0
   hitEffect: {fileID: 6956923645762377966, guid: e04083014c7427d4db3ec851c136f9b9, type: 3}
   goodHitEffect: {fileID: 6454705224513310168, guid: 803f58ead9d533d449d238e449ca3c09, type: 3}
   perfectHitEffect: {fileID: 6885353956483216958, guid: 9cfead00050cb7c4d9826dc09b553df0, type: 3}

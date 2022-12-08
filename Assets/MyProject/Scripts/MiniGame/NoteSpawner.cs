@@ -6,18 +6,18 @@ public class NoteSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] NotesToSpawn;
     [SerializeField] int distanceBetweenNotes;
+
+
+    public List<GameObject> spawnedNotes;
+
     public IEnumerator CreateNotes(int counter)
     {
         while (counter > 0)
         {
             GameObject myNote = Instantiate(NotesToSpawn[Random.Range(0, NotesToSpawn.Length -1)]);
             myNote.transform.position = new Vector3(transform.position.x, transform.position.y);
-
+            spawnedNotes.Add(myNote);
             counter--;
-            if(counter == 0)
-            {
-                Debug.Log("This is the last note");
-            }
             yield return new WaitForSeconds(1.0f);
         }
     }
