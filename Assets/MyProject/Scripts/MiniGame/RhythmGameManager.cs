@@ -19,6 +19,7 @@ public class RhythmGameManager : MonoBehaviour
     [SerializeField] int currentMultiplier;
     [SerializeField] int multiplierTracker;
     public int[] multiplierThresholds;
+
     private void Awake()
     {
         instance = this;
