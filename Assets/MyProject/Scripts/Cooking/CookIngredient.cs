@@ -26,8 +26,7 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         //originalPosition = rect.anchoredPosition;
-        
-        
+       
     }
     private void Start()
     {

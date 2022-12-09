@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Leaves from Outside
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: -5
+  mana: -1

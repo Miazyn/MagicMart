@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 410511042b284e9438f5c419ed47658c, type: 3}
-  m_Name: Angel Feather
+  m_Name: Phoenix Feather
   m_EditorClassIdentifier: 
-  ingredientName: Angel Feather
+  ingredientName: Phoenix Feather
   ingredientSprite: {fileID: 0}
-  health: 10
-  mana: 8
+  health: 8
+  mana: 10

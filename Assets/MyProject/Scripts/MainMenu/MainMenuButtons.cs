@@ -13,7 +13,6 @@ public class MainMenuButtons : MonoBehaviour
     }
     public void QuitApplication()
     {
-       
         QuitApplication();
     }
 

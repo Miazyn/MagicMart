@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Pansy
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: 5
+  mana: 3

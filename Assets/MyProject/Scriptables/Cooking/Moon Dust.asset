@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Moon Dust
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: -1
+  mana: 7

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Snake Venom
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: -10
+  mana: 5

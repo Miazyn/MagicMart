@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Super Spicy Pepper
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: -8
+  mana: -2

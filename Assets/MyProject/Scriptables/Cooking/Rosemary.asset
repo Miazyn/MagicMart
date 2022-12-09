@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Rosemary
   ingredientSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  health: 4
+  mana: 4

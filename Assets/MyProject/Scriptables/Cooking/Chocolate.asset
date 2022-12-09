@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Chocolate
   ingredientSprite: {fileID: 0}
-  health: 0
+  health: 8
   mana: 0
