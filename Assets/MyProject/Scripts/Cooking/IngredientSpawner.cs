@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IInitializePotentialDragHandler, IDragHandler, IPointerDownHandler
+public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IInitializePotentialDragHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] GameObject ingredientPrefab;
     [SerializeField] SO_Ingredient ingredientToSpawn;
@@ -39,16 +39,16 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 
         eventData.pointerDrag = instantiatedObject;
-
+       
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-       
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -62,4 +62,10 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
         //Image alpha back up
         GetComponent<Image>().color = defaultColor;
     }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+    }
+
+
 }

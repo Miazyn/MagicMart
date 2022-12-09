@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class ExitMenus : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] GameObject itemMenu;
+    [SerializeField] GameObject itemMenuBG;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -25,5 +26,6 @@ public class ExitMenus : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     void CloseMenu()
     {
         itemMenu.SetActive(false);
+        itemMenuBG.SetActive(false);
     }
 }

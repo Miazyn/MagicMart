@@ -6,6 +6,7 @@ public class ItemMenu : MonoBehaviour
 {
     GameManager gameManager;
     [SerializeField] GameObject itemMenu;
+    [SerializeField] GameObject itemMenuBG;
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -14,6 +15,7 @@ public class ItemMenu : MonoBehaviour
     public void ToggleItemMenu()
     {
         itemMenu.SetActive(!itemMenu.activeSelf);
+        itemMenuBG.SetActive(!itemMenuBG.activeSelf);
     }
 
 }
