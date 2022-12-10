@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IInitializePotentialDragHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] GameObject ingredientPrefab;
-    [SerializeField] SO_Ingredient ingredientToSpawn;
-    [SerializeField] Transform prefabParent;
-    [SerializeField] Canvas canvas;
+    [Header("Ingredient")]
+    public GameObject ingredientPrefab;
+    public SO_Ingredient ingredientToSpawn;
+    public TextMeshProUGUI ItemAmount;
 
-    [SerializeField] Image itemImage;
+    [Header("Positioning")]
+    public Transform prefabParent;
+    public Canvas canvas;
+
+    [SerializeField]public Image itemImage { get; private set; }
     CookIngredient ingredientScript;
     GameObject instantiatedObject;
 
@@ -21,8 +26,21 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Awake()
     {
-        itemImage.sprite = ingredientToSpawn.ingredientSprite;
+        itemImage = transform.Find("ItemImage").gameObject.GetComponent<Image>();
+        ItemAmount = transform.Find("ItemAmount").gameObject.GetComponent<TextMeshProUGUI>();
         defaultColor = GetComponent<Image>().color;
+
+    }
+
+    void Start()
+    {
+        itemImage.sprite = ingredientToSpawn.ingredientSprite;
+        AddItemAmount(1);
+    }
+
+    public void AddItemAmount(int _amount)
+    {
+        ItemAmount.SetText(_amount.ToString());
     }
 
     public void OnInitializePotentialDrag(PointerEventData eventData)
@@ -67,5 +85,8 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
     }
 
-
+    public SO_Ingredient GetIngredient()
+    {
+        return ingredientToSpawn;
+    }
 }

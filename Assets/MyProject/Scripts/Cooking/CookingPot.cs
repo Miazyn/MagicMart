@@ -20,6 +20,7 @@ public class CookingPot : MonoBehaviour, IDropHandler
     private void Start()
     {
         currentRecipe = recipeBoard.recipe;
+        
     }
 
     public void OnDrop(PointerEventData eventData)

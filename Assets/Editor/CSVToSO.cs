@@ -6,7 +6,7 @@ public class CSVToSO
 {
     private static string CSVItems = "/Editor/CSV/ItemsTabelle.csv";
     private static string CSVRezepte = "/Editor/CSV/Rezepte.csv";
-    private static string resourcePath = "Ingredients/";
+    private static string resourcePath = "CookingIngredients/";
     [MenuItem("Utilities/GenerateItems")]
     public static void GenerateSO()
     {
@@ -32,7 +32,7 @@ public class CSVToSO
             }
 
             //Knowledge of unity of all data //Path has alrdy to be exist
-            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Cooking/{tester.ingredientName}.asset");
+            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Resources/CookingIngredients/{tester.ingredientName}.asset");
         }
 
         AssetDatabase.SaveAssets();
