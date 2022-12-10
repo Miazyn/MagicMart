@@ -10,22 +10,63 @@ public class SO_Recipe : ScriptableObject
     public string description;
     public SO_Ingredient[] ingredients;
 
+    public Sprite recipeSprite;
+
     public int health;
     public int mana;
-    public (int totalHealth, int totalMana) CombineIngredients(SO_Ingredient[] ingredientsArray)
-    {
-        int fullHealth = 0;
-        int fullMana = 0;
-        for (int i = 0; i < ingredientsArray.Length - 1; i++)
-        {
-            ingredientsArray[i].health += fullHealth;
-            ingredientsArray[i].mana += fullMana;
-        }
-        return (fullHealth, fullMana);
-    }
     public (int healthReq, int manaReq) CheckRecipeRequirements() 
     {
         return (this.health, this.mana);
     }
 
+    public bool IsValidIngredient(SO_Ingredient i)
+    {
+        foreach(var item in ingredients)
+        {
+            if (item.CompareIngredient(i))
+            {
+                return true;
+            }
+        }
+        return false;
     }
+
+    public bool ContainsRecipe(SO_Ingredient[] iArray)
+    {
+        foreach(var item in ingredients)
+        {
+            bool found = false;
+            foreach(var i in iArray)
+            {
+                if (item.CompareIngredient(i))
+                {
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public bool ContainsRecipe(List<SO_Ingredient> iList)
+    {
+        foreach (var item in ingredients)
+        {
+            bool found = false;
+            foreach (var i in iList)
+            {
+                if (item.CompareIngredient(i))
+                {
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}

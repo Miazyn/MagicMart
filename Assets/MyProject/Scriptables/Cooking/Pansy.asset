@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pansy
   m_EditorClassIdentifier: 
   ingredientName: Pansy
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: a866348ec8443034ab0dddf65e0c142e, type: 3}
   health: 5
   mana: 3

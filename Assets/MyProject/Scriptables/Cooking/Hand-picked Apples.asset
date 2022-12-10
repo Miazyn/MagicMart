@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hand-picked Apples
   m_EditorClassIdentifier: 
   ingredientName: Hand-picked Apples
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: 1a5127aa50fc8ff498c042b87698dd7e, type: 3}
   health: 6
   mana: 1

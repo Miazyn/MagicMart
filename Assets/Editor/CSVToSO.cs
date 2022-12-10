@@ -5,7 +5,8 @@ using System.IO;
 public class CSVToSO
 {
     private static string CSVItems = "/Editor/CSV/ItemsTabelle.csv";
-    private static string resourcePath = "MyProject/Material/Kitchen/Ingredients/";
+    private static string CSVRezepte = "/Editor/CSV/Rezepte.csv";
+    private static string resourcePath = "Ingredients/";
     [MenuItem("Utilities/GenerateItems")]
     public static void GenerateSO()
     {
@@ -25,6 +26,10 @@ public class CSVToSO
             {
                 tester.ingredientSprite = testerSprite;
             }
+            else
+            {
+                Debug.Log("no Sprite found at: " + resourcePath + tester.ingredientName);
+            }
 
             //Knowledge of unity of all data //Path has alrdy to be exist
             AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Cooking/{tester.ingredientName}.asset");
@@ -37,21 +42,30 @@ public class CSVToSO
     [MenuItem("Utilities/GenerateRecipes")]
     public static void GenerateRecipes()
     {
-        Debug.Log("Generate SO");
-        string[] allLines = File.ReadAllLines(Application.dataPath + CSVItems);
+        Debug.Log("Generate Recipes");
+        string[] allLines = File.ReadAllLines(Application.dataPath + CSVRezepte);
 
         foreach (string s in allLines)
         {
-            string[] splitData = s.Split(';');
+            string[] splitData = s.Split(',');
 
-            SO_Ingredient tester = ScriptableObject.CreateInstance<SO_Ingredient>();
-            tester.ingredientName = splitData[0];
-
+            SO_Recipe tester = ScriptableObject.CreateInstance<SO_Recipe>();
+            tester.recipeName = splitData[0];
+            var testerSprite = Resources.Load<Sprite>("Recipes/" + tester.recipeName);
+            if (testerSprite != null)
+            {
+                tester.recipeSprite = testerSprite;
+            }
+            else
+            {
+                Debug.Log("no Sprite found at: " + resourcePath + tester.recipeName);
+            }
             //Knowledge of unity of all data //Path has alrdy to be exist
-            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/{tester.ingredientName}.asset");
+            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Recipes/{tester.recipeName}.asset");
 
         }
 
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 }

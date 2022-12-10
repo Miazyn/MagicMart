@@ -14,7 +14,13 @@ public class CookingPot : MonoBehaviour, IDropHandler
     [SerializeField] Animator ruehrstabAnimator;
     string ruehrAnim = "MixingAnimation";
 
-    [SerializeField] RecipeBoard currentRecipe;
+    [SerializeField] RecipeBoard recipeBoard;
+    SO_Recipe currentRecipe;
+
+    private void Start()
+    {
+        currentRecipe = recipeBoard.recipe;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -22,57 +28,26 @@ public class CookingPot : MonoBehaviour, IDropHandler
 
         ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
         lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
-        if (!IngredientCheck())
+
+        if (!currentRecipe.IsValidIngredient(lastIngredient))
         {
             Debug.Log("invalid ingredient");
         }
 
-        if (ingredients.Count == currentRecipe.recipe.ingredients.Length)
+        if (ingredients.Count == currentRecipe.ingredients.Length)
         {
-            if (CheckRecipe())
+            if (currentRecipe.ContainsRecipe(ingredients))
             {
-                Debug.Log("Same recipe");
+                Debug.Log("Contains recipe");
                 ruehrstabAnimator.Play(ruehrAnim);
             }
             else
             {
-                Debug.Log("Not same recipe");
+                Debug.Log("Not contains recipe");
             }
         }
         counter++;
         Destroy(eventData.pointerDrag);
     }
 
-    bool IngredientCheck()
-    {
-        bool foundIngredient = false;
-        foreach(var item in currentRecipe.recipe.ingredients)
-        {
-            if (lastIngredient.CompareIngredient(item))
-            {
-                foundIngredient = true;
-            }
-        }
-        return foundIngredient;
-    }
-
-    bool CheckRecipe()
-    {
-        foreach (var item in currentRecipe.recipe.ingredients)
-        {
-            bool foundIngredient = false;
-            for (int i = 0; i < ingredients.Count; i++)
-            {
-                if (ingredients[i].CompareIngredient(item))
-                {
-                    foundIngredient = true;
-                }
-            }
-            if (!foundIngredient)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 }

@@ -12,17 +12,14 @@ public class SO_Ingredient : ScriptableObject
 
 
 
-    //[TextArea(5,10)]
-    //public string ingredientDescription
+    [TextArea(5, 10)]
+    public string ingredientDescription;
 
     public bool CompareIngredient(SO_Ingredient compareTo)
     {
         if (ingredientName == compareTo.ingredientName)
         {
-            if (ingredientSprite == compareTo.ingredientSprite)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }

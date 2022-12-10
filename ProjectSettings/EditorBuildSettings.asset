@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyProject/Scenes/RhythmMiniGame.unity
     guid: efd26a85469ad1345a23de73538a164d
+  - enabled: 1
+    path: Assets/MyProject/Scenes/Shopkeeper.unity
+    guid: e45e93cdac0116d418a4aa90483d1aac
   m_configObjects: {}

@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredients: []
   ruehrstabAnimator: {fileID: 1520103774}
-  currentRecipe: {fileID: 154911720}
+  recipeBoard: {fileID: 154911720}
 --- !u!114 &1522274144
 MonoBehaviour:
   m_ObjectHideFlags: 0
