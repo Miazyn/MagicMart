@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public SO_Inventory inventory;
+    public int moneyAmount { get; private set; }
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -19,6 +20,18 @@ public class Player : MonoBehaviour
     void Awake()
     {
         instance = this;
+        moneyAmount = 1000;
+    }
+
+    public bool CanBuy(int _buyPrice)
+    {
+        if (moneyAmount > _buyPrice) return true;
+        return false;
+    }
+
+    public void SetMoneyAmount(int _addedMoney)
+    {
+        moneyAmount += _addedMoney;
     }
 
     void OnApplicationQuit()

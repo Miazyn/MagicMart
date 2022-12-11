@@ -24,6 +24,19 @@ public class SO_Inventory : ScriptableObject
         return true;
 
     }
+
+    public (bool, int) FindItemInList(SO_Ingredient _ingredient)
+    {
+        for(int i = 0; i < inventoryItems.Count -1; i++)
+        {
+            if (_ingredient.CompareIngredient(inventoryItems[i].item))
+            {
+                return (true, i);
+            }
+        }
+        
+        return (false, 1);
+    }
 }
 
 [System.Serializable]
@@ -40,5 +53,10 @@ public class InventorySlot
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public int GetAmount()
+    {
+        return amount;
     }
 }

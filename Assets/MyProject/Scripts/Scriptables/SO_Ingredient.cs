@@ -10,7 +10,7 @@ public class SO_Ingredient : ScriptableObject
     public int health;
     public int mana;
 
-
+    public int BuyPrice;
 
     [TextArea(5, 10)]
     public string ingredientDescription;
