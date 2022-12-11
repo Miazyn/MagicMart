@@ -15,6 +15,6 @@ MonoBehaviour:
   recipeName: Sweet Dreams
   description: 
   ingredients: []
-  recipeSprite: {fileID: 0}
+  recipeSprite: {fileID: 21300000, guid: b22f5ec28168ae2428fdbd740c67d7b1, type: 3}
   health: 0
   mana: 0

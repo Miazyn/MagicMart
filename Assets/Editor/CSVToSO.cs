@@ -6,7 +6,7 @@ public class CSVToSO
 {
     private static string CSVItems = "/Editor/CSV/ItemsTabelle.csv";
     private static string CSVRezepte = "/Editor/CSV/Rezepte.csv";
-    private static string resourcePath = "CookingIngredients/";
+    private static string resourcePath = "Ingredients/";
     [MenuItem("Utilities/GenerateItems")]
     public static void GenerateSO()
     {
@@ -25,6 +25,7 @@ public class CSVToSO
             if (testerSprite != null) 
             {
                 tester.ingredientSprite = testerSprite;
+                Debug.Log("Load Sprite at: " + resourcePath + tester.ingredientName);
             }
             else
             {
@@ -58,7 +59,7 @@ public class CSVToSO
             }
             else
             {
-                Debug.Log("no Sprite found at: " + resourcePath + tester.recipeName);
+                Debug.Log("no Sprite found at: " + "Recipes/" + tester.recipeName);
             }
             //Knowledge of unity of all data //Path has alrdy to be exist
             AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Recipes/{tester.recipeName}.asset");

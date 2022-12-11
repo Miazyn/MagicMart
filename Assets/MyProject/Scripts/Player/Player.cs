@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    public string PlayerName = "Default";
+
     public SO_Inventory inventory;
     public int moneyAmount { get; private set; }
 
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         instance = this;
-        moneyAmount = 1000;
+        moneyAmount = 0;
     }
 
     public bool CanBuy(int _buyPrice)

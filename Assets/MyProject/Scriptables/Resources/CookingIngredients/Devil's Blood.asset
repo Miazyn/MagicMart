@@ -16,4 +16,5 @@ MonoBehaviour:
   ingredientSprite: {fileID: 0}
   health: -10
   mana: 9
+  BuyPrice: 0
   ingredientDescription: 

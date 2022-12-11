@@ -23,9 +23,12 @@ public class DialogueManager : MonoBehaviour
     Coroutine displayCoroutine;
     public bool typerRunning = false;
 
+    Player player;
+
 
     private void Awake()
     {
+        player = Player.instance;
         WarnCheck();
     }
 
@@ -73,12 +76,22 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                if (displayCoroutine != null)
+                string line = "";
+                if (dialogue.lines[counter].Contains("$playerName")) 
                 {
-                    StopCoroutine(TypeEffect(dialogue.lines[counter]));
+                    line = dialogue.lines[counter].Replace("$playerName", player.PlayerName);
+                }
+                else
+                {
+                    line = dialogue.lines[counter];
                 }
 
-                displayCoroutine = StartCoroutine(TypeEffect(dialogue.lines[counter]));
+                if (displayCoroutine != null)
+                {
+                    StopCoroutine(TypeEffect(line));
+                }
+
+                displayCoroutine = StartCoroutine(TypeEffect(line));
             }
         }
 

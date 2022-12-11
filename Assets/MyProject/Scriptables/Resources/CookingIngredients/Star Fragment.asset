@@ -16,4 +16,5 @@ MonoBehaviour:
   ingredientSprite: {fileID: 21300000, guid: cb7fe4e309ce999408408bbd0d8cb657, type: 3}
   health: -1
   mana: 5
+  BuyPrice: 0
   ingredientDescription: 
