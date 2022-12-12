@@ -14,6 +14,10 @@ public class SO_Recipe : ScriptableObject
 
     public int health;
     public int mana;
+
+    public int normalSellPrice;
+    public int goodSellPrice;
+    public int perfectSellPrice;
     public (int healthReq, int manaReq) CheckRecipeRequirements() 
     {
         return (this.health, this.mana);

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] int maxCharPerLine = 10;
+
     [SerializeField] GameObject dialogSystemHeader;
     [SerializeField] TextMeshProUGUI nameBox;
     [SerializeField] TextMeshProUGUI dialogueBox;
@@ -86,6 +88,8 @@ public class DialogueManager : MonoBehaviour
                     line = dialogue.lines[counter];
                 }
 
+                line = CheckStringForLineBreak(line);
+
                 if (displayCoroutine != null)
                 {
                     StopCoroutine(TypeEffect(line));
@@ -158,5 +162,64 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public string CheckStringForLineBreak(string line)
+    {
+        char[] a = line.ToCharArray();
+        int counter = 0;
+        int curCheck = 0;
 
+        List<int> spaces = new List<int>();
+
+        for (int i = 1; i <= a.Length / maxCharPerLine; i++)
+        {
+            curCheck = i * maxCharPerLine;
+            Debug.Log(curCheck);
+            bool addedSpace = false;
+            for (int j = 0; j < curCheck; j++)
+            {
+                if (a[j] == ' ')
+                {
+                    if (addedSpace)
+                    {
+                        spaces[counter] = j;
+                    }
+                    else
+                    {
+                        spaces.Add(j);
+                        addedSpace = true;
+                    }
+                }
+            }
+            counter++;
+        }
+        string newString = "";
+        for (int y = 0; y < a.Length; y++)
+        {
+            bool addSpace = false;
+            for (int x = 0; x < spaces.Count; x++)
+            {
+                if (y == spaces[x])
+                {
+                    addSpace = true;
+                }
+            }
+            if (addSpace)
+            {
+                if (a[y] != ' ')
+                {
+                    newString += "\n" + a[y].ToString();
+
+                }
+                else
+                {
+                    newString += "\n";
+                }
+            }
+            else
+            {
+                newString += a[y].ToString();
+            }
+        }
+        return newString;
+    }
 }

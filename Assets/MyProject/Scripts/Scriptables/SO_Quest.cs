@@ -9,9 +9,8 @@ public class SO_Quest : ScriptableObject
     public SO_Recipe ReqRecipe;
 
     public bool _IsFullFilled;
-
-    public bool IsQuestDone()
+    public void SetQuestStatus(bool _isFullFilled)
     {
-        return _IsFullFilled;
+        _IsFullFilled = _isFullFilled;
     }
 }

@@ -7,6 +7,7 @@ public class FadeItemIn : MonoBehaviour
 {
     Color fadeInColor;
     Image image;
+    
     void Start()
     {
         fadeInColor = new Color(1, 1, 1, 0);
