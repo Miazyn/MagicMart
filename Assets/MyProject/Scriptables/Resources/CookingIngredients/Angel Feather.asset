@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Angel Feather
   m_EditorClassIdentifier: 
   ingredientName: Angel Feather
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: c8f02bf88d8d1fd4dbf7fd9ed63b5215, type: 3}
   health: 10
   mana: 8
   BuyPrice: 0

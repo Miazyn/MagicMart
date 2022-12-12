@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     //[Header("Dialog")]
     //DialogueManager dialogManager;
     //[SerializeField] SO_Dialog currentDialog;
-    //int counter = 0;
-
+    int counter = 0;
     public enum GameState
     {
         DialogState,
@@ -24,23 +23,34 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         curState = GameState.IdleState;
-        DontDestroyOnLoad(gameObject);
+        
     }
 
+    public void ChangeGameState(string _newGameState)
+    {
+         curState = (GameState)System.Enum.Parse(typeof(GameState), _newGameState);
+    }
 
-
-    //void InteractionDialogue()
-    //{
-    //    if (counter <= currentDialog.lines.Count && !dialogManager.typerRunning)
-    //    {
-    //        dialogManager.TextReceived(currentDialog, counter);
-    //        counter++;
-    //    }
-    //    else if (dialogManager.typerRunning)
-    //    {
-    //        dialogManager.StopTypeEffect(currentDialog, counter);
-    //    }
-    //}
+    void InteractionDialogue(SO_Dialog currentDialog)
+    {
+        //if (counter <= currentDialog.lines.Count && !dialogManager.typerRunning)
+        //{
+        //    dialogManager.TextReceived(currentDialog, counter);
+        //    counter++;
+        //}
+        //else if (dialogManager.typerRunning)
+        //{
+        //    dialogManager.StopTypeEffect(currentDialog, counter);
+        //}
+    }
 }

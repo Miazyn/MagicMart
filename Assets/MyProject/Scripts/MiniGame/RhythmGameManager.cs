@@ -44,15 +44,15 @@ public class RhythmGameManager : MonoBehaviour
     }
     void Update()
     {
+
         if (!StartPlaying)
         {
-            if (Input.anyKeyDown)
-            {
-                StartPlaying = true;
-                rhythmMusic.Play();
-                StartCoroutine(noteSpawn.CreateNotes(NotesToBeMade));
-            }
+            StartPlaying = true;
+            rhythmMusic.Play();
+            StartCoroutine(noteSpawn.CreateNotes(NotesToBeMade));
+
         }
+
     }
 
     public void PercentageCalc()

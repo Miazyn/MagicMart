@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784e56a250f2d384392f4cb468dd5f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipe: {fileID: 11400000, guid: 60968c83fbb25b7499519b3acc35adc1, type: 2}
+  recipe: {fileID: 11400000, guid: 257381aff09d0514e8f8ce55988d74a0, type: 2}
   recipeBoard: {fileID: 586395197}
   recipeItemPrefab: {fileID: 8572748656083182972, guid: b068e42949d56044e9286443e7f174f4, type: 3}
 --- !u!1 &198037080
@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.0056221485, a: 0}
+  m_Color: {r: 0, g: 1, b: 0.003921509, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

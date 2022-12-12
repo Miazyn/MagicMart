@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camomile
   m_EditorClassIdentifier: 
   ingredientName: Camomile
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: 3639c9daf4540b24aa04eeda8046f7e7, type: 3}
   health: 7
   mana: 2
   BuyPrice: 0

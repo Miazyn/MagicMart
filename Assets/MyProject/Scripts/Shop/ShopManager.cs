@@ -10,16 +10,13 @@ public class ShopManager : MonoBehaviour
     public Transform parentTransform;
     RectTransform parentRect;
 
-    Player CurrentPlayer;
-    SO_Inventory PlayerInventory;
 
     int shopSize = 10;
 
-    void Awake()
-    {
-        CurrentPlayer = Player.instance;
-        PlayerInventory = CurrentPlayer.inventory;
 
+    void Start()
+    {
+        
         for(int i =0; i < shopSize; i++)
         {
             GameObject _shopTile = Instantiate(ShopTilePrefab, parentTransform);

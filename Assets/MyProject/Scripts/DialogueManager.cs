@@ -7,49 +7,59 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
+
     [SerializeField] int maxCharPerLine = 10;
 
-    [SerializeField] GameObject dialogSystemHeader;
-    [SerializeField] TextMeshProUGUI nameBox;
-    [SerializeField] TextMeshProUGUI dialogueBox;
+    [SerializeField] GameObject textBox;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] float typingSpeedInSeconds = 0.05f;
 
     Sprite savedSprite;
-    [SerializeField] GameObject spriteShownInGame;
-
-    //Choices
-    [SerializeField] GameObject choiceBottom;
-    [SerializeField] GameObject choiceMiddle;
-    [SerializeField] GameObject choiceLow;
+    [SerializeField] GameObject npc;
 
     Coroutine displayCoroutine;
     public bool typerRunning = false;
 
     Player player;
-
+    GameManager manager;
 
     private void Awake()
     {
-        player = Player.instance;
-        WarnCheck();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
+    private void Start()
+    {
+        player = Player.instance;
+        manager = GameManager.Instance;
+        WarnCheck();
+    }
     private void WarnCheck()
     {
-        if (!dialogSystemHeader)
+        if (!textBox)
         {
             Debug.LogWarning("No Default TextBox is defined.");
         }
-        if (!nameBox)
+        if (!nameText)
         {
             Debug.LogWarning("No Default NameBox is defined.");
 
         }
-        if (!dialogueBox)
+        if (!dialogueText)
         {
             Debug.LogWarning("No Default DialogueBox is defined.");
         }
-        if (!spriteShownInGame)
+        if (!npc)
         {
             Debug.LogWarning("No Default SpriteBox is defined.");
         }
@@ -58,12 +68,12 @@ public class DialogueManager : MonoBehaviour
     public void TextReceived(SO_Dialog dialogue, int counter)
     {
         DisplayCharacterSprite(dialogue, counter);
-        nameBox.text = dialogue.nameOfSpeaker;
+        nameText.text = dialogue.nameOfSpeaker;
         if (!typerRunning)
         {
             if (dialogue != null || dialogue.lines[counter] != "")
             {
-                dialogSystemHeader.SetActive(true);
+                //SET ACTIVE
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
@@ -103,18 +113,17 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialog()
     {
-        dialogSystemHeader.SetActive(false);
-        spriteShownInGame.SetActive(false);
+        //SET INACTIVE
     }
 
     public IEnumerator TypeEffect(string line)
     {
         typerRunning = true;
-        dialogueBox.text = "";
+        dialogueText.text = "";
         for (int i = 0; i < line.ToCharArray().Length; i++)
         {
 
-            dialogueBox.text += line.ToCharArray()[i];
+            dialogueText.text += line.ToCharArray()[i];
             yield return new WaitForSeconds(typingSpeedInSeconds);
 
         }
@@ -127,7 +136,7 @@ public class DialogueManager : MonoBehaviour
         {
             StopCoroutine(displayCoroutine);
         }
-        dialogueBox.text = dialogue.lines[counter - 1];
+        dialogueText.text = dialogue.lines[counter - 1];
         typerRunning = false;
 
     }
@@ -141,8 +150,8 @@ public class DialogueManager : MonoBehaviour
                 if (dialogue.keyForCharacterDisplay[i] == counter)
                 {
                     savedSprite = dialogue.spriteForCharacterDisplay[i];
-                    spriteShownInGame.GetComponent<Image>().sprite = savedSprite;
-                    spriteShownInGame.SetActive(true);
+                    npc.GetComponent<Image>().sprite = savedSprite;
+                    npc.SetActive(true);
 
                     break;
                 }
@@ -150,7 +159,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (savedSprite)
                     {
-                        spriteShownInGame.GetComponent<Image>().sprite = savedSprite;
+                        npc.GetComponent<Image>().sprite = savedSprite;
                     }
                     else
                     {

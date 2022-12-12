@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class CookingPot : MonoBehaviour, IDropHandler
@@ -17,10 +18,13 @@ public class CookingPot : MonoBehaviour, IDropHandler
     [SerializeField] RecipeBoard recipeBoard;
     SO_Recipe currentRecipe;
 
+    bool animPlaying = false;
+
+    float animTimer = 2;
+
     private void Start()
     {
         currentRecipe = recipeBoard.recipe;
-        
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -35,20 +39,35 @@ public class CookingPot : MonoBehaviour, IDropHandler
             Debug.Log("invalid ingredient");
         }
 
-        if (ingredients.Count == currentRecipe.ingredients.Length)
+        if (currentRecipe.ContainsRecipe(ingredients))
         {
-            if (currentRecipe.ContainsRecipe(ingredients))
-            {
-                Debug.Log("Contains recipe");
-                ruehrstabAnimator.Play(ruehrAnim);
-            }
-            else
-            {
-                Debug.Log("Not contains recipe");
-            }
+            animTimer = 2;
+            Debug.Log("Contains recipe");
+            ruehrstabAnimator.Play(ruehrAnim);
+            animPlaying = true;
+            StartCoroutine(loadNextScene());
         }
+        else
+        {
+            Debug.Log("Not contains recipe");
+        }
+
         counter++;
         Destroy(eventData.pointerDrag);
+    }
+
+    IEnumerator loadNextScene()
+    {
+        while (animPlaying)
+        {
+            animTimer--;
+            if(animTimer <= 0)
+            {
+                animPlaying = false;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+        SceneManager.LoadScene("RhythmMiniGame");
     }
 
 }

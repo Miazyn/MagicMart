@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Healing Fruit Salad
   description: 
-  ingredients: []
+  ingredients:
+  - {fileID: 11400000, guid: c21a0c73eb2d98c49a61e2c43a8c8059, type: 2}
+  - {fileID: 11400000, guid: 3fb97ab030fbd474cb25f73e4cb05120, type: 2}
+  - {fileID: 11400000, guid: 32c40313a6816834d9561555200ff940, type: 2}
+  - {fileID: 11400000, guid: 5809dde9a25eec6419b29b7e54a7efc0, type: 2}
   recipeSprite: {fileID: 21300000, guid: f29e5ba126c466541a45ad8a6c9adc48, type: 3}
-  health: 0
-  mana: 0
+  health: 10
+  mana: 10
+  normalSellPrice: 0
+  goodSellPrice: 0
+  perfectSellPrice: 0

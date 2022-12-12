@@ -25,7 +25,6 @@ public class CSVToSO
             if (testerSprite != null) 
             {
                 tester.ingredientSprite = testerSprite;
-                Debug.Log("Load Sprite at: " + resourcePath + tester.ingredientName);
             }
             else
             {

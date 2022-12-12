@@ -21,7 +21,19 @@ public class Player : MonoBehaviour
     public OnItemChanged onInventoryToggleCallback;
     void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
         moneyAmount = 0;
     }
 
