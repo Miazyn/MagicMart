@@ -17,5 +17,7 @@ MonoBehaviour:
   spriteForCharacterDisplay:
   - {fileID: 0}
   lines:
-  - This is a testrun. Can you please make me a healing salad?
+  - This is a testrun. Can you please make me a healing salad? Also just gonna add
+    a few more lines for testing.
+  - Also just make sure to make it.
   dialogueChoices: []

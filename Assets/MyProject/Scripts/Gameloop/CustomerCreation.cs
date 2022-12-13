@@ -9,7 +9,7 @@ public class CustomerCreation : MonoBehaviour
     int customerAmount;
     int dayCounter;
 
-    SO_NPC fillerCustomers;
+    [SerializeField] SO_NPC fillerCustomers;
 
     private void Start()
     {
@@ -22,6 +22,7 @@ public class CustomerCreation : MonoBehaviour
 
     IEnumerator CreatingCustomer()
     {
+        gameManager.Customers = new SO_NPC[customerAmount];
         for(int i = 0; i < customerAmount; i++)
         {
             gameManager.Customers[i] = fillerCustomers;

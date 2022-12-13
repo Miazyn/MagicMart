@@ -9,21 +9,26 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
-    [SerializeField] int maxCharPerLine = 10;
-
-    [SerializeField] GameObject textBox;
-    [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] int maxCharPerLine = 43;
     [SerializeField] float typingSpeedInSeconds = 0.05f;
 
-    Sprite savedSprite;
+    [Header("Elements for Dialog")]
+    [SerializeField] GameObject textBoxObject;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] GameObject npc;
+    [SerializeField] Image npcSprite;
+    [SerializeField] GameObject InDialogEffect;
+
+    Sprite savedSprite;
 
     Coroutine displayCoroutine;
     public bool typerRunning = false;
 
     Player player;
     GameManager manager;
+
+    int counter = 0;
 
     private void Awake()
     {
@@ -37,7 +42,6 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private void Start()
     {
         player = Player.instance;
@@ -46,7 +50,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void WarnCheck()
     {
-        if (!textBox)
+        if (!textBoxObject)
         {
             Debug.LogWarning("No Default TextBox is defined.");
         }
@@ -59,21 +63,37 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogWarning("No Default DialogueBox is defined.");
         }
-        if (!npc)
+        if (!npcSprite)
         {
             Debug.LogWarning("No Default SpriteBox is defined.");
         }
     }
 
-    public void TextReceived(SO_Dialog dialogue, int counter)
+    public void SetUpDialog(SO_Dialog _currentDialog)
     {
-        DisplayCharacterSprite(dialogue, counter);
+        if (counter <= _currentDialog.lines.Count && !typerRunning)
+        {
+            TextReceived(_currentDialog);
+            counter++;
+        }
+        else if (typerRunning)
+        {
+            StopTypeEffect(_currentDialog);
+        }
+    }
+
+    void TextReceived(SO_Dialog dialogue)
+    {
+        DisplayCharacterSprite(dialogue);
         nameText.text = dialogue.nameOfSpeaker;
         if (!typerRunning)
         {
             if (dialogue != null || dialogue.lines[counter] != "")
             {
                 //SET ACTIVE
+                textBoxObject.SetActive(true);
+                npc.SetActive(true);
+                InDialogEffect.SetActive(true);
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
@@ -114,9 +134,15 @@ public class DialogueManager : MonoBehaviour
     void EndDialog()
     {
         //SET INACTIVE
+        textBoxObject.SetActive(false);
+        InDialogEffect.SetActive(false);
+        npc.SetActive(false);
+
+        manager.ChangeGameState(GameManager.GameState.IdleState);
+        counter = 0;
     }
 
-    public IEnumerator TypeEffect(string line)
+    IEnumerator TypeEffect(string line)
     {
         typerRunning = true;
         dialogueText.text = "";
@@ -130,7 +156,7 @@ public class DialogueManager : MonoBehaviour
         typerRunning = false;
     }
 
-    public void StopTypeEffect(SO_Dialog dialogue, int counter)
+    void StopTypeEffect(SO_Dialog dialogue)
     {
         if (displayCoroutine != null)
         {
@@ -141,7 +167,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void DisplayCharacterSprite(SO_Dialog dialogue, int counter)
+    void DisplayCharacterSprite(SO_Dialog dialogue)
     {
         if (dialogue.keyForCharacterDisplay != null && dialogue.spriteForCharacterDisplay != null)
         {
@@ -150,7 +176,7 @@ public class DialogueManager : MonoBehaviour
                 if (dialogue.keyForCharacterDisplay[i] == counter)
                 {
                     savedSprite = dialogue.spriteForCharacterDisplay[i];
-                    npc.GetComponent<Image>().sprite = savedSprite;
+                    npcSprite.GetComponent<Image>().sprite = savedSprite;
                     npc.SetActive(true);
 
                     break;
@@ -159,7 +185,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (savedSprite)
                     {
-                        npc.GetComponent<Image>().sprite = savedSprite;
+                        npcSprite.GetComponent<Image>().sprite = savedSprite;
                     }
                     else
                     {
@@ -171,18 +197,19 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public string CheckStringForLineBreak(string line)
+    string CheckStringForLineBreak(string line)
     {
         char[] a = line.ToCharArray();
-        int counter = 0;
+        int charCounter = 0;
         int curCheck = 0;
+        int lastCheck = 0;
 
         List<int> spaces = new List<int>();
 
         for (int i = 1; i <= a.Length / maxCharPerLine; i++)
         {
             curCheck = i * maxCharPerLine;
-            Debug.Log(curCheck);
+            
             bool addedSpace = false;
             for (int j = 0; j < curCheck; j++)
             {
@@ -190,7 +217,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (addedSpace)
                     {
-                        spaces[counter] = j;
+                        spaces[charCounter] = j;
                     }
                     else
                     {
@@ -199,7 +226,7 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
             }
-            counter++;
+            charCounter++;
         }
         string newString = "";
         for (int y = 0; y < a.Length; y++)
@@ -212,23 +239,18 @@ public class DialogueManager : MonoBehaviour
                     addSpace = true;
                 }
             }
+
             if (addSpace)
             {
-                if (a[y] != ' ')
-                {
-                    newString += "\n" + a[y].ToString();
-
-                }
-                else
-                {
-                    newString += "\n";
-                }
+                Debug.Log("Add break");
+                newString += "\n";
             }
             else
             {
-                newString += a[y].ToString();
+                 newString += a[y].ToString();
             }
         }
+
         return newString;
     }
 }

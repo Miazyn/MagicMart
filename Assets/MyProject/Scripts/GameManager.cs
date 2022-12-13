@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     public float RhythymGameScore;
     public float CookingGameScore;
     public float OverallScore;
+
+    [Header("All Corelated Scripts")]
+    DialogueManager dialogueManager;
 
     SO_CookedFood resultFood;
 
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        dialogueManager = DialogueManager.instance;
         curState = GameState.IdleState;
     }
 
@@ -55,18 +60,38 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState _newState)
     {
         curState = _newState;
+        CheckGameStateAction();
     }
 
-    void InteractionDialogue(SO_Dialog currentDialog)
+    public void CheckGameStateAction()
     {
-        //if (counter <= currentDialog.lines.Count && !dialogManager.typerRunning)
-        //{
-        //    dialogManager.TextReceived(currentDialog, counter);
-        //    counter++;
-        //}
-        //else if (dialogManager.typerRunning)
-        //{
-        //    dialogManager.StopTypeEffect(currentDialog, counter);
-        //}
+        if(curState == GameState.DialogState)
+        {
+            Debug.Log("Time to start some dialog");
+            if (counter < CustomerCount - 1)
+            {
+                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+            }
+            else
+            {
+                Debug.Log("No more dialog, time to swap states");
+            }
+        }
+        else if(curState == GameState.IdleState)
+        {
+            Debug.Log("Time to be idle");
+        }
+        else if(curState == GameState.CookingState)
+        {
+            Debug.Log("Time to start Cooking");
+        }
+        else if(curState == GameState.MiniRhythmGameState)
+        {
+            Debug.Log("Time to rhythm");
+        }
+        else if(curState == GameState.ShoppingState)
+        {
+            Debug.Log("Time to shop");
+        }
     }
 }

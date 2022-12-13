@@ -2860,9 +2860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2892,9 +2890,9 @@ MonoBehaviour:
   m_fontSize: 46.69
   m_fontSizeBase: 46.69
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 43
+  m_fontSizeMax: 43
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2944,6 +2942,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 188653861965027705, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
   m_PrefabInstance: {fileID: 342675129}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2091751669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091751668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043af94aa3b231040abe0b1f3f39ff29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCharPerLine: 43
+  typingSpeedInSeconds: 0.05
+  textBoxObject: {fileID: 2128197630}
+  nameText: {fileID: 551613436}
+  dialogueText: {fileID: 2079398574}
+  npc: {fileID: 464377313}
+  npcSprite: {fileID: 165890255}
+  InDialogEffect: {fileID: 22411385}
+  typerRunning: 0
 --- !u!114 &2091751672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,6 +2975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726365c6226a6c647a105853ab66aaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fillerCustomers: {fileID: 11400000, guid: 93e67a11c2f449a49805f1f447821f9e, type: 2}
 --- !u!1 &2128197630
 GameObject:
   m_ObjectHideFlags: 0

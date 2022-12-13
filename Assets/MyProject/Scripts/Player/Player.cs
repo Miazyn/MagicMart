@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int moneyAmount { get; private set; }
 
     public SO_Quest CurrentCookingQuest;
+    GameManager manager;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -37,8 +38,17 @@ public class Player : MonoBehaviour
     void Start()
     {
         moneyAmount = 0;
+        manager = GameManager.Instance;
     }
 
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            manager.CheckGameStateAction();
+        }    
+    }
 
     public bool CanBuy(int _buyPrice)
     {
