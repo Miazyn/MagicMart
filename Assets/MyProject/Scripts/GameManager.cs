@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     //[Header("Dialog")]
     //DialogueManager dialogManager;
     //[SerializeField] SO_Dialog currentDialog;
-    int counter = 0;
+    public int counter = 0;
 
     public SO_NPC[] Customers;
-    public int day;
+    public SO_Recipe CurrentRecipe;
+    public int day = 1;
     public int CustomerCount;
 
     [Header("Scores")]
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
         CookingState,
         MiniRhythmGameState,
         ShoppingState,
-        IdleState
+        IdleState,
+        EvaluationState
     }
 
     [SerializeField] public GameState curState { get; private set; }
@@ -74,7 +76,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("No more dialog, time to swap states");
+                Debug.Log("No more dialog, Done with the day");
             }
         }
         else if(curState == GameState.IdleState)
@@ -93,5 +95,22 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Time to shop");
         }
+        else if(curState == GameState.EvaluationState)
+        {
+            Debug.Log("Time to Evaluate");
+            //Evaluation();
+            
+        }
+    }
+
+    void Evaluation()
+    {
+        Debug.Log("currently we finished all the quest stuff");
+        AfterQuestDialog();
+    }
+
+    public void AfterQuestDialog()
+    {
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
     }
 }

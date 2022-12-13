@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RhythmGameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RhythmGameManager : MonoBehaviour
     public bool StartPlaying;
 
     public static RhythmGameManager instance;
+    GameManager manager;
 
     [SerializeField] int currentScore;
     float scoreDifference;
@@ -33,6 +35,7 @@ public class RhythmGameManager : MonoBehaviour
 
     private void Start()
     {
+        manager = GameManager.Instance;
         NotesToBeMade = Random.Range(7, 15);
         NotesLeft = NotesToBeMade;
         Debug.Log(NotesToBeMade);
@@ -70,24 +73,11 @@ public class RhythmGameManager : MonoBehaviour
             {
                 Destroy(noteSpawn.spawnedNotes[i]);
             }
-            Debug.Log("Cleaned up all notes");
 
-            if(playerScore > 90)
-            {
-                Debug.Log("PERFECT SCORE");
-            }
-            else if(playerScore > 50)
-            {
-                Debug.Log("GOOD SCORE");
-            }
-            else if(playerScore > 30)
-            {
-                Debug.Log("OKAY SCORE");
-            }
-            else
-            {
-                Debug.Log("FAIL");
-            }
+            manager.RhythymGameScore = playerScore;
+            manager.ChangeGameState(GameManager.GameState.EvaluationState);
+
+            SceneManager.LoadScene("MainStore", LoadSceneMode.Single);
         }
     }
     public void NormalHit()

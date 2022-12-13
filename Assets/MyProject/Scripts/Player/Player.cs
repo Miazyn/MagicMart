@@ -46,7 +46,14 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            manager.CheckGameStateAction();
+            if (manager.curState == GameManager.GameState.DialogState)
+            {
+                manager.CheckGameStateAction();
+            }
+            if(manager.curState == GameManager.GameState.EvaluationState)
+            {
+                manager.AfterQuestDialog();
+            }
         }    
     }
 

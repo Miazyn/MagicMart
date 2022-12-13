@@ -20,6 +20,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Image npcSprite;
     [SerializeField] GameObject InDialogEffect;
 
+    [Header("Disabling Buttons etc")]
+    [SerializeField] GameObject cookButton;
+    [SerializeField] GameObject shopButton;
+
     Sprite savedSprite;
 
     Coroutine displayCoroutine;
@@ -94,6 +98,9 @@ public class DialogueManager : MonoBehaviour
                 textBoxObject.SetActive(true);
                 npc.SetActive(true);
                 InDialogEffect.SetActive(true);
+
+                cookButton.SetActive(false);
+                shopButton.SetActive(false);
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
@@ -138,8 +145,20 @@ public class DialogueManager : MonoBehaviour
         InDialogEffect.SetActive(false);
         npc.SetActive(false);
 
-        manager.ChangeGameState(GameManager.GameState.IdleState);
+        if (manager.curState == GameManager.GameState.DialogState)
+        {
+            manager.ChangeGameState(GameManager.GameState.IdleState);
+        }
+        if (manager.curState == GameManager.GameState.EvaluationState)
+        {
+            manager.counter++;
+            manager.ChangeGameState(GameManager.GameState.DialogState);
+        }
+
         counter = 0;
+
+        cookButton.SetActive(true);
+        shopButton.SetActive(true);
     }
 
     IEnumerator TypeEffect(string line)

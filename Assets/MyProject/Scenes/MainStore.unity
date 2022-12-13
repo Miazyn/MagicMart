@@ -2962,6 +2962,8 @@ MonoBehaviour:
   npc: {fileID: 464377313}
   npcSprite: {fileID: 165890255}
   InDialogEffect: {fileID: 22411385}
+  cookButton: {fileID: 1952913300}
+  shopButton: {fileID: 329983781}
   typerRunning: 0
 --- !u!114 &2091751672
 MonoBehaviour:

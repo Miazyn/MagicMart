@@ -65,9 +65,9 @@ public class CookingPot : MonoBehaviour, IDropHandler
             {
                 animPlaying = false;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.2f);
         }
-        SceneManager.LoadScene("RhythmMiniGame");
+        SceneManager.LoadScene("RhythmMiniGame", LoadSceneMode.Single);
     }
 
 }

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class RecipeBoard : MonoBehaviour
 {
-
-    public SO_Recipe recipe;
+    GameManager manager;
+    public SO_Recipe recipe { get; private set; }
 
     [SerializeField] GameObject recipeBoard;
     [SerializeField] public GameObject recipeItemPrefab;
 
     void Start()
     {
+        manager = GameManager.Instance;
+        recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
         CreateRecipeBoard();
     }
 
