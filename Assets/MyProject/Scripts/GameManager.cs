@@ -10,6 +10,18 @@ public class GameManager : MonoBehaviour
     //DialogueManager dialogManager;
     //[SerializeField] SO_Dialog currentDialog;
     int counter = 0;
+
+    public SO_NPC[] Customers;
+    public int day;
+    public int CustomerCount;
+
+    [Header("Scores")]
+    public float RhythymGameScore;
+    public float CookingGameScore;
+    public float OverallScore;
+
+    SO_CookedFood resultFood;
+
     public enum GameState
     {
         DialogState,
@@ -32,13 +44,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        curState = GameState.IdleState;
-        
     }
 
-    public void ChangeGameState(string _newGameState)
+    void Start()
     {
-         curState = (GameState)System.Enum.Parse(typeof(GameState), _newGameState);
+        curState = GameState.IdleState;
+    }
+
+
+    public void ChangeGameState(GameState _newState)
+    {
+        curState = _newState;
     }
 
     void InteractionDialogue(SO_Dialog currentDialog)

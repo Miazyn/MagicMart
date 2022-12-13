@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Used Gum
   m_EditorClassIdentifier: 
   ingredientName: Used Gum
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: 16c1135eeda2e0041b6ca633059e1c40, type: 3}
   health: -4
   mana: -2
   BuyPrice: 0

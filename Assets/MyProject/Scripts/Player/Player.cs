@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public SO_Inventory inventory;
     public int moneyAmount { get; private set; }
 
+    public SO_Quest CurrentCookingQuest;
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
     {
         moneyAmount = 0;
     }
+
 
     public bool CanBuy(int _buyPrice)
     {

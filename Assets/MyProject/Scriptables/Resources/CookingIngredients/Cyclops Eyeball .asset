@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 'Cyclops Eyeball '
   m_EditorClassIdentifier: 
   ingredientName: 'Cyclops Eyeball '
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: 21300000, guid: fafd651b05cc105449a3dcf054dff3fd, type: 3}
   health: -5
   mana: 6
   BuyPrice: 0
