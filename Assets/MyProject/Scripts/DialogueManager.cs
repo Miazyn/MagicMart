@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     public bool typerRunning = false;
 
     Player player;
-    GameManager manager;
+    [SerializeField] GameManager manager;
 
     int counter = 0;
 
@@ -39,7 +39,6 @@ public class DialogueManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -51,6 +50,12 @@ public class DialogueManager : MonoBehaviour
         player = Player.instance;
         manager = GameManager.Instance;
         WarnCheck();
+
+        if(manager.curState == GameManager.GameState.MiniRhythmGameState)
+        {
+            Debug.Log("Into Eval");
+            manager.ChangeGameState(GameManager.GameState.EvaluationState);
+        }
     }
     private void WarnCheck()
     {
@@ -152,7 +157,7 @@ public class DialogueManager : MonoBehaviour
         if (manager.curState == GameManager.GameState.EvaluationState)
         {
             manager.counter++;
-            manager.ChangeGameState(GameManager.GameState.DialogState);
+            manager.ChangeGameState(GameManager.GameState.StartState);
         }
 
         counter = 0;

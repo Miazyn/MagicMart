@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
+        DayStart,
+        StartState,
         DialogState,
         CookingState,
         MiniRhythmGameState,
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] public GameState curState { get; private set; }
+
 
     private void Awake()
     {
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         dialogueManager = DialogueManager.instance;
-        curState = GameState.IdleState;
+        curState = GameState.DayStart;
     }
 
 
@@ -67,7 +70,16 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameStateAction()
     {
-        if(curState == GameState.DialogState)
+        if (curState == GameState.StartState)
+        {
+            Debug.Log("Time to be idle");
+            curState = GameState.DialogState;
+        }
+        if (curState == GameState.IdleState)
+        {
+            Debug.Log("Time to be idle");
+        }
+        if (curState == GameState.DialogState)
         {
             Debug.Log("Time to start some dialog");
             if (counter < CustomerCount - 1)
@@ -79,26 +91,22 @@ public class GameManager : MonoBehaviour
                 Debug.Log("No more dialog, Done with the day");
             }
         }
-        else if(curState == GameState.IdleState)
-        {
-            Debug.Log("Time to be idle");
-        }
-        else if(curState == GameState.CookingState)
+        if(curState == GameState.CookingState)
         {
             Debug.Log("Time to start Cooking");
         }
-        else if(curState == GameState.MiniRhythmGameState)
+        if(curState == GameState.MiniRhythmGameState)
         {
             Debug.Log("Time to rhythm");
         }
-        else if(curState == GameState.ShoppingState)
+        if(curState == GameState.ShoppingState)
         {
             Debug.Log("Time to shop");
         }
-        else if(curState == GameState.EvaluationState)
+        if(curState == GameState.EvaluationState)
         {
             Debug.Log("Time to Evaluate");
-            //Evaluation();
+            Evaluation();
             
         }
     }
@@ -111,6 +119,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterQuestDialog()
     {
+        Debug.Log("Display after Dialog");
         dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
     }
 }

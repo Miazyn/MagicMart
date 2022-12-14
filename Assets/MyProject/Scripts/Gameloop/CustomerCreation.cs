@@ -15,9 +15,11 @@ public class CustomerCreation : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         dayCounter = 1;
-
-        customerAmount = Random.Range(5, 7);
-        StartCoroutine(CreatingCustomer());
+        if (gameManager.curState == GameManager.GameState.DayStart)
+        {
+            customerAmount = Random.Range(5, 7);
+            StartCoroutine(CreatingCustomer());
+        }
     }
 
     IEnumerator CreatingCustomer()

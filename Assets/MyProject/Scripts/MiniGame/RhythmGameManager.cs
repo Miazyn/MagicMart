@@ -38,12 +38,13 @@ public class RhythmGameManager : MonoBehaviour
         manager = GameManager.Instance;
         NotesToBeMade = Random.Range(7, 15);
         NotesLeft = NotesToBeMade;
-        Debug.Log(NotesToBeMade);
         currentScore = 0;
 
         perfectScore = NotesToBeMade * scorePerPerfectNote;
         onePercent = perfectScore / 100;
         scoreText.text = 100 + "%";
+
+        manager.ChangeGameState(GameManager.GameState.MiniRhythmGameState);
     }
     void Update()
     {
@@ -75,27 +76,22 @@ public class RhythmGameManager : MonoBehaviour
             }
 
             manager.RhythymGameScore = playerScore;
-            manager.ChangeGameState(GameManager.GameState.EvaluationState);
-
             SceneManager.LoadScene("MainStore", LoadSceneMode.Single);
         }
     }
     public void NormalHit()
     {
-        Debug.Log("Hit");
         currentScore += scorePerNote; 
         PercentageCalc(); 
     }
     public void GoodHit() 
     {
-        Debug.Log("Good Hit");
 
         currentScore += scorePerGoodNote;
         PercentageCalc(); 
     }
     public void PerfectHit() 
     {
-        Debug.Log(" Perfect Hit");
 
         currentScore += scorePerPerfectNote; 
         PercentageCalc(); 

@@ -47,10 +47,6 @@ public class CookingPot : MonoBehaviour, IDropHandler
             animPlaying = true;
             StartCoroutine(loadNextScene());
         }
-        else
-        {
-            Debug.Log("Not contains recipe");
-        }
 
         counter++;
         Destroy(eventData.pointerDrag);

@@ -32,7 +32,6 @@ public class NoteObject : MonoBehaviour
             if (CanBePressed)
             {
                 HasHitNote = true;
-                Debug.Log(transform.position.x);
                 HitCheck();
 
             }
