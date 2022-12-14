@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfSpeaker: Claw
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0d55f8dc04f6d6a46b1616a810af29e9, type: 3}
   lines:
   - This is a testrun. Can you please make me a healing salad? Also just gonna add
     a few more lines for testing.

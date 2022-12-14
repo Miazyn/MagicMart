@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
 
     Coroutine displayCoroutine;
     public bool typerRunning = false;
+    AudioSource audioSource;
+    [SerializeField] AudioClip[] allTypeClips;
 
     Player player;
     [SerializeField] GameManager manager;
@@ -47,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         player = Player.instance;
         manager = GameManager.Instance;
         WarnCheck();
@@ -175,6 +178,14 @@ public class DialogueManager : MonoBehaviour
         {
 
             dialogueText.text += line.ToCharArray()[i];
+
+            if (line.ToCharArray()[i] != '.' || line.ToCharArray()[i] != ' ' || line.ToCharArray()[i] != '\n')
+            {
+                audioSource.clip = allTypeClips[UnityEngine.Random.Range(0, allTypeClips.Length - 1)];
+                audioSource.Play();
+            }
+
+
             yield return new WaitForSeconds(typingSpeedInSeconds);
 
         }
@@ -194,6 +205,11 @@ public class DialogueManager : MonoBehaviour
 
     void DisplayCharacterSprite(SO_Dialog dialogue)
     {
+        if (dialogue.keyForCharacterDisplay == null && dialogue.spriteForCharacterDisplay != null)
+        {
+            Debug.LogWarning("Cannot have a sprite without a key number");
+        }
+
         if (dialogue.keyForCharacterDisplay != null && dialogue.spriteForCharacterDisplay != null)
         {
             for (int i = 0; i < dialogue.keyForCharacterDisplay.Count; i++)
