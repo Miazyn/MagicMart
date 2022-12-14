@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2723138715192044125}
   m_Layer: 5
   m_Name: Ingredient
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e218f8391aca1da4d9ed64f09e6023c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayedCheck: 0.2
   rect: {fileID: 0}
   ingredient: {fileID: 0}
   canvas: {fileID: 0}

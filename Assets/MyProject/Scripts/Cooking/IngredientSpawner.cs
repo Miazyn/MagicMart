@@ -72,7 +72,11 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Image alpa down
-        GetComponent<Image>().color = Color.green;
+        if (GameObject.FindGameObjectWithTag("Ingredient") == null)
+        {
+            GetComponent<Image>().color = Color.green;
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

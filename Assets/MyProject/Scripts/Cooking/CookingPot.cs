@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class CookingPot : MonoBehaviour, IDropHandler
+public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler
 {
 
     [SerializeField] List<SO_Ingredient> ingredients = new List<SO_Ingredient>();
@@ -49,6 +49,7 @@ public class CookingPot : MonoBehaviour, IDropHandler
         }
 
         counter++;
+        Debug.Log("Item has been destroyed");
         Destroy(eventData.pointerDrag);
     }
 
@@ -66,4 +67,15 @@ public class CookingPot : MonoBehaviour, IDropHandler
         SceneManager.LoadScene("RhythmMiniGame", LoadSceneMode.Single);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(eventData.pointerDrag.GetComponent<CookIngredient>() != null)
+        {
+            Debug.Log("Has Script on it");
+        }
+        else
+        {
+            Debug.Log("No Script on it");
+        }
+    }
 }
