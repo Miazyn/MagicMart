@@ -80,6 +80,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SetUpDialog(SO_Dialog _currentDialog)
     {
+        Debug.Log(_currentDialog);
         if (counter <= _currentDialog.lines.Count && !typerRunning)
         {
             TextReceived(_currentDialog);

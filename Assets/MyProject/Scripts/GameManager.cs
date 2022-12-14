@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public float OverallScore;
 
     [Header("All Corelated Scripts")]
-    DialogueManager dialogueManager;
+    [SerializeField] DialogueManager dialogueManager;
 
     SO_CookedFood resultFood;
 
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Time to be idle");
             curState = GameState.DialogState;
+            Debug.Log(curState);
         }
         if (curState == GameState.IdleState)
         {
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
         if(curState == GameState.EvaluationState)
         {
+            dialogueManager = DialogueManager.instance;
             Debug.Log("Time to Evaluate");
             Evaluation();
             
@@ -120,6 +122,8 @@ public class GameManager : MonoBehaviour
     public void AfterQuestDialog()
     {
         Debug.Log("Display after Dialog");
+        
         dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
+        
     }
 }
