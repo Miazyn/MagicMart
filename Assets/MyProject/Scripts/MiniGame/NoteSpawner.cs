@@ -5,7 +5,7 @@ using UnityEngine;
 public class NoteSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] NotesToSpawn;
-    [SerializeField] int distanceBetweenNotes;
+    [SerializeField] float distanceBetweenNotes;
 
 
     public List<GameObject> spawnedNotes;

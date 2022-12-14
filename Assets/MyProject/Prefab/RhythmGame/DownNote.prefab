@@ -105,7 +105,7 @@ MonoBehaviour:
   goodHitEffect: {fileID: 6454705224513310168, guid: 803f58ead9d533d449d238e449ca3c09, type: 3}
   perfectHitEffect: {fileID: 6885353956483216958, guid: 9cfead00050cb7c4d9826dc09b553df0, type: 3}
   missEffect: {fileID: 4592840886990838263, guid: 74aff502e0ef0634691a83f6e44a4c9f, type: 3}
-  beatTempo: 120
+  beatTempo: 700
 --- !u!58 &2119565294996329821
 CircleCollider2D:
   m_ObjectHideFlags: 0

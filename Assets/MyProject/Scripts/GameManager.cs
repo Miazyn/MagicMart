@@ -73,8 +73,7 @@ public class GameManager : MonoBehaviour
         if (curState == GameState.StartState)
         {
             Debug.Log("Time to be idle");
-            curState = GameState.DialogState;
-            Debug.Log(curState);
+            ChangeGameState(GameState.DialogState);
         }
         if (curState == GameState.IdleState)
         {

@@ -48,10 +48,12 @@ public class Player : MonoBehaviour
         {
             if (manager.curState == GameManager.GameState.DialogState)
             {
+                Debug.Log("Dialog");
                 manager.CheckGameStateAction();
             }
             if(manager.curState == GameManager.GameState.EvaluationState)
             {
+                Debug.Log("After");
                 manager.AfterQuestDialog();
             }
         }    

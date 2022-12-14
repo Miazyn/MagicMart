@@ -804,7 +804,7 @@ MonoBehaviour:
   - {fileID: 5606108669516731606, guid: b640524c8716732419b85a1eda9f0090, type: 3}
   - {fileID: 1809456652506580497, guid: eb165dabd0d8e1d4abbb5930fbbca272, type: 3}
   - {fileID: 1245243632720661342, guid: 9be3b9d38980be449bbd575b661c5436, type: 3}
-  distanceBetweenNotes: 2
+  distanceBetweenNotes: 1
   spawnedNotes: []
 --- !u!1 &1240859789
 GameObject:
