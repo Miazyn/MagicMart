@@ -16,6 +16,8 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public CanvasGroup canvasGroup;
     public float onDragAlpha;
 
+    public float HoverSizeUp = 1.5f;
+    Vector3 ogScale;
 
     GameObject prefab;
 
@@ -35,7 +37,9 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         {
             Debug.LogWarning("NO CANVAS FOR SCALE DEFINED");
         }
+        ogScale = rect.localScale;
         StartCoroutine(CheckIfDragged());
+
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -43,21 +47,17 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         canvasGroup.blocksRaycasts = false;
         
     }
-
     public void OnDrag(PointerEventData eventData)
     {
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
         IsDragged = true;
     }
-
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         Destroy(gameObject);
     }
-
-
     IEnumerator CheckIfDragged()
     {
         yield return new WaitForSeconds(delayedCheck);
@@ -65,5 +65,15 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SizeUp()
+    {
+        rect.localScale *= HoverSizeUp;
+    }
+
+    public void SizeDown()
+    {
+        rect.localScale = ogScale;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler
+public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField] List<SO_Ingredient> ingredients = new List<SO_Ingredient>();
@@ -49,7 +49,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler
         }
 
         counter++;
-        Debug.Log("Item has been destroyed");
         Destroy(eventData.pointerDrag);
     }
 
@@ -69,13 +68,31 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(eventData.pointerDrag.GetComponent<CookIngredient>() != null)
+        if (CheckForCookIngredientOnPot(eventData))
         {
-            Debug.Log("Has Script on it");
+            eventData.pointerDrag.GetComponent<CookIngredient>().SizeUp();
         }
-        else
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (CheckForCookIngredientOnPot(eventData))
         {
-            Debug.Log("No Script on it");
+            eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
         }
+    }
+
+    bool CheckForCookIngredientOnPot(PointerEventData _eventData)
+    {
+        if (_eventData.pointerDrag != null)
+        {
+            if (_eventData.pointerDrag.GetComponent<CookIngredient>() != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        return false;
     }
 }
