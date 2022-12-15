@@ -30,12 +30,10 @@ public class RecipeBoard : MonoBehaviour
     public void CreateRecipeBoard()
     {
         int count = recipe.ingredients.Length;
-        Debug.Log(count);
         for(int i = 0; i < count; i++)
         {
             GameObject curItem = Instantiate(recipeItemPrefab, recipeBoard.transform);
             curItem.GetComponent<RecipeIngredientSlot>().heldIngredient = recipe.ingredients[i];
-            Debug.Log("Made Ingredient");
         }
     }
 }
