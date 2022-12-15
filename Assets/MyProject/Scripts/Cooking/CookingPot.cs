@@ -52,7 +52,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
         if (glowEffect != null)
         {
-            glowAnimator.SetTrigger("EndGlow");
             delayCoroutine = StartCoroutine(DelayUntilDeactivation());
         }
 
