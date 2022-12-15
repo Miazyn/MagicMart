@@ -10,10 +10,20 @@ public class RecipeBoard : MonoBehaviour
     [SerializeField] GameObject recipeBoard;
     [SerializeField] public GameObject recipeItemPrefab;
 
+     [SerializeField] SO_Recipe testingRecipe;
+
     void Start()
     {
         manager = GameManager.Instance;
-        recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
+        if (manager.Customers.Length > 0)
+        {
+            recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
+        }
+        if(recipe == null)
+        {
+            recipe = testingRecipe;
+        }
+
         CreateRecipeBoard();
     }
 
