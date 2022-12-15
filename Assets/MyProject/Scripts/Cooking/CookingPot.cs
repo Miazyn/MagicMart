@@ -52,16 +52,14 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
         if (glowEffect != null)
         {
+            glowAnimator.SetTrigger("EndGlow");
             delayCoroutine = StartCoroutine(DelayUntilDeactivation());
         }
-
-        ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
-        lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
-
-        if (!currentRecipe.IsValidIngredient(lastIngredient))
+        if (!eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke)
         {
-            Debug.Log("invalid ingredient");
+            ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
         }
+        lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
 
         if (currentRecipe.ContainsRecipe(ingredients))
         {
@@ -73,7 +71,9 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         }
 
         counter++;
-        Destroy(eventData.pointerDrag);
+        eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
+        eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke = true;
+        eventData.pointerDrag.GetComponent<CookIngredient>().IsOnTheke = true;
     }
 
     IEnumerator loadNextScene()
@@ -114,7 +114,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             if (glowEffect != null)
             {
-                Debug.Log("End Glow");
                 glowAnimator.SetTrigger("EndGlow");
                 delayCoroutine = StartCoroutine(DelayUntilDeactivation());
             }
@@ -147,5 +146,10 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         }
 
         return false;
+    }
+
+    bool IngredientHasBeenAddedBefore()
+    {
+        return true;
     }
 }

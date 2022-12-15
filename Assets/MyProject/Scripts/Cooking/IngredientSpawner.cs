@@ -24,6 +24,8 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     Color defaultColor;
     Vector2 currentpos;
 
+    [SerializeField] PullUpMenu pullUpItemMenu;
+
     void Awake()
     {
         itemImage = transform.Find("ItemImage").gameObject.GetComponent<Image>();
@@ -34,6 +36,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Start()
     {
+        pullUpItemMenu = GameObject.FindObjectOfType<PullUpMenu>();
         itemImage.sprite = ingredientToSpawn.ingredientSprite;
         AddItemAmount(1);
     }
@@ -57,7 +60,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 
         eventData.pointerDrag = instantiatedObject;
-       
+        pullUpItemMenu.MenuDown();
     }
 
     public void OnDrag(PointerEventData eventData)

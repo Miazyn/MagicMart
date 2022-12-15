@@ -16,6 +16,9 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public CanvasGroup canvasGroup;
     public float onDragAlpha;
 
+    public bool IsOnTheke = false;
+    public bool HasBeenOnTheke = false;
+
     public float HoverSizeUp = 1.5f;
     Vector3 ogScale;
 
@@ -49,6 +52,7 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
     public void OnDrag(PointerEventData eventData)
     {
+        IsOnTheke = false;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
         IsDragged = true;
     }
@@ -56,7 +60,10 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        Destroy(gameObject);
+        if (!IsOnTheke)
+        {
+            Destroy(gameObject);
+        }
     }
     IEnumerator CheckIfDragged()
     {

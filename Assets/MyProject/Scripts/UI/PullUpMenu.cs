@@ -27,7 +27,6 @@ public class PullUpMenu : MonoBehaviour
     {
         if (!HasAnimPlayed)
         {
-            Debug.Log("Calling Anim");
             button.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
             background.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
             logic.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
