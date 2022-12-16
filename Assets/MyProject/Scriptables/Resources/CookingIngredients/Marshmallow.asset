@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Marshmallow
   ingredientSprite: {fileID: 21300000, guid: 02646666fd2b88944aa6dba372498e5f, type: 3}
-  health: -3
+  health: 5
   mana: 0
-  BuyPrice: 0
-  ingredientDescription: 
+  power: 0
+  BuyPrice: 1000
+  ingredientDescription: Usually roasted over a campfire with scary stories.

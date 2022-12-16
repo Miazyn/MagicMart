@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [SerializeField] float delayedCheck = 0.2f;
+    [SerializeField] float delayedCheck = 2f;
     public RectTransform rect;
     //public Vector2 originalPosition;
+
+    public Transform AfterOnTheke;
 
     public SO_Ingredient ingredient;
 
@@ -18,6 +20,7 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     public bool IsOnTheke = false;
     public bool HasBeenOnTheke = false;
+    public bool IsCurrentlyDragged;
 
     public float HoverSizeUp = 1.5f;
     Vector3 ogScale;
@@ -46,6 +49,7 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        IsCurrentlyDragged = true;
         canvasGroup.alpha = onDragAlpha;
         canvasGroup.blocksRaycasts = false;
         
@@ -58,10 +62,12 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        IsCurrentlyDragged = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         if (!IsOnTheke)
         {
+            GameObject.FindObjectOfType<CookingPot>().RemoveItem(ingredient);
             Destroy(gameObject);
         }
     }
@@ -73,14 +79,13 @@ public class CookIngredient : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             Destroy(gameObject);
         }
     }
-
     public void SizeUp()
     {
         rect.localScale *= HoverSizeUp;
     }
-
     public void SizeDown()
     {
         rect.localScale = ogScale;
     }
+
 }

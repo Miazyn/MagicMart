@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Elixir of Youth
   description: 
-  ingredients: []
-  recipeSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  ingredients:
+  - {fileID: 11400000, guid: d55396abbdd2c3f428456d0fc1fae120, type: 2}
+  - {fileID: 11400000, guid: 5632ee791d1f42a4b9817c39bd249e94, type: 2}
+  recipeSprite: {fileID: 21300000, guid: 762eee4921ccafa4cb0e2052751e84d4, type: 3}
+  health: 7
+  mana: 10
+  power: 7
+  terribleSellPrice: 7777
+  normalSellPrice: 8777
+  goodSellPrice: 9777
+  perfectSellPrice: 12777

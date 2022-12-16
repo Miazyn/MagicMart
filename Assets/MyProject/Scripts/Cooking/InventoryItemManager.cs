@@ -7,6 +7,7 @@ public class InventoryItemManager : MonoBehaviour
     public GameObject ItemSlotPrefab;
     public Transform ParentTransform;
     public Transform PrefabParent;
+    public Transform OnThekeParent;
     public Canvas Canvas;
 
     private void Awake()
@@ -21,6 +22,7 @@ public class InventoryItemManager : MonoBehaviour
             _newIngredient.prefabParent = PrefabParent;
             _newIngredient.canvas = this.Canvas;
             _newIngredient.GetComponent<RectTransform>().anchoredPosition = ParentTransform.GetComponent<RectTransform>().anchoredPosition;
+            _newIngredient.AfterThekeParent = OnThekeParent;
         }
     }
 }

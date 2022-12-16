@@ -2,36 +2,44 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField] GameObject glowEffect;
-    [SerializeField] GameObject bubbleEffect;
     Animator glowAnimator;
 
     [SerializeField] List<SO_Ingredient> ingredients = new List<SO_Ingredient>();
-    SO_Ingredient lastIngredient;
-    int counter = 0;
+    [SerializeField] int ingredientsLimit = 10;
+    [SerializeField] TextMeshProUGUI currentIngredients;
 
-    [SerializeField] Animator ruehrstabAnimator;
-    string ruehrAnim = "MixingAnimation";
+    public int curMana = 0;
+    public int curHealth = 0;
+    public int curPower = 0;
+
+    SO_Ingredient lastIngredient;
 
     [SerializeField] RecipeBoard recipeBoard;
-    SO_Recipe currentRecipe;
+    public SO_Recipe currentRecipe { get; private set; }
 
-    bool animPlaying = false;
-
-    float animTimer = 2;
 
     Coroutine delayCoroutine, delayBubbleCoroutine;
+
+    public delegate void OnIngredientsChanged();
+    public OnIngredientsChanged onIngredientsChangedCallback;
 
     private void Start()
     {
         currentRecipe = recipeBoard.recipe;
         glowAnimator = glowEffect.GetComponent<Animator>();
+
+        Debug.Log(ingredientsLimit + " this is the current max limit of ingredients");
+        if (onIngredientsChangedCallback != null)
+        {
+            onIngredientsChangedCallback.Invoke();
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -39,55 +47,51 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         Debug.Log("Dropped: " + eventData.pointerDrag);
 
         //SFX
-        if (bubbleEffect != null)
-        {
-            bubbleEffect.SetActive(true);
-            if (delayBubbleCoroutine != null)
-            {
-                StopCoroutine(delayBubbleCoroutine);
-                bubbleEffect.GetComponent<Animator>().Play("BubblesAnim");
-            }
-            delayBubbleCoroutine = StartCoroutine(DelayBubbleDeactivation());
-        }
-
         if (glowEffect != null)
         {
             glowAnimator.SetTrigger("EndGlow");
             delayCoroutine = StartCoroutine(DelayUntilDeactivation());
         }
-        if (!eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke)
-        {
-            ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
-        }
-        lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
 
+        if (ingredients.Count < ingredientsLimit)
+        {
+            eventData.pointerDrag.gameObject.transform.SetParent(eventData.pointerDrag.GetComponent<CookIngredient>().AfterOnTheke);
+            UpdateUIText();
+            if (!eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke)
+            {
+                ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
+
+                curHealth += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.health;
+                curMana += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.mana;
+                curPower += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.power;
+                if (onIngredientsChangedCallback != null)
+                {
+                    onIngredientsChangedCallback.Invoke();
+                }
+            }
+            lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
+        }
+        else
+        {
+            Destroy(eventData.pointerDrag);
+        }
         if (currentRecipe.ContainsRecipe(ingredients))
         {
-            animTimer = 2;
+            //animTimer = 2;
             Debug.Log("Contains recipe");
-            ruehrstabAnimator.Play(ruehrAnim);
-            animPlaying = true;
-            StartCoroutine(loadNextScene());
+            //ruehrstabAnimator.Play(ruehrAnim);
+            //animPlaying = true;
         }
 
-        counter++;
-        eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
+        
+        //eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
         eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke = true;
         eventData.pointerDrag.GetComponent<CookIngredient>().IsOnTheke = true;
     }
 
-    IEnumerator loadNextScene()
+    private void UpdateUIText()
     {
-        while (animPlaying)
-        {
-            animTimer--;
-            if(animTimer <= 0)
-            {
-                animPlaying = false;
-            }
-            yield return new WaitForSeconds(1.2f);
-        }
-        SceneManager.LoadScene("RhythmMiniGame", LoadSceneMode.Single);
+        currentIngredients.SetText((ingredients.Count + 1) + "/" + ingredientsLimit);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -104,7 +108,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                 
                 glowEffect.SetActive(true);
             }
-            eventData.pointerDrag.GetComponent<CookIngredient>().SizeUp();
+            //eventData.pointerDrag.GetComponent<CookIngredient>().SizeUp();
         }
     }
 
@@ -118,14 +122,8 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                 delayCoroutine = StartCoroutine(DelayUntilDeactivation());
             }
             
-            eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
+            //eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
         }
-    }
-
-    IEnumerator DelayBubbleDeactivation()
-    {
-        yield return new WaitForSeconds(1.3f);
-        bubbleEffect.SetActive(false);
     }
 
     IEnumerator DelayUntilDeactivation()
@@ -151,5 +149,27 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     bool IngredientHasBeenAddedBefore()
     {
         return true;
+    }
+
+    public void RemoveItem(SO_Ingredient _ingredient)
+    {
+        List<SO_Ingredient> _tempList = new List<SO_Ingredient>();
+        bool itemDeleted = false;
+
+        foreach(var item in ingredients)
+        {
+            if (item.CompareIngredient(_ingredient) && !itemDeleted)
+            {
+                itemDeleted = true;
+            }
+            else
+            {
+                _tempList.Add(item);
+            }
+        }
+
+        ingredients = new List<SO_Ingredient>();
+        ingredients = _tempList;
+        UpdateUIText();
     }
 }

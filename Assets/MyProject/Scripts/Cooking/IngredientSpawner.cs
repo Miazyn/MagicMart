@@ -15,6 +15,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     [Header("Positioning")]
     public Transform prefabParent;
+    public Transform AfterThekeParent;
     public Canvas canvas;
 
     [SerializeField]public Image itemImage { get; private set; }
@@ -52,6 +53,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
         ingredientScript = instantiatedObject.GetComponent<CookIngredient>();
         ingredientScript.ingredient = ingredientToSpawn;
         ingredientScript.canvas = canvas;
+        instantiatedObject.GetComponent<CookIngredient>().AfterOnTheke = AfterThekeParent;
 
         currentpos = GetComponent<RectTransform>().anchoredPosition;
         RectTransform rt = instantiatedObject.GetComponent<RectTransform>();
@@ -75,9 +77,16 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Image alpa down
-        if (GameObject.FindGameObjectWithTag("Ingredient") == null)
+        if (GameObject.FindWithTag("Ingredient") == null)
         {
             GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            if (!GameObject.FindWithTag("Ingredient").GetComponent<CookIngredient>().IsCurrentlyDragged)
+            {
+                GetComponent<Image>().color = Color.green;
+            }
         }
         
     }

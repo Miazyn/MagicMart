@@ -9,6 +9,7 @@ public class SO_Ingredient : ScriptableObject
     public Sprite ingredientSprite;
     public int health;
     public int mana;
+    public int power;
 
     public int BuyPrice;
 
@@ -24,5 +25,8 @@ public class SO_Ingredient : ScriptableObject
         return false;
     }
 
-   
+    public (int _health, int _mana, int _power) GetIngredientStats()
+    {
+        return (health, mana, power);
+    }
 }

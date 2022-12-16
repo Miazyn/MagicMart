@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Angel Feather
   ingredientSprite: {fileID: 21300000, guid: c8f02bf88d8d1fd4dbf7fd9ed63b5215, type: 3}
-  health: 10
-  mana: 8
-  BuyPrice: 0
-  ingredientDescription: 
+  health: 7
+  mana: 7
+  power: 7
+  BuyPrice: 7777
+  ingredientDescription: It feels like a sin to own.

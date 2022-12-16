@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Moonlight Dumplings
   description: 
-  ingredients: []
-  recipeSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  ingredients:
+  - {fileID: 11400000, guid: b63e3d711df9ab24aac723cccebe27b5, type: 2}
+  - {fileID: 11400000, guid: 5632ee791d1f42a4b9817c39bd249e94, type: 2}
+  - {fileID: 11400000, guid: 057d067730aedca42bb0fc7a2c24eefd, type: 2}
+  recipeSprite: {fileID: 21300000, guid: 3d615b8f0c4d4914cbf42907ba65a94d, type: 3}
+  health: 10
+  mana: 20
+  power: 10
+  terribleSellPrice: 9777
+  normalSellPrice: 14777
+  goodSellPrice: 15777
+  perfectSellPrice: 17777

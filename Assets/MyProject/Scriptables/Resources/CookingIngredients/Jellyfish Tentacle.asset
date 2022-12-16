@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Jellyfish Tentacle
   ingredientSprite: {fileID: 21300000, guid: c2d397c7045cb4a4d8d752a9a1ebfc8f, type: 3}
-  health: -3
+  health: 2
   mana: 3
-  BuyPrice: 0
-  ingredientDescription: 
+  power: 2
+  BuyPrice: 2000
+  ingredientDescription: Looks a bit slimy. But they say its good for your eyes.

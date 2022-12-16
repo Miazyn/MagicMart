@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Wisdom Serum
   description: 
-  ingredients: []
-  recipeSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  ingredients:
+  - {fileID: 11400000, guid: 77118deafc032704eae6202d29334eb8, type: 2}
+  - {fileID: 11400000, guid: 5809dde9a25eec6419b29b7e54a7efc0, type: 2}
+  recipeSprite: {fileID: 21300000, guid: d44b50140a6bbf040b9b258f127bbd72, type: 3}
+  health: 7
+  mana: 10
+  power: 0
+  terribleSellPrice: 2500
+  normalSellPrice: 5500
+  goodSellPrice: 6500
+  perfectSellPrice: 8020

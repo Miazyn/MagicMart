@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Hand-picked Apples
   ingredientSprite: {fileID: 21300000, guid: 1a5127aa50fc8ff498c042b87698dd7e, type: 3}
-  health: 6
-  mana: 1
-  BuyPrice: 0
-  ingredientDescription: 
+  health: 4
+  mana: -3
+  power: 4
+  BuyPrice: 2000
+  ingredientDescription: Freshly picked apples from someone's backyard. Don't tell.

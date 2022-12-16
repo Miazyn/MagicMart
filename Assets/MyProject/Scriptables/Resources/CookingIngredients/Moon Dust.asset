@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Moon Dust
   ingredientSprite: {fileID: 21300000, guid: 7b843921b90c07d41b1e6fcf12118ab9, type: 3}
-  health: -1
+  health: -6
   mana: 7
-  BuyPrice: 0
-  ingredientDescription: 
+  power: 1
+  BuyPrice: 5000
+  ingredientDescription: Most people would prefer 'grated moon cheese'.

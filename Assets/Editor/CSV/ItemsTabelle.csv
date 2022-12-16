@@ -1,21 +1,24 @@
-Pixel plant,6,4,,1000,Meet Steve,A plant from a different world where everything is made up from pixels.
-Star Fragment,-1,5,,1000,Meet Steve,A pretty little part of a star. It is said you can wish for these in a different dimension.
-Chocolate,8,0,,1000,Meet Steve,A sweet little treat. Can be used to make more sweets.
-Leaves from Outside,-5,-1,,90,None,Leaves. They look pretty much dead.
-Used Gum,-4,-2,,10,None,Eww...Like why is this even on sale?
-Marshmallow,-3,0,,1000,Make Pixel Cupcake,Usually roasted over a campfire with scary stories.
-Hand-picked Apples,6,1,,2000,,Freshly picked apples from someone's backyard. Don't tell.
-Sunny Strawberries,6,2,,2500,,Strawberries which were left longer under the sun but it is hard to tell a difference.
-Tears of a Mermaid,7,10,,3000,,I wonder how they even got these...
-Pansy,5,3,,2500,,A beautiful flower which can be found in many gardens.
-Moon Dust,-1,7,,5000,,Most people would prefer 'grated moon cheese'.
-Angel Feather,10,8,,10000,,It feels like a sin to own.
-Camomile,7,2,,2000,,Makes great tea to become sleepy... (Yawn)
-Rosemary,4,4,,1000,,
-Suspicious Mushroom,4,5,,3000,,"A completely normal mushroom. Yeah, normal."
-Snake Venom,-10,5,,2000,,
-Devil's Blood,-10,9,,6666,,
-Super Spicy Pepper,-8,-2,,3000,,
-Phoenix Feather,8,10,,7000,,
-Jellyfish Tentacle,-3,3,,8000,,
-Cyclops Eyeball,-5,6,,9000,,
+Pixel plant,6,4,1,1000,Meet Steve,A plant from a different world where everything is made up from pixels.
+Star Fragment,-1,5,6,1000,Meet Steve,A pretty little part of a star. It is said you can wish for these in a different dimension.
+Chocolate,8,0,-4,1000,Meet Steve,A sweet little treat. Can be used to make more sweets.
+Leaves from Outside,-5,-1,4,99,None,Leaves. They look pretty much dead.
+Used Gum,-4,-2,6,10,None,Eww...Like why is this even on sale?
+Marshmallow,5,0,0,1000,Make Pixel Cupcake,Usually roasted over a campfire with scary stories.
+Hand-picked Apples,4,-3,4,2000,,Freshly picked apples from someone's backyard. Don't tell.
+Sunny Strawberries,3,0,5,2500,,Strawberries which were left longer under the sun but it is hard to tell a difference.
+Tears of a Mermaid,3,10,-4,3000,,I wonder how they even got these...
+Pansy,5,3,-4,2500,none,A beautiful flower which can be found in many gardens.
+Moon Dust,-6,7,1,5000,,Most people would prefer 'grated moon cheese'.
+Angel Feather,7,7,7,7777,,It feels like a sin to own.
+Camomile,6,2,1,2000,,Makes great tea to become sleepy... (Yawn)
+Rosemary,4,4,-5,1000,,Just Rosemary. Yeah. It smells nice.
+Suspicious Mushroom,4,5,-3,3000,none,"A completely normal mushroom. Yeah, normal."
+Snake Venom,-10,5,6,2000,,Imagine asking a snake for its venom! Must be pretty dangerous.
+Devil's Blood,-10,9,1,6666,,Blood of a real devil. It's darker than normal blood and has a scary aura to it.
+Super Spicy Pepper,-8,3,-2,3000,,This pepper is so spicy that you can't even taste it.
+Phoenix Feather,8,10,-6,7000,,Symbol of rebirth. Doesn't look that delicious though.
+Jellyfish Tentacle,2,3,2,2000,none,Looks a bit slimy. But they say its good for your eyes.
+Cyclops Eyeball,2,-6,4,5000,,Poor Cyclops. I hope they're alright.
+Tea Tree Leaves,6,0,-3,1000,none,Tea leaves for making Tea.
+Honey Pot,2,-2,2,2000,none,Every Bear's favourite snack! 
+Milk,2,0,1,1000,none,Makes you grow big and strong!

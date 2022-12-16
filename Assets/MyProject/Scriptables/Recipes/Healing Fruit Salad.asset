@@ -20,8 +20,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32c40313a6816834d9561555200ff940, type: 2}
   - {fileID: 11400000, guid: 5809dde9a25eec6419b29b7e54a7efc0, type: 2}
   recipeSprite: {fileID: 21300000, guid: f29e5ba126c466541a45ad8a6c9adc48, type: 3}
-  health: 10
-  mana: 10
-  normalSellPrice: 0
-  goodSellPrice: 0
-  perfectSellPrice: 0
+  health: 20
+  mana: 15
+  power: 5
+  terribleSellPrice: 6000
+  normalSellPrice: 8000
+  goodSellPrice: 9000
+  perfectSellPrice: 11000

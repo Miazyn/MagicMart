@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 479, y: 144}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2723138715192044123
 CanvasRenderer:
@@ -91,10 +91,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayedCheck: 0.2
   rect: {fileID: 0}
+  AfterOnTheke: {fileID: 0}
   ingredient: {fileID: 0}
   canvas: {fileID: 0}
   canvasGroup: {fileID: 0}
   onDragAlpha: 0.7
+  IsOnTheke: 0
+  HasBeenOnTheke: 0
+  IsCurrentlyDragged: 0
+  HoverSizeUp: 1.5
 --- !u!225 &2723138715192044125
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -16,5 +16,6 @@ MonoBehaviour:
   ingredientSprite: {fileID: 21300000, guid: 4177d6c85dd75084ebe3c271e59ac0a1, type: 3}
   health: 8
   mana: 10
-  BuyPrice: 0
-  ingredientDescription: 
+  power: -6
+  BuyPrice: 7000
+  ingredientDescription: Symbol of rebirth. Doesn't look that delicious though.

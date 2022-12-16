@@ -15,6 +15,7 @@ MonoBehaviour:
   ingredientName: Super Spicy Pepper
   ingredientSprite: {fileID: 21300000, guid: 04053f3a4fc160d44952d0c6fa9008c0, type: 3}
   health: -8
-  mana: -2
-  BuyPrice: 0
-  ingredientDescription: 
+  mana: 3
+  power: -2
+  BuyPrice: 3000
+  ingredientDescription: This pepper is so spicy that you can't even taste it.

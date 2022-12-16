@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Sunny Strawberries
   ingredientSprite: {fileID: 21300000, guid: 87ccf8224f9317f4285eb64a3b86bdd3, type: 3}
-  health: 6
-  mana: 2
-  BuyPrice: 0
-  ingredientDescription: 
+  health: 3
+  mana: 0
+  power: 5
+  BuyPrice: 2500
+  ingredientDescription: Strawberries which were left longer under the sun but it
+    is hard to tell a difference.

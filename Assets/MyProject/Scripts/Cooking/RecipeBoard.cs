@@ -5,12 +5,11 @@ using UnityEngine;
 public class RecipeBoard : MonoBehaviour
 {
     GameManager manager;
-    public SO_Recipe recipe { get; private set; }
+    public SO_Recipe recipe;
 
     [SerializeField] GameObject recipeBoard;
     [SerializeField] public GameObject recipeItemPrefab;
 
-     [SerializeField] SO_Recipe testingRecipe;
 
     void Start()
     {
@@ -19,9 +18,9 @@ public class RecipeBoard : MonoBehaviour
         {
             recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
         }
-        if(recipe == null)
+        else
         {
-            recipe = testingRecipe;
+            Debug.Log("No Recipe here owo");
         }
 
         CreateRecipeBoard();

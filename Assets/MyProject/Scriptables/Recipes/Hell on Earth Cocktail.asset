@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Hell on Earth Cocktail
   description: 
-  ingredients: []
-  recipeSprite: {fileID: 0}
-  health: 0
-  mana: 0
+  ingredients:
+  - {fileID: 11400000, guid: 23b59af99ba71af49815902778c9e507, type: 2}
+  - {fileID: 11400000, guid: 288c326f58240ee48add130fdd122690, type: 2}
+  recipeSprite: {fileID: 21300000, guid: a7a5d02e62067cc4982541c41674509e, type: 3}
+  health: -20
+  mana: 6
+  power: -6
+  terribleSellPrice: 6666
+  normalSellPrice: 9666
+  goodSellPrice: 10666
+  perfectSellPrice: 13666

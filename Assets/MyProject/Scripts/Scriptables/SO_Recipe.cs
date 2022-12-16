@@ -14,13 +14,15 @@ public class SO_Recipe : ScriptableObject
 
     public int health;
     public int mana;
+    public int power;
 
+    public int terribleSellPrice;
     public int normalSellPrice;
     public int goodSellPrice;
     public int perfectSellPrice;
-    public (int healthReq, int manaReq) CheckRecipeRequirements() 
+    public (int healthReq, int manaReq, int powerReq) CheckRecipeRequirements() 
     {
-        return (this.health, this.mana);
+        return (this.health, this.mana, this.power);
     }
 
     public bool IsValidIngredient(SO_Ingredient i)

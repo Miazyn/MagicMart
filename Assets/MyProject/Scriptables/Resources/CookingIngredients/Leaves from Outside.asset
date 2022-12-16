@@ -16,5 +16,6 @@ MonoBehaviour:
   ingredientSprite: {fileID: 21300000, guid: 44461a995d869f847aa42b34ccadedf2, type: 3}
   health: -5
   mana: -1
-  BuyPrice: 0
-  ingredientDescription: 
+  power: 4
+  BuyPrice: 99
+  ingredientDescription: Leaves. They look pretty much dead.

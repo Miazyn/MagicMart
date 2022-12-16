@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Suprise Cake
   description: 
-  ingredients: []
-  recipeSprite: {fileID: 0}
+  ingredients:
+  - {fileID: 11400000, guid: e7a5c6b2fe89b204f9536a1b8ab8e455, type: 2}
+  - {fileID: 11400000, guid: 68af3ad6eaaea424fb6909ce7899cab3, type: 2}
+  - {fileID: 11400000, guid: eddb6eadaf1242542b5ed8270cdb6c9d, type: 2}
+  recipeSprite: {fileID: 21300000, guid: a50d6516e322e5a41b508e67c7576cd9, type: 3}
   health: 0
   mana: 0
+  power: 5
+  terribleSellPrice: 100
+  normalSellPrice: 1200
+  goodSellPrice: 1500
+  perfectSellPrice: 2500

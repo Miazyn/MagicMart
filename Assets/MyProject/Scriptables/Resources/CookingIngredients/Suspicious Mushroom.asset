@@ -16,5 +16,6 @@ MonoBehaviour:
   ingredientSprite: {fileID: 21300000, guid: 2ac309c5d7d2a3244adfcc1595784bf4, type: 3}
   health: 4
   mana: 5
-  BuyPrice: 0
-  ingredientDescription: 
+  power: -3
+  BuyPrice: 3000
+  ingredientDescription: '"A completely normal mushroom. Yeah'

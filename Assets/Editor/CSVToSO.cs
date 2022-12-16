@@ -21,6 +21,12 @@ public class CSVToSO
             tester.ingredientName = splitData[0];
             tester.health = int.Parse(splitData[1]);
             tester.mana = int.Parse(splitData[2]);
+            tester.power = int.Parse(splitData[3]);
+
+            tester.BuyPrice = int.Parse(splitData[4]);
+            tester.ingredientDescription = splitData[6];
+
+
             var testerSprite = Resources.Load<Sprite>(resourcePath + tester.ingredientName);
             if (testerSprite != null) 
             {
@@ -49,8 +55,45 @@ public class CSVToSO
         {
             string[] splitData = s.Split(',');
 
+            int ingredientCounter = 0;
+
             SO_Recipe tester = ScriptableObject.CreateInstance<SO_Recipe>();
             tester.recipeName = splitData[0];
+
+            tester.perfectSellPrice = int.Parse(splitData[5]);
+            tester.goodSellPrice = int.Parse(splitData[6]);
+            tester.normalSellPrice = int.Parse(splitData[7]);
+            tester.terribleSellPrice = int.Parse(splitData[8]);
+
+            if(splitData[1] != "")
+            {
+                ingredientCounter++;
+                if(splitData[2] != "")
+                {
+                    ingredientCounter++;
+                    if(splitData[3] != "")
+                    {
+                        ingredientCounter++;
+                        if(splitData[4] != "")
+                        {
+                            ingredientCounter++;
+                        }
+                    }
+                }
+            }
+
+            tester.ingredients = new SO_Ingredient[ingredientCounter];
+            
+            for(int i = 0; i < tester.ingredients.Length; i++)
+            {
+                tester.ingredients[i] = Resources.Load<SO_Ingredient>("CookingIngredients/" + splitData[i + 1]);
+            }
+
+
+            tester.health = int.Parse(splitData[9]);
+            tester.mana = int.Parse(splitData[10]);
+            tester.power = int.Parse(splitData[11]);
+            
             var testerSprite = Resources.Load<Sprite>("Recipes/" + tester.recipeName);
             if (testerSprite != null)
             {
