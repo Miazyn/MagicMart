@@ -19,12 +19,14 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     public int curHealth = 0;
     public int curPower = 0;
 
+    public float OverallScore = 0;
+
     SO_Ingredient lastIngredient;
 
     [SerializeField] RecipeBoard recipeBoard;
-    SO_Ingredient[] recipeToDo;
-    public SO_Recipe currentRecipe { get; private set; }
-
+    [SerializeField] SO_Ingredient[] recipeToDo;
+    public SO_Recipe currentRecipe;
+    //AFTER DEBUG BACK INTO PRIVATE SET
 
     Coroutine delayCoroutine, delayBubbleCoroutine;
 
@@ -39,9 +41,48 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         Debug.Log(ingredientsLimit + " this is the current max limit of ingredients");
         if (onIngredientsChangedCallback != null)
         {
+            Debug.Log("Update called");
             onIngredientsChangedCallback.Invoke();
         }
         
+    }
+
+    public void DebugUpdateRecipe()
+    {
+        //FOR TESTING
+
+        if (onIngredientsChangedCallback != null)
+        {
+            onIngredientsChangedCallback.Invoke();
+        }
+        recipeToDo = null;
+        ingredients = new List<SO_Ingredient>();
+
+        curHealth = 0;
+        curMana = 0;
+        curPower = 0;
+
+        OverallScore = 0.0f;
+
+        foreach (var item in GameObject.FindGameObjectsWithTag("Ingredient"))
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    public float GiveScore()
+    {
+        float inBtwManaScore = curMana / (currentRecipe.mana / 100.0f);
+        float inBtwHealthScore = curHealth / (currentRecipe.health / 100.0f);
+        float inBtwPowerScore = curPower / (currentRecipe.power / 100.0f);
+
+        Debug.Log("Mana" + inBtwManaScore + "\nHealth:" + inBtwHealthScore + "\nPower" + inBtwPowerScore);
+
+        float result = inBtwHealthScore + inBtwManaScore + inBtwPowerScore / (300 / 100.0f);
+
+        Debug.Log(result);
+
+        return result;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -67,6 +108,8 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                 if (currentRecipe.IsValidIngredient(currentIngredient.ingredient))
                 {
                     SO_Ingredient[] _tempArray;
+
+                    
                     if(recipeToDo == null)
                     {
                         recipeToDo = new SO_Ingredient[1];
@@ -93,6 +136,17 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                                 _tempArray[i] = recipeToDo[i];
                             }
                             _tempArray[recipeToDo.Length] = currentIngredient.ingredient;
+                            recipeToDo = new SO_Ingredient[recipeToDo.Length+1];
+                            recipeToDo = _tempArray;
+
+                            if (recipeToDo.Length == currentRecipe.ingredients.Length)
+                            {
+                                OverallScore = GiveScore();
+                            }
+                        }
+                        else
+                        {
+                            AddToScore(currentIngredient);
                         }
                     }
                 }

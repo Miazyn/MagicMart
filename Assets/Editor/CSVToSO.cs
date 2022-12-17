@@ -104,7 +104,7 @@ public class CSVToSO
                 Debug.Log("no Sprite found at: " + "Recipes/" + tester.recipeName);
             }
             //Knowledge of unity of all data //Path has alrdy to be exist
-            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Recipes/{tester.recipeName}.asset");
+            AssetDatabase.CreateAsset(tester, $"Assets/MyProject/Scriptables/Resources/Recipes/{tester.recipeName}.asset");
 
         }
 

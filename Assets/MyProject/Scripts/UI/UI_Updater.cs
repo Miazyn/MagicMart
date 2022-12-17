@@ -12,7 +12,7 @@ public class UI_Updater : MonoBehaviour
     [SerializeField] TextMeshProUGUI mana; 
     [SerializeField] TextMeshProUGUI health; 
     [SerializeField] TextMeshProUGUI power; 
-    private void Start()
+    private void Awake()
     {
         cookingPot.onIngredientsChangedCallback += UpdateStatsUI;
     }
