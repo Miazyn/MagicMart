@@ -22,6 +22,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     SO_Ingredient lastIngredient;
 
     [SerializeField] RecipeBoard recipeBoard;
+    SO_Ingredient[] recipeToDo;
     public SO_Recipe currentRecipe { get; private set; }
 
 
@@ -40,12 +41,14 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             onIngredientsChangedCallback.Invoke();
         }
+        
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("Dropped: " + eventData.pointerDrag);
 
+        CookIngredient currentIngredient = eventData.pointerDrag.GetComponent<CookIngredient>();
         //SFX
         if (glowEffect != null)
         {
@@ -55,38 +58,77 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
         if (ingredients.Count < ingredientsLimit)
         {
-            eventData.pointerDrag.gameObject.transform.SetParent(eventData.pointerDrag.GetComponent<CookIngredient>().AfterOnTheke);
+            eventData.pointerDrag.gameObject.transform.SetParent(currentIngredient.AfterOnTheke);
             UpdateUIText();
-            if (!eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke)
+            if (!currentIngredient.HasBeenOnTheke)
             {
-                ingredients.Add(eventData.pointerDrag.GetComponent<CookIngredient>().ingredient);
+                ingredients.Add(currentIngredient.ingredient);
 
-                curHealth += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.health;
-                curMana += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.mana;
-                curPower += eventData.pointerDrag.GetComponent<CookIngredient>().ingredient.power;
+                if (currentRecipe.IsValidIngredient(currentIngredient.ingredient))
+                {
+                    SO_Ingredient[] _tempArray;
+                    if(recipeToDo == null)
+                    {
+                        recipeToDo = new SO_Ingredient[1];
+                        recipeToDo[0] = currentIngredient.ingredient;
+                    }
+                    else
+                    {
+                        bool found = false;
+                        for(int i = 0; i < recipeToDo.Length; i++)
+                        {
+                            if (recipeToDo[i].CompareIngredient(currentIngredient.ingredient))
+                            {
+                                found = true;
+                                Debug.Log("Ingredient alrdy here");
+                            }
+                        }
+                        if (!found)
+                        {
+                            _tempArray = new SO_Ingredient[recipeToDo.Length + 1];
+                            Debug.Log("Code to do with new ingredient" + _tempArray.Length);
+
+                            for (int i = 0; i < _tempArray.Length - 1; i++)
+                            {
+                                _tempArray[i] = recipeToDo[i];
+                            }
+                            _tempArray[recipeToDo.Length] = currentIngredient.ingredient;
+                        }
+                    }
+                }
+                else
+                {
+                    AddToScore(currentIngredient);
+                }
+
+
                 if (onIngredientsChangedCallback != null)
                 {
                     onIngredientsChangedCallback.Invoke();
                 }
             }
-            lastIngredient = eventData.pointerDrag.GetComponent<CookIngredient>().ingredient;
+            lastIngredient = currentIngredient.ingredient;
         }
         else
         {
             Destroy(eventData.pointerDrag);
         }
-        if (currentRecipe.ContainsRecipe(ingredients))
-        {
-            //animTimer = 2;
-            Debug.Log("Contains recipe");
-            //ruehrstabAnimator.Play(ruehrAnim);
-            //animPlaying = true;
-        }
+        //if (currentRecipe.ContainsRecipe(ingredients))
+        //{
+        //    Debug.Log("Contains recipe");
+        //}
 
         
         //eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
-        eventData.pointerDrag.GetComponent<CookIngredient>().HasBeenOnTheke = true;
-        eventData.pointerDrag.GetComponent<CookIngredient>().IsOnTheke = true;
+        currentIngredient.HasBeenOnTheke = true;
+        currentIngredient.IsOnTheke = true;
+    }
+
+    private void AddToScore(CookIngredient currentIngredient)
+    {
+        curHealth += currentIngredient.ingredient.health;
+        curMana += currentIngredient.ingredient.mana;
+        curPower += currentIngredient.ingredient.power;
     }
 
     private void UpdateUIText()
