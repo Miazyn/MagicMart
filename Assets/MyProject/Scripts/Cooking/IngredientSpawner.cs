@@ -12,6 +12,9 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public GameObject ingredientPrefab;
     public SO_Ingredient ingredientToSpawn;
     public TextMeshProUGUI ItemAmount;
+    public TextMeshProUGUI Mana;
+    public TextMeshProUGUI Health;
+    public TextMeshProUGUI Power;
 
     [Header("Positioning")]
     public Transform prefabParent;
@@ -30,7 +33,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     void Awake()
     {
         itemImage = transform.Find("ItemImage").gameObject.GetComponent<Image>();
-        ItemAmount = transform.Find("ItemAmount").gameObject.GetComponent<TextMeshProUGUI>();
+        ItemAmount = transform.Find("Amount").gameObject.GetComponent<TextMeshProUGUI>();
         defaultColor = GetComponent<Image>().color;
 
     }
@@ -39,6 +42,10 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         pullUpItemMenu = GameObject.FindObjectOfType<PullUpMenu>();
         itemImage.sprite = ingredientToSpawn.ingredientSprite;
+        Mana.SetText("" + ingredientToSpawn.mana);
+        Health.SetText("" + ingredientToSpawn.health);
+        Power.SetText("" + ingredientToSpawn.power);
+
         AddItemAmount(1);
     }
 

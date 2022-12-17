@@ -2588,8 +2588,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 50, y: 50}
-  m_Spacing: {x: 11, y: 10}
+  m_CellSize: {x: 102, y: 125}
+  m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1388017334
@@ -3536,7 +3536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7ad7cb759f1f446a24a41df28ac421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemSlotPrefab: {fileID: 2850375523857440981, guid: 0f567030a6ad5164da4df78a9bed746e, type: 3}
+  ItemSlotPrefab: {fileID: 4724787970634593482, guid: 94d4a545a231dc44080428dc15d492e3, type: 3}
   ParentTransform: {fileID: 1370517373}
   PrefabParent: {fileID: 1541532263}
   OnThekeParent: {fileID: 655667012}
