@@ -20,10 +20,6 @@ public class RecipeBoard : MonoBehaviour
         {
             recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
         }
-        else
-        {
-            Debug.Log("No Recipe here owo");
-        }
 
         CreateRecipeBoard();
     }

@@ -38,10 +38,11 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         currentRecipe = recipeBoard.recipe;
         glowAnimator = glowEffect.GetComponent<Animator>();
 
+        ingredients = new List<SO_Ingredient>();
+
         Debug.Log(ingredientsLimit + " this is the current max limit of ingredients");
         if (onIngredientsChangedCallback != null)
         {
-            Debug.Log("Update called");
             onIngredientsChangedCallback.Invoke();
         }
         
@@ -100,11 +101,13 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         if (ingredients.Count < ingredientsLimit)
         {
             eventData.pointerDrag.gameObject.transform.SetParent(currentIngredient.AfterOnTheke);
-            UpdateUIText();
+            
             if (!currentIngredient.HasBeenOnTheke)
             {
+                Debug.Log("ingredient, hasnt been on theke");
                 ingredients.Add(currentIngredient.ingredient);
 
+                UpdateUIText();
                 if (currentRecipe.IsValidIngredient(currentIngredient.ingredient))
                 {
                     SO_Ingredient[] _tempArray;
@@ -123,13 +126,11 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                             if (recipeToDo[i].CompareIngredient(currentIngredient.ingredient))
                             {
                                 found = true;
-                                Debug.Log("Ingredient alrdy here");
                             }
                         }
                         if (!found)
                         {
                             _tempArray = new SO_Ingredient[recipeToDo.Length + 1];
-                            Debug.Log("Code to do with new ingredient" + _tempArray.Length);
 
                             for (int i = 0; i < _tempArray.Length - 1; i++)
                             {
@@ -176,6 +177,8 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         //eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
         currentIngredient.HasBeenOnTheke = true;
         currentIngredient.IsOnTheke = true;
+
+        
     }
 
     private void AddToScore(CookIngredient currentIngredient)
@@ -187,7 +190,8 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     private void UpdateUIText()
     {
-        currentIngredients.SetText((ingredients.Count + 1) + "/" + ingredientsLimit);
+        Debug.Log(ingredients.Count);
+        currentIngredients.SetText((ingredients.Count) + "/" + ingredientsLimit);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
