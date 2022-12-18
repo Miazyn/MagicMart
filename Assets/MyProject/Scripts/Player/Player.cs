@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public SO_Quest CurrentCookingQuest;
     GameManager manager;
 
+    public SO_CookedFood CreatedFood;
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 

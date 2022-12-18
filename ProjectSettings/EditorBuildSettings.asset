@@ -5,19 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/MyProject/Scenes/CookingArea.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/MyProject/Scenes/MainMenu.unity
     guid: a6b70dbd8260af147811097df6719d20
-  - enabled: 0
+  - enabled: 1
+    path: Assets/MyProject/Scenes/MainStore.unity
+    guid: 501307ad5f6cbec4c9b914b7f7431020
+  - enabled: 1
+    path: Assets/MyProject/Scenes/CookingArea.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/MyProject/Scenes/RhythmMiniGame.unity
     guid: efd26a85469ad1345a23de73538a164d
-  - enabled: 0
+  - enabled: 1
     path: Assets/MyProject/Scenes/Shopkeeper.unity
     guid: e45e93cdac0116d418a4aa90483d1aac
-  - enabled: 1
+  - enabled: 0
     path: Assets/MyProject/Scenes/CookingDebug.unity
     guid: cd69776e1700d1c41bda25e2df5a4d50
   m_configObjects: {}

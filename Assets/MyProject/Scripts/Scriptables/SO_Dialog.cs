@@ -5,8 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName ="Scriptables/Dialogue")]
 public class SO_Dialog : ScriptableObject
 {
-    public string nameOfSpeaker;
+    [Header("Name")]
+    public List<int> keyForName;
+    public List<string> nameOfSpeaker;
 
+    [Header("Sprite Displayed")]
     public List<int> keyForCharacterDisplay;
     public List<Sprite> spriteForCharacterDisplay;
 

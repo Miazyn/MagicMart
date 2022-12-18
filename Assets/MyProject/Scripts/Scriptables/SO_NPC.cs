@@ -7,8 +7,7 @@ public class SO_NPC : ScriptableObject
 {
     public string NpcName;
 
-    public SO_Dialog[] AllDialog;
-
     public SO_QuestNPC[] quests;
-    public int[] unlockDay;
+    public int unlockDay;
+    public SO_Quest unlockQuest;
 }

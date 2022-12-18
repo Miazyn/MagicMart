@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -27,5 +28,10 @@ public class ShopManager : MonoBehaviour
             _shopTile.GetComponent<ShopTile>().Ingredient = allIngredients[i];
 
         }
+    }
+
+    public void LeaveShop()
+    {
+        SceneManager.LoadScene("MainStore", LoadSceneMode.Single);
     }
 }

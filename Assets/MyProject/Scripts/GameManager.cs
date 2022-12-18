@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         if (curState == GameState.DialogState)
         {
             Debug.Log("Time to start some dialog");
+            Debug.Log(counter);
             if (counter < CustomerCount - 1)
             {
                 dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     void Evaluation()
     {
+        //Create Food For Player with stats for npc
         Debug.Log("currently we finished all the quest stuff");
         AfterQuestDialog();
     }

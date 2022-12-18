@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] GameObject shopButton;
 
     Sprite savedSprite;
+    string savedName;
 
     Coroutine displayCoroutine;
     public bool typerRunning = false;
@@ -98,7 +99,8 @@ public class DialogueManager : MonoBehaviour
     void TextReceived(SO_Dialog dialogue)
     {
         DisplayCharacterSprite(dialogue);
-        nameText.text = dialogue.nameOfSpeaker;
+        DisplayCharacterName(dialogue);
+        //nameText.text = dialogue.nameOfSpeaker;
         if (!typerRunning)
         {
             if (dialogue != null || dialogue.lines[counter] != "")
@@ -235,6 +237,42 @@ public class DialogueManager : MonoBehaviour
                 }
             }
 
+        }
+    }
+    
+    void DisplayCharacterName(SO_Dialog dialogue)
+    {
+        if (dialogue.keyForName == null && dialogue.nameOfSpeaker != null)
+        {
+            nameText.SetText(dialogue.nameOfSpeaker[0]);
+        }
+        else
+        {
+            if (dialogue.keyForName != null && dialogue.nameOfSpeaker != null)
+            {
+                for (int i = 0; i < dialogue.keyForName.Count; i++)
+                {
+                    if (dialogue.keyForName[i] == counter)
+                    {
+                        savedName = dialogue.nameOfSpeaker[i];
+                        nameText.SetText(savedName);
+
+                        break;
+                    }
+                    else
+                    {
+                        if (savedName != "")
+                        {
+                            nameText.SetText(savedName);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("THERE IS NO NAME FOR THIS CHARACTER YET SET.");
+                        }
+                    }
+                }
+
+            }
         }
     }
 

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed88c8208fd4a241ab99921791e55f1, type: 3}
   m_Name: FirstDialog
   m_EditorClassIdentifier: 
-  nameOfSpeaker: Claw
+  keyForName: 0000000001000000
+  nameOfSpeaker:
+  - Claw
+  - You
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
   - {fileID: 21300000, guid: 0d55f8dc04f6d6a46b1616a810af29e9, type: 3}
