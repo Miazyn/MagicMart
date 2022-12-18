@@ -140,10 +140,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                             recipeToDo = new SO_Ingredient[recipeToDo.Length+1];
                             recipeToDo = _tempArray;
 
-                            if (recipeToDo.Length == currentRecipe.ingredients.Length)
-                            {
-                                OverallScore = GiveScore();
-                            }
                         }
                         else
                         {
@@ -168,13 +164,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             Destroy(eventData.pointerDrag);
         }
-        //if (currentRecipe.ContainsRecipe(ingredients))
-        //{
-        //    Debug.Log("Contains recipe");
-        //}
 
-        
-        //eventData.pointerDrag.GetComponent<CookIngredient>().SizeDown();
         currentIngredient.HasBeenOnTheke = true;
         currentIngredient.IsOnTheke = true;
 
@@ -255,7 +245,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     {
         List<SO_Ingredient> _tempList = new List<SO_Ingredient>();
         bool itemDeleted = false;
-
         foreach(var item in ingredients)
         {
             if (item.CompareIngredient(_ingredient) && !itemDeleted)
@@ -268,8 +257,55 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
             }
         }
 
+        curHealth -= _ingredient.health;
+        curMana -= _ingredient.mana;
+        curPower -= _ingredient.power;
+
         ingredients = new List<SO_Ingredient>();
         ingredients = _tempList;
         UpdateUIText();
+    }
+    public void RemoveRecipeItem(SO_Ingredient _ingredient)
+    {
+        SO_Ingredient[] _tempArray = new SO_Ingredient[recipeToDo.Length - 1];
+        bool itemDeleted = false;
+        for(int i = 0; i < recipeToDo.Length; i++)
+        {
+            if (recipeToDo[i].CompareIngredient(_ingredient) && !itemDeleted)
+            {
+                itemDeleted = true;
+            }
+            else
+            {
+                _tempArray[i] = recipeToDo[i];
+            }
+        }
+        recipeToDo = new SO_Ingredient[recipeToDo.Length + 1];
+        recipeToDo = _tempArray;
+
+
+        List<SO_Ingredient> _tempList = new List<SO_Ingredient>();
+        bool itemDeletedList = false;
+        foreach (var item in ingredients)
+        {
+            if (item.CompareIngredient(_ingredient) && !itemDeletedList)
+            {
+                itemDeletedList = true;
+            }
+            else
+            {
+                _tempList.Add(item);
+            }
+        }
+        ingredients = new List<SO_Ingredient>();
+        ingredients = _tempList;
+    }
+    public void StartCooking()
+    {
+        if (recipeToDo.Length == currentRecipe.ingredients.Length) 
+        { 
+            Debug.Log("Cook the ingredient owo");
+            //OverallScore = GiveScore();
+        }
     }
 }

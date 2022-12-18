@@ -288,7 +288,7 @@ MonoBehaviour:
   recipe: {fileID: 11400000, guid: 465ac683aa93d7346963d3ed263381da, type: 2}
   recipeBoard: {fileID: 586395197}
   recipeItemPrefab: {fileID: 8572748656083182972, guid: b068e42949d56044e9286443e7f174f4, type: 3}
-  recipeName: {fileID: 0}
+  recipeName: {fileID: 976376620}
 --- !u!1 &198037080
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2966,7 +2966,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1440211938}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1522274143}
+        m_TargetAssemblyTypeName: CookingPot, Assembly-CSharp
+        m_MethodName: StartCooking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1440211938
 MonoBehaviour:
   m_ObjectHideFlags: 0

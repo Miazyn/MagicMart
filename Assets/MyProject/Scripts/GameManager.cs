@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
     void Evaluation()
     {
         //Create Food For Player with stats for npc
+        
         Debug.Log("currently we finished all the quest stuff");
         AfterQuestDialog();
     }
