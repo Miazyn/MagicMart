@@ -19,10 +19,9 @@ public class ShopTile : MonoBehaviour
     {
         CurrentPlayer = Player.instance;
         PlayerInventory = CurrentPlayer.inventory;
-        SetUpTile();
     }
 
-    void SetUpTile()
+    public void SetUpTile()
     {
         ItemImage.sprite = Ingredient.ingredientSprite;
         Name.SetText(Ingredient.ingredientName);

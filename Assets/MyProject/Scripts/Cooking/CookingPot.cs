@@ -302,7 +302,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     }
     public void StartCooking()
     {
-        if (recipeToDo.Length == currentRecipe.ingredients.Length) 
+        if (currentRecipe.ContainsRecipe(ingredients))
         { 
             Debug.Log("Cook the ingredient owo");
             //OverallScore = GiveScore();
