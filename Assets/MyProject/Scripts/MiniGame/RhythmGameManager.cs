@@ -48,13 +48,15 @@ public class RhythmGameManager : MonoBehaviour
     }
     void Update()
     {
-
-        if (!StartPlaying)
+        if (Input.GetMouseButtonDown(0))
         {
-            StartPlaying = true;
-            rhythmMusic.Play();
-            StartCoroutine(noteSpawn.CreateNotes(NotesToBeMade));
+            if (!StartPlaying)
+            {
+                StartPlaying = true;
+                rhythmMusic.Play();
+                StartCoroutine(noteSpawn.CreateNotes(NotesToBeMade));
 
+            }
         }
 
     }

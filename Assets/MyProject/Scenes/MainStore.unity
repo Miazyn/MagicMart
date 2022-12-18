@@ -885,15 +885,15 @@ RectTransform:
   m_GameObject: {fileID: 551613434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6497095, y: 0.6497095, z: 0.6497095}
+  m_LocalScale: {x: 0.5652473, y: 0.5652473, z: 0.5652473}
   m_Children: []
   m_Father: {fileID: 2128197631}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -202.61961, y: 123.027054}
-  m_SizeDelta: {x: 217.735, y: 30.2743}
+  m_AnchoredPosition: {x: -205.3, y: 123.9}
+  m_SizeDelta: {x: 231.9755, y: 30.2743}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &551613436
 MonoBehaviour:
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unknown
+  m_text: Claw & Mr.Wiggles
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
   m_sharedMaterial: {fileID: 6220737870694669907, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
@@ -2939,8 +2939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.5269, y: 34.5646}
-  m_SizeDelta: {x: 829.8109, y: 192.9928}
+  m_AnchoredPosition: {x: 9.5269, y: 40.61753}
+  m_SizeDelta: {x: 829.8109, y: 174.3537}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079398574
 MonoBehaviour:
@@ -2962,7 +2962,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Oh god! This could be one of the side effects of the salad. The Moonlight
+    Dumplings are a good antidote and shall calm your hamster down.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
   m_sharedMaterial: {fileID: 6220737870694669907, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
@@ -3056,7 +3059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2128197631
 RectTransform:
   m_ObjectHideFlags: 0

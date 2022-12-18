@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c5990086c3d5845855901d5e27bd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toleranceNormalHit: 0.5
-  toleranceGoodHit: 0.2
-  tolerancePerfectHit: 0.1
+  toleranceNormalHit: 1
+  toleranceGoodHit: 0.4
+  tolerancePerfectHit: 0.2
   keyToPress: 274
   keyXValue: -7
   hitEffect: {fileID: 6956923645762377966, guid: e04083014c7427d4db3ec851c136f9b9, type: 3}

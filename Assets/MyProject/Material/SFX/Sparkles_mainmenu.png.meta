@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 9fbeb3ae9772eae4c90e9f2d5f5152a4
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7175157700714739623
+    second: Sparkles_mainmenu_0
+  - first:
+      213: 3656301990835581849
+    second: Sparkles_mainmenu_1
+  - first:
+      213: 898623508535535599
+    second: Sparkles_mainmenu_2
+  - first:
+      213: -1365007463820316149
+    second: Sparkles_mainmenu_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,7 +125,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Sparkles_mainmenu_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1064
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9584d793618bc6c90800000000000000
+      internalID: -7175157700714739623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sparkles_mainmenu_1
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 0
+        width: 1064
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 993fe4be94bcdb230800000000000000
+      internalID: 3656301990835581849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sparkles_mainmenu_2
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 0
+        width: 1064
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe76315e15d887c00800000000000000
+      internalID: 898623508535535599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sparkles_mainmenu_3
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 0
+        width: 1064
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b02bb3b91f48e0de0800000000000000
+      internalID: -1365007463820316149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
