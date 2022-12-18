@@ -288,6 +288,7 @@ MonoBehaviour:
   recipe: {fileID: 11400000, guid: 465ac683aa93d7346963d3ed263381da, type: 2}
   recipeBoard: {fileID: 586395197}
   recipeItemPrefab: {fileID: 8572748656083182972, guid: b068e42949d56044e9286443e7f174f4, type: 3}
+  recipeName: {fileID: 0}
 --- !u!1 &198037080
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,8 +686,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 222, y: -25}
-  m_SizeDelta: {x: 731.0188, y: 1223.9255}
+  m_AnchoredPosition: {x: 233.22281, y: -25}
+  m_SizeDelta: {x: 616.4456, y: 1223.9254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &269477682
 MonoBehaviour:
@@ -834,7 +835,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -8.346191, y: -24.2657}
-  m_SizeDelta: {x: 338.2744, y: -83.5087}
+  m_SizeDelta: {x: 327.78, y: -83.5087}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &519420028
 GameObject:
@@ -2411,8 +2412,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 222, y: -412.92645}
-  m_SizeDelta: {x: 731.0188, y: 1223.9255}
+  m_AnchoredPosition: {x: 233.22281, y: -415.38}
+  m_SizeDelta: {x: 616.4456, y: 1223.9254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1206579026
 Animator:
@@ -2634,7 +2635,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 327.7787, y: 0}
-  m_SizeDelta: {x: 317.4571, y: 0}
+  m_SizeDelta: {x: 327.78, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1370517374
 MonoBehaviour:
@@ -2656,10 +2657,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 102, y: 125}
-  m_Spacing: {x: 0, y: 5}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_CellSize: {x: 100, y: 121.7}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!114 &1370517375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2785,8 +2786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -87, y: -34}
-  m_SizeDelta: {x: 484.748, y: 261.433}
+  m_AnchoredPosition: {x: -68.516, y: -34}
+  m_SizeDelta: {x: 452.464, y: 261.433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1444967588
 MonoBehaviour:
@@ -2964,7 +2965,10 @@ MonoBehaviour:
   curMana: 0
   curHealth: 0
   curPower: 0
+  OverallScore: 0
   recipeBoard: {fileID: 154911720}
+  recipeToDo: []
+  currentRecipe: {fileID: 0}
 --- !u!114 &1522274144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3507,8 +3511,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.32379913, y: 2.9143}
-  m_SizeDelta: {x: 220.7888, y: 249.1412}
+  m_AnchoredPosition: {x: 9.935893, y: 2.914299}
+  m_SizeDelta: {x: 193.5752, y: 249.1412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1940023673
 MonoBehaviour:
@@ -4014,8 +4018,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.602661, y: 166.74506}
-  m_SizeDelta: {x: -363.459, y: 2.0208}
+  m_AnchoredPosition: {x: 20.752, y: 166.74506}
+  m_SizeDelta: {x: -408.8126, y: 2.0208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085147927
 MonoBehaviour:
