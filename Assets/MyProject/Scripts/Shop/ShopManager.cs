@@ -5,25 +5,26 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public GameObject ShopTilePrefab;
-    public SO_Ingredient Ingredient;
+
+    SO_Ingredient[] allIngredients;
 
     public Transform parentTransform;
-    RectTransform parentRect;
 
 
-    int shopSize = 10;
-
+    void Awake()
+    {
+        allIngredients = Resources.LoadAll<SO_Ingredient>("CookingIngredients");
+    }
 
     void Start()
     {
         
-        for(int i =0; i < shopSize; i++)
+        for(int i =0; i < allIngredients.Length; i++)
         {
             GameObject _shopTile = Instantiate(ShopTilePrefab, parentTransform);
 
-            _shopTile.GetComponent<RectTransform>().anchoredPosition = 
-                parentTransform.GetComponent<RectTransform>().anchoredPosition;
-            _shopTile.GetComponent<ShopTile>().Ingredient = this.Ingredient;
+            _shopTile.GetComponent<RectTransform>().anchoredPosition = parentTransform.GetComponent<RectTransform>().anchoredPosition;
+            _shopTile.GetComponent<ShopTile>().Ingredient = allIngredients[i];
 
         }
     }

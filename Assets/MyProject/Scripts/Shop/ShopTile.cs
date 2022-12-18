@@ -15,14 +15,10 @@ public class ShopTile : MonoBehaviour
 
     Player CurrentPlayer;
     SO_Inventory PlayerInventory;
-    private void Awake()
+    private void Start()
     {
         CurrentPlayer = Player.instance;
         PlayerInventory = CurrentPlayer.inventory;
-    }
-    private void Start()
-    {
-        
         SetUpTile();
     }
 
@@ -37,11 +33,11 @@ public class ShopTile : MonoBehaviour
             playerStockOfItem = 
                 PlayerInventory.inventoryItems
                 [PlayerInventory.FindItemInList(Ingredient).Item2].GetAmount();
-            PlayerStock.SetText("Your stock: " + playerStockOfItem.ToString());
+            PlayerStock.SetText("Owned: " + playerStockOfItem.ToString());
         }
         else
         {
-            PlayerStock.SetText("Your stock: " + "invalid_item");
+            PlayerStock.SetText("Owned: " + "invalid_item");
         }
 
 

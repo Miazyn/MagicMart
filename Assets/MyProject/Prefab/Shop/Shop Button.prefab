@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3251820756303607881}
   - component: {fileID: 2313532107597717290}
   - component: {fileID: 1338928766753309493}
+  - component: {fileID: 880192766553555429}
   m_Layer: 5
   m_Name: Shop Button
   m_TagString: Untagged
@@ -260,6 +261,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &880192766553555429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951837414677885536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1e9a3fbabf9ce4db62a252dffa7bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ingredient: {fileID: 0}
+  ItemImage: {fileID: 5023324491976819355}
+  Name: {fileID: 2676684982328067859}
+  Price: {fileID: 6705935819640371808}
+  PlayerStock: {fileID: 9047049894014995591}
 --- !u!1 &4537339712662953616
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,8 +521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: -64.675}
-  m_SizeDelta: {x: 231.73, y: 49.241}
+  m_AnchoredPosition: {x: -46.63089, y: -64.674995}
+  m_SizeDelta: {x: 434.1397, y: 49.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2142550222161980599
 CanvasRenderer:
