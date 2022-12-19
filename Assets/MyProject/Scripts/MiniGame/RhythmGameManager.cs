@@ -36,7 +36,7 @@ public class RhythmGameManager : MonoBehaviour
     private void Start()
     {
         manager = GameManager.Instance;
-        NotesToBeMade = Random.Range(7, 15);
+        NotesToBeMade = Random.Range(15,20);
         NotesLeft = NotesToBeMade;
         currentScore = 0;
 

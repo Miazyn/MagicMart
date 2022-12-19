@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0.5549128, b: 0.61854553, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1386,8 +1386,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290764799
+  m_fontColor: {r: 1, g: 0.875, b: 0.75, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2313,8 +2313,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290764799
+  m_fontColor: {r: 1, g: 0.8745098, b: 0.7490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2572,6 +2572,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
+--- !u!114 &1042305570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6481079972689303875, guid: ff0bc019063b9354caa7629b423d3fe2, type: 3}
+  m_PrefabInstance: {fileID: 267141493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce864d755bb57e04ca68718eb57fb674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1206579024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,7 +3064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8117647, g: 0.5568628, b: 0.61960787, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3286,6 +3297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0a46772a34c034ab4c67750fc66bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneMana: {fileID: 1042305570}
   glowEffect: {fileID: 2018016310}
   ingredients: []
   ingredientsLimit: 10

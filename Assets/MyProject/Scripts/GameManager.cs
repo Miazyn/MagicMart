@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     SO_CookedFood resultFood;
 
+    bool delayStartDone = false;
+    bool delayEndDone = false;
+
+    public delegate void OnStateChanged();
+    public OnStateChanged onStateChangedCallback;
     public enum GameState
     {
         DayStart,
@@ -65,6 +70,11 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState _newState)
     {
         curState = _newState;
+        if(onStateChangedCallback != null) 
+        {
+            Debug.Log("State has changed");
+            onStateChangedCallback.Invoke();
+        }
         CheckGameStateAction();
     }
 
@@ -78,14 +88,23 @@ public class GameManager : MonoBehaviour
         if (curState == GameState.IdleState)
         {
             Debug.Log("Time to be idle");
+            
         }
         if (curState == GameState.DialogState)
         {
             Debug.Log("Time to start some dialog");
             Debug.Log(counter);
+            dialogueManager = DialogueManager.instance;
             if (counter < CustomerCount - 1)
             {
-                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+                if (!delayStartDone)
+                {
+                    StartCoroutine(DelayBeforeDialog());
+                }
+                else
+                {
+                    dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+                }
             }
             else
             {
@@ -113,6 +132,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator DelayBeforeDialog()
+    {
+        yield return new WaitForSeconds(1.5f);
+        delayStartDone = true;
+        delayEndDone = false;
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+    }
     void Evaluation()
     {
         //Create Food For Player with stats for npc
@@ -124,8 +150,21 @@ public class GameManager : MonoBehaviour
     public void AfterQuestDialog()
     {
         Debug.Log("Display after Dialog");
-        
+        if (!delayEndDone)
+        {
+            StartCoroutine(DelayAfterDialog());
+        }
+        else
+        {
+            dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
+        }
+    }
+
+    IEnumerator DelayAfterDialog()
+    {
+        yield return new WaitForSeconds(1.5f);
+        delayStartDone = false;
+        delayEndDone = true;
         dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
-        
     }
 }

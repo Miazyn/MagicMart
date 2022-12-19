@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
-    public string PlayerName = "Default";
+    public string PlayerName = "Aussie";
 
     public SO_Inventory inventory;
     public int moneyAmount { get; private set; }

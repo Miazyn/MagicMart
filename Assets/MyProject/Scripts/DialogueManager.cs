@@ -244,7 +244,15 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogue.keyForName == null && dialogue.nameOfSpeaker != null)
         {
-            nameText.SetText(dialogue.nameOfSpeaker[0]);
+            if (dialogue.nameOfSpeaker[0] == "$playerName")
+            {
+                nameText.SetText(player.PlayerName);
+            }
+            else
+            {
+                nameText.SetText(dialogue.nameOfSpeaker[0]);
+            }
+            
         }
         else
         {
@@ -255,15 +263,28 @@ public class DialogueManager : MonoBehaviour
                     if (dialogue.keyForName[i] == counter)
                     {
                         savedName = dialogue.nameOfSpeaker[i];
-                        nameText.SetText(savedName);
-
+                        if (savedName == "$playerName")
+                        {
+                            nameText.SetText(player.PlayerName);
+                        }
+                        else
+                        {
+                            nameText.SetText(savedName);
+                        }
                         break;
                     }
                     else
                     {
                         if (savedName != "")
                         {
-                            nameText.SetText(savedName);
+                            if (savedName == "$playerName")
+                            {
+                                nameText.SetText(player.PlayerName);
+                            }
+                            else
+                            {
+                                nameText.SetText(savedName);
+                            }
                         }
                         else
                         {

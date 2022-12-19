@@ -7,7 +7,7 @@ using TMPro;
 
 public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
+    [SerializeField] SceneMana sceneMana;
     [SerializeField] GameObject glowEffect;
     Animator glowAnimator;
 
@@ -30,11 +30,14 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     Coroutine delayCoroutine, delayBubbleCoroutine;
 
+    GameManager manager;
+
     public delegate void OnIngredientsChanged();
     public OnIngredientsChanged onIngredientsChangedCallback;
 
     private void Start()
     {
+        manager = GameManager.Instance;
         currentRecipe = recipeBoard.recipe;
         glowAnimator = glowEffect.GetComponent<Animator>();
 
@@ -45,7 +48,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             onIngredientsChangedCallback.Invoke();
         }
-        
+        manager.ChangeGameState(GameManager.GameState.CookingState);
     }
 
     public void DebugUpdateRecipe()
@@ -280,7 +283,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                 _tempArray[i] = recipeToDo[i];
             }
         }
-        recipeToDo = new SO_Ingredient[recipeToDo.Length + 1];
+        recipeToDo = new SO_Ingredient[recipeToDo.Length - 1];
         recipeToDo = _tempArray;
 
 
@@ -306,6 +309,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         { 
             Debug.Log("Cook the ingredient owo");
             //OverallScore = GiveScore();
+            sceneMana.LoadNextScene("TransitionScene");
         }
     }
 }

@@ -256,7 +256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff518878e27db4a4497b5cdb379eee10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d55f8dc04f6d6a46b1616a810af29e9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -368,16 +368,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &167817767
@@ -436,7 +436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &329983782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -698,7 +698,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &382272646
@@ -754,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &464377314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1175,6 +1175,8 @@ GameObject:
   - component: {fileID: 857502846}
   - component: {fileID: 857502848}
   - component: {fileID: 857502847}
+  - component: {fileID: 857502849}
+  - component: {fileID: 857502850}
   m_Layer: 5
   m_Name: Cauldron
   m_TagString: Untagged
@@ -1239,6 +1241,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857502845}
   m_CullTransparentMesh: 1
+--- !u!95 &857502849
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857502845}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01ca56f8e08a3e44786c0f3942592800, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &857502850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857502845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a5b37219cfa62449fba53df3fe647b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reqState: 6
 --- !u!1 &970555734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,16 +1355,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &970555737
@@ -1453,16 +1487,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1033147353
@@ -1585,16 +1619,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1069875533
@@ -1783,16 +1817,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1260835392
@@ -1915,16 +1949,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1347128259
@@ -2060,7 +2094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 91da2617aa7d0c7459219b74b2ebdd85, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5df7fb8aa0ca1c4da3acb78f487a59d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2160,16 +2194,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1457096644
@@ -2302,16 +2336,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1520925108
@@ -2434,16 +2468,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneName
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CookingArea
+          m_StringArgument: TransitionScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1661262082
@@ -2687,7 +2721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1952913301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2760,7 +2794,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1952913303}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617127931}
+        m_TargetAssemblyTypeName: SceneMana, Assembly-CSharp
+        m_MethodName: LoadNextScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TransitionScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1952913303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2774,8 +2820,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2962,10 +3008,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Oh god! This could be one of the side effects of the salad. The Moonlight
-    Dumplings are a good antidote and shall calm your hamster down.
-
-'
+  m_text: "Ah, sorry! It's a delicious dessert called Pixel Cupcake.\r I heard that
+    your store offers all kinds of foods and I had to check it out."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
   m_sharedMaterial: {fileID: 6220737870694669907, guid: eee3f236d980e9b4a942914bbaddd022, type: 2}
@@ -3059,7 +3103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2128197631
 RectTransform:
   m_ObjectHideFlags: 0

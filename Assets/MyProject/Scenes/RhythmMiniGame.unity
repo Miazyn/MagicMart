@@ -212,6 +212,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188653861965027704, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 188653861965027705, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
       propertyPath: m_Name
       value: Managers
@@ -258,6 +262,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188653861965027710, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5243368440919085150, guid: 258dc7a7c4398f946886647c046e78ec, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -390,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 423720158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.0044, z: 0}
-  m_LocalScale: {x: 2, y: 0.526384, z: 1}
+  m_LocalScale: {x: 3.22, y: 0.526384, z: 1}
   m_Children: []
   m_Father: {fileID: 1294077195}
   m_RootOrder: 0
@@ -1448,7 +1456,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1771227187
 SpriteRenderer:
@@ -1518,7 +1526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1968852826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1600,10 +1608,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986344608}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fe3c9e2dd6897b84eadffb8d9a9511e2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d9f202262f5c49e4aa60c938aa0bdce4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
