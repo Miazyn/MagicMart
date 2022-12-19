@@ -67,16 +67,8 @@ public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler
         canvasGroup.blocksRaycasts = true;
         if (!IsOnTheke) 
         {
-            if (!HasBeenOnTheke)
-            {
-                GameObject.FindObjectOfType<CookingPot>().RemoveItem(ingredient);
-                Destroy(gameObject);
-            }
-            else
-            {
-                GameObject.FindObjectOfType<CookingPot>().RemoveRecipeItem(ingredient);
-                Destroy(gameObject);
-            } 
+            GameObject.FindObjectOfType<CookingPot>().RemoveItem(ingredient);
+            Destroy(gameObject);
         }
     }
     IEnumerator CheckIfDragged()

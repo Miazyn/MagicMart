@@ -27,6 +27,8 @@ public class RhythmGameManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
 
+    [SerializeField] SceneMana sceneMana;
+
     bool IsGameFinished = false;
     private void Awake()
     {
@@ -78,7 +80,7 @@ public class RhythmGameManager : MonoBehaviour
             }
 
             manager.RhythymGameScore = playerScore;
-            SceneManager.LoadScene("MainStore", LoadSceneMode.Single);
+            sceneMana.LoadNextScene("TransitionScene");
         }
     }
     public void NormalHit()

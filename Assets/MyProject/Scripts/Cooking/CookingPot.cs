@@ -24,7 +24,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     SO_Ingredient lastIngredient;
 
     [SerializeField] RecipeBoard recipeBoard;
-    [SerializeField] SO_Ingredient[] recipeToDo;
     public SO_Recipe currentRecipe;
     //AFTER DEBUG BACK INTO PRIVATE SET
 
@@ -35,7 +34,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     public delegate void OnIngredientsChanged();
     public OnIngredientsChanged onIngredientsChangedCallback;
 
-    private void Start()
+    void Start()
     {
         manager = GameManager.Instance;
         currentRecipe = recipeBoard.recipe;
@@ -59,7 +58,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             onIngredientsChangedCallback.Invoke();
         }
-        recipeToDo = null;
         ingredients = new List<SO_Ingredient>();
 
         curHealth = 0;
@@ -107,55 +105,12 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
             
             if (!currentIngredient.HasBeenOnTheke)
             {
-                Debug.Log("ingredient, hasnt been on theke");
                 ingredients.Add(currentIngredient.ingredient);
 
                 UpdateUIText();
-                if (currentRecipe.IsValidIngredient(currentIngredient.ingredient))
-                {
-                    SO_Ingredient[] _tempArray;
-
-                    
-                    if(recipeToDo == null)
-                    {
-                        recipeToDo = new SO_Ingredient[1];
-                        recipeToDo[0] = currentIngredient.ingredient;
-                    }
-                    else
-                    {
-                        bool found = false;
-                        for(int i = 0; i < recipeToDo.Length; i++)
-                        {
-                            if (recipeToDo[i].CompareIngredient(currentIngredient.ingredient))
-                            {
-                                found = true;
-                            }
-                        }
-                        if (!found)
-                        {
-                            _tempArray = new SO_Ingredient[recipeToDo.Length + 1];
-
-                            for (int i = 0; i < _tempArray.Length - 1; i++)
-                            {
-                                _tempArray[i] = recipeToDo[i];
-                            }
-                            _tempArray[recipeToDo.Length] = currentIngredient.ingredient;
-                            recipeToDo = new SO_Ingredient[recipeToDo.Length+1];
-                            recipeToDo = _tempArray;
-
-                        }
-                        else
-                        {
-                            AddToScore(currentIngredient);
-                        }
-                    }
-                }
-                else
-                {
-                    AddToScore(currentIngredient);
-                }
-
-
+                
+                AddToScore(currentIngredient);
+                
                 if (onIngredientsChangedCallback != null)
                 {
                     onIngredientsChangedCallback.Invoke();
@@ -268,41 +223,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         ingredients = _tempList;
         UpdateUIText();
     }
-    public void RemoveRecipeItem(SO_Ingredient _ingredient)
-    {
-        SO_Ingredient[] _tempArray = new SO_Ingredient[recipeToDo.Length - 1];
-        bool itemDeleted = false;
-        for(int i = 0; i < recipeToDo.Length; i++)
-        {
-            if (recipeToDo[i].CompareIngredient(_ingredient) && !itemDeleted)
-            {
-                itemDeleted = true;
-            }
-            else
-            {
-                _tempArray[i] = recipeToDo[i];
-            }
-        }
-        recipeToDo = new SO_Ingredient[recipeToDo.Length - 1];
-        recipeToDo = _tempArray;
-
-
-        List<SO_Ingredient> _tempList = new List<SO_Ingredient>();
-        bool itemDeletedList = false;
-        foreach (var item in ingredients)
-        {
-            if (item.CompareIngredient(_ingredient) && !itemDeletedList)
-            {
-                itemDeletedList = true;
-            }
-            else
-            {
-                _tempList.Add(item);
-            }
-        }
-        ingredients = new List<SO_Ingredient>();
-        ingredients = _tempList;
-    }
+   
     public void StartCooking()
     {
         if (currentRecipe.ContainsRecipe(ingredients))

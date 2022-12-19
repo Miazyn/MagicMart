@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,6 +13,13 @@ public class Player : MonoBehaviour
     GameManager manager;
 
     public SO_CookedFood CreatedFood;
+
+    [Header("Cursor")]
+    [SerializeField] Texture2D cursorNormal;
+    [SerializeField] Texture2D cursorDrag;
+    CursorMode cursorMode;
+    Vector2 hotspot;
+
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -41,6 +46,12 @@ public class Player : MonoBehaviour
     {
         moneyAmount = 0;
         manager = GameManager.Instance;
+
+        //CURSOR
+        cursorMode = CursorMode.Auto;
+        hotspot = Vector2.zero;
+
+        Cursor.SetCursor(cursorNormal, hotspot, cursorMode);
     }
 
 

@@ -21,8 +21,8 @@ public class UI_Updater : MonoBehaviour
     {
         recipe = cookingPot.currentRecipe;
         mana.SetText("Mana: " + cookingPot.curMana + "/" + recipe.mana);
-        health.SetText("Mana: " + cookingPot.curHealth + "/" + recipe.health);
-        power.SetText("Mana: " + cookingPot.curPower + "/" + recipe.power);
+        health.SetText("Health: " + cookingPot.curHealth + "/" + recipe.health);
+        power.SetText("Power: " + cookingPot.curPower + "/" + recipe.power);
     }
 
     void OnDisable()

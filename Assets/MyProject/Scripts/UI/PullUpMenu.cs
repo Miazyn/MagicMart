@@ -15,6 +15,9 @@ public class PullUpMenu : MonoBehaviour
     bool HasAnimPlayed;
     RectTransform ogButton, ogBG, ogLogic;
 
+    Coroutine menuPullUp, menuPullDown;
+
+    bool animPlaying = false;
     void Start()
     {
         HasAnimPlayed = false;
@@ -25,28 +28,36 @@ public class PullUpMenu : MonoBehaviour
 
     public void MenuUp()
     {
-        if (!HasAnimPlayed)
+        if (!animPlaying)
         {
-            button.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
-            background.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
-            logic.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
+            if (!HasAnimPlayed)
+            {
+                HasAnimPlayed = true;
 
-            StartCoroutine(WaitForAnimToFinish());
+                if (menuPullUp != null)
+                {
+                    StopCoroutine(menuPullUp);
+                }
+                menuPullUp = StartCoroutine(WaitForAnimToFinish());
+                animPlaying = true;
+            }
+            else
+            {
+                MenuDown();
+                animPlaying = true;
+            }
         }
-        else
-        {
-            MenuDown();
-        }
+
     }
     public void MenuDown()
     {
-        button.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
-        background.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
-        logic.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
-
-        StartCoroutine(DisableAnim());
-
         HasAnimPlayed = false;
+        if (menuPullDown != null)
+        {
+            StopCoroutine(menuPullDown);
+        }
+        menuPullDown = StartCoroutine(DisableAnim());
+        
         button.anchoredPosition = ogButton.anchoredPosition;
         background.anchoredPosition = ogBG.anchoredPosition;
         logic.anchoredPosition = ogLogic.anchoredPosition;
@@ -54,7 +65,18 @@ public class PullUpMenu : MonoBehaviour
 
     IEnumerator DisableAnim()
     {
-        yield return new WaitForSeconds(1f);
+        button.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
+        background.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
+        logic.gameObject.GetComponent<Animator>().SetTrigger("MenuDown");
+
+        yield return new WaitForSeconds(1.05f);
+
+        animPlaying = false;
+        SetIdle();
+    }
+
+    void SetIdle()
+    {
         button.gameObject.GetComponent<Animator>().Play("Idle");
         background.gameObject.GetComponent<Animator>().Play("Idle");
         logic.gameObject.GetComponent<Animator>().Play("Idle");
@@ -62,9 +84,13 @@ public class PullUpMenu : MonoBehaviour
 
     IEnumerator WaitForAnimToFinish()
     {
-        yield return new WaitForSeconds(1f);
-        HasAnimPlayed = true;
+        button.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
+        background.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
+        logic.gameObject.GetComponent<Animator>().SetTrigger("MenuUp");
 
+        yield return new WaitForSeconds(1.05f);
+
+        animPlaying = false;
         button.anchoredPosition = newPosButton.anchoredPosition;
         background.anchoredPosition = newPosBackground.anchoredPosition;
         logic.anchoredPosition = newPosLogic.anchoredPosition;

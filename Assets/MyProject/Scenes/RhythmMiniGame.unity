@@ -797,6 +797,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff0bc019063b9354caa7629b423d3fe2, type: 3}
+--- !u!114 &1034287598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6481079972689303875, guid: ff0bc019063b9354caa7629b423d3fe2, type: 3}
+  m_PrefabInstance: {fileID: 1034287597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce864d755bb57e04ca68718eb57fb674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1064499486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1890,7 @@ MonoBehaviour:
   scorePerPerfectNote: 150
   noteSpawn: {fileID: 1151537949}
   scoreText: {fileID: 1029923633}
+  sceneMana: {fileID: 1034287598}
 --- !u!4 &2032263039
 Transform:
   m_ObjectHideFlags: 0

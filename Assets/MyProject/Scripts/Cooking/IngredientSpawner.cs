@@ -15,6 +15,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public TextMeshProUGUI Mana;
     public TextMeshProUGUI Health;
     public TextMeshProUGUI Power;
+    public TextMeshProUGUI Name;
 
     [Header("Positioning")]
     public Transform prefabParent;
@@ -25,6 +26,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     CookIngredient ingredientScript;
     GameObject instantiatedObject;
 
+    public Color highlightColor;
     Color defaultColor;
     Vector2 currentpos;
 
@@ -45,6 +47,7 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
         Mana.SetText("" + ingredientToSpawn.mana);
         Health.SetText("" + ingredientToSpawn.health);
         Power.SetText("" + ingredientToSpawn.power);
+        Name.SetText(ingredientToSpawn.ingredientName);
 
         AddItemAmount(1);
     }
@@ -86,13 +89,13 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
         //Image alpa down
         if (GameObject.FindWithTag("Ingredient") == null)
         {
-            GetComponent<Image>().color = Color.green;
+            GetComponent<Image>().color = highlightColor;
         }
         else
         {
             if (!GameObject.FindWithTag("Ingredient").GetComponent<CookIngredient>().IsCurrentlyDragged)
             {
-                GetComponent<Image>().color = Color.green;
+                GetComponent<Image>().color = highlightColor;
             }
         }
         

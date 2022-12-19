@@ -577,9 +577,11 @@ MonoBehaviour:
   Mana: {fileID: 4724787970161351266}
   Health: {fileID: 4724787971157992889}
   Power: {fileID: 4724787971044591295}
+  Name: {fileID: 4724787969745844721}
   prefabParent: {fileID: 0}
   AfterThekeParent: {fileID: 0}
   canvas: {fileID: 0}
+  highlightColor: {r: 0.63529414, g: 0.5529412, b: 0.48627454, a: 1}
   pullUpItemMenu: {fileID: 0}
 --- !u!1 &4724787971044591293
 GameObject:
