@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a1bab3b3e43e2e4b853821bff1b4c19, type: 3}
-  m_Name: 01Quest
+  m_Name: 02 Quest
   m_EditorClassIdentifier: 
   QuestName: 
-  ReqRecipe: {fileID: 11400000, guid: ff9f74e64a022184d8a736ae5b218fe5, type: 2}
+  ReqRecipe: {fileID: 11400000, guid: 47a589e7329b0ba438c96f5848bb78bc, type: 2}
   CookedFood: {fileID: 0}
   _IsFullFilled: 0
   QuestDialogBeforeCompletion:
-  - {fileID: 11400000, guid: aa48e78dd6c438446ba554a531de6ec2, type: 2}
-  - {fileID: 11400000, guid: fa0eb4f012a37a342a04897efbfd5f62, type: 2}
-  - {fileID: 11400000, guid: ede1b97787a6e6c44982626d2b310a19, type: 2}
+  - {fileID: 11400000, guid: 1787a73c602511d4eb3804b452ba57af, type: 2}
+  - {fileID: 11400000, guid: 111ea43bd45d17a478207717c9b5d980, type: 2}
+  - {fileID: 11400000, guid: 4f081747d4ba6b2469c812e0f28c31cc, type: 2}
   QuestDialogAfterCompletion:
-  - {fileID: 11400000, guid: 2798e638acb765f4bba97b4be7920571, type: 2}
+  - {fileID: 11400000, guid: 999269cfe9e476e4bb190b483d3c5857, type: 2}

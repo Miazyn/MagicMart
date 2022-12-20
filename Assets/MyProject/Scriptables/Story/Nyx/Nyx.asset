@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 261f2721fe522024fa0cacc094294452, type: 3}
-  m_Name: Steve
+  m_Name: Nyx
   m_EditorClassIdentifier: 
-  NpcName: Steve
+  NpcName: Nyx
   quests:
-  - {fileID: 11400000, guid: 48aefce93ce802e4ca9beb69f50f333e, type: 2}
-  - {fileID: 11400000, guid: dea56815b2b05334696e86237ea5edd9, type: 2}
-  - {fileID: 11400000, guid: a9a1a6e9bad189742812055b66861b45, type: 2}
+  - {fileID: 11400000, guid: f7e7934b17c1008488055596cd10aff1, type: 2}
+  - {fileID: 11400000, guid: 8f1d29ebc60d81648a79893bc0b2b1f6, type: 2}
+  - {fileID: 11400000, guid: 28e8389598485364292522e77bcf252d, type: 2}
   unlockDay: 0
   unlockQuest: {fileID: 0}
