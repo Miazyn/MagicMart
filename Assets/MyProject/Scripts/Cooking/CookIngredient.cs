@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CookIngredient : MonoBehaviour, IDropHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] float delayedCheck = 2f;
     public RectTransform rect;
@@ -28,6 +28,8 @@ public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler
     GameObject prefab;
 
     bool IsDragged = false;
+
+    bool IsOnSelf = false;
 
     private void Awake()
     {
@@ -65,12 +67,19 @@ public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler
         IsCurrentlyDragged = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        if (!IsOnTheke) 
+        if (!IsOnTheke && HasBeenOnTheke) 
         {
+            Debug.Log("I am not on a theke: " + ingredient.ingredientName);
             GameObject.FindObjectOfType<CookingPot>().RemoveItem(ingredient);
             Destroy(gameObject);
         }
+        else if(!IsOnTheke)
+        {
+            Destroy(gameObject);
+        }
     }
+
+
     IEnumerator CheckIfDragged()
     {
         yield return new WaitForSeconds(delayedCheck);
@@ -88,4 +97,8 @@ public class CookIngredient : MonoBehaviour,  IBeginDragHandler, IEndDragHandler
         rect.localScale = ogScale;
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        
+    }
 }

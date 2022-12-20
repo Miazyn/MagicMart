@@ -66,7 +66,10 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
         currentpos = GetComponent<RectTransform>().anchoredPosition;
         RectTransform rt = instantiatedObject.GetComponent<RectTransform>();
         rt.anchoredPosition = currentpos;
-        instantiatedObject.transform.position = transform.position;
+
+        Vector3 mousePos = new Vector3(Input.mousePosition.x - 2, Input.mousePosition.y - 2, Input.mousePosition.z);
+
+        instantiatedObject.transform.position = mousePos;
 
 
         eventData.pointerDrag = instantiatedObject;

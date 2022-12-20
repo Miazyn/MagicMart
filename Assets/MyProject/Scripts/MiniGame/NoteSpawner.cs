@@ -18,7 +18,7 @@ public class NoteSpawner : MonoBehaviour
             myNote.transform.position = new Vector3(transform.position.x, transform.position.y);
             spawnedNotes.Add(myNote);
             counter--;
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(distanceBetweenNotes);
         }
     }
 }

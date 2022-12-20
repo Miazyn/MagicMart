@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class ShopTile : MonoBehaviour
+public class ShopTile : MonoBehaviour, IPointerClickHandler
 {
     public SO_Ingredient Ingredient;
     [SerializeField] Image ItemImage;
     [SerializeField] TextMeshProUGUI Name;
     [SerializeField] TextMeshProUGUI Price;
     [SerializeField] TextMeshProUGUI PlayerStock;
+    public AudioSource buttonClick;
 
     Player CurrentPlayer;
     [SerializeField]    SO_Inventory PlayerInventory;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        buttonClick.Play();
+    }
 
     public void SetUpTile()
     {

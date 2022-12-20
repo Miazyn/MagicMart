@@ -16,6 +16,7 @@ public class CustomerCreation : MonoBehaviour
     SO_Voice[] voices;
     SO_Recipe[] allRecipes;
 
+    int npcOfTheDay = 0;
     void Awake()
     {
         sprites = Resources.LoadAll<Sprite>("GenericSprites");
@@ -27,9 +28,14 @@ public class CustomerCreation : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         dayCounter = 1;
+
+
         if (gameManager.curState == GameManager.GameState.DayStart)
         {
             customerAmount = Random.Range(5, 7);
+
+            npcOfTheDay = Random.Range(0, customerAmount);
+
             StartCoroutine(CreatingCustomers());
         }
     }
@@ -39,13 +45,15 @@ public class CustomerCreation : MonoBehaviour
         gameManager.Customers = new SO_NPC[customerAmount];
         for(int i = 0; i < customerAmount; i++)
         {
-            if(i == 0)
+            SO_NPC _npc = new SO_NPC();
+            if(i == npcOfTheDay)
             {
                 gameManager.Customers[i] = mainChars[Random.Range(0, mainChars.Length)];
             }
             else
             {
-                gameManager.Customers[i] = CreateCustomer();
+                _npc = CreateCustomer();
+                gameManager.Customers[i] = _npc;
             }
         }
         yield return null;

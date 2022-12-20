@@ -89,9 +89,12 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Dropped: " + eventData.pointerDrag);
-
         CookIngredient currentIngredient = eventData.pointerDrag.GetComponent<CookIngredient>();
+
+        Debug.Log("Dropped: " + currentIngredient.ingredient.ingredientName);
+
+        currentIngredient.IsOnTheke = true;
+
         //SFX
         if (glowEffect != null)
         {
@@ -103,18 +106,15 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             eventData.pointerDrag.gameObject.transform.SetParent(currentIngredient.AfterOnTheke);
             
-            if (!currentIngredient.HasBeenOnTheke)
+            if (!currentIngredient.HasBeenOnTheke && currentIngredient.IsOnTheke)
             {
                 ingredients.Add(currentIngredient.ingredient);
 
                 UpdateUIText();
-                
+
                 AddToScore(currentIngredient);
-                
-                if (onIngredientsChangedCallback != null)
-                {
-                    onIngredientsChangedCallback.Invoke();
-                }
+
+                currentIngredient.HasBeenOnTheke = true;
             }
             lastIngredient = currentIngredient.ingredient;
         }
@@ -122,23 +122,25 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             Destroy(eventData.pointerDrag);
         }
-
-        currentIngredient.HasBeenOnTheke = true;
-        currentIngredient.IsOnTheke = true;
-
         
     }
 
     private void AddToScore(CookIngredient currentIngredient)
     {
+        Debug.Log("Added to score");
         curHealth += currentIngredient.ingredient.health;
         curMana += currentIngredient.ingredient.mana;
         curPower += currentIngredient.ingredient.power;
+
+        if (onIngredientsChangedCallback != null)
+        {
+            onIngredientsChangedCallback.Invoke();
+        }
+
     }
 
     private void UpdateUIText()
     {
-        Debug.Log(ingredients.Count);
         currentIngredients.SetText((ingredients.Count) + "/" + ingredientsLimit);
     }
 
@@ -222,6 +224,11 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         ingredients = new List<SO_Ingredient>();
         ingredients = _tempList;
         UpdateUIText();
+
+        if (onIngredientsChangedCallback != null)
+        {
+            onIngredientsChangedCallback.Invoke();
+        }
     }
    
     public void StartCooking()

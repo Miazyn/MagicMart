@@ -87,6 +87,7 @@ public class DialogueManager : MonoBehaviour
     {
         allTypeClips = _dialogNpc.voice.voiceClips;
 
+
         if (counter <= _currentDialog.lines.Count && !typerRunning)
         {
             TextReceived(_currentDialog);
@@ -108,7 +109,6 @@ public class DialogueManager : MonoBehaviour
             if (dialogue != null || dialogue.lines[counter] != "")
             {
                 //SET ACTIVE
-                Debug.Log("Activating windows");
 
                 textBoxObject.SetActive(true);
                 npc.SetActive(true);
@@ -119,11 +119,8 @@ public class DialogueManager : MonoBehaviour
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
-                EndDialog();
-            }
-            else if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count != 0)
-            {
-                Debug.Log("Here would be logic for a dialog");
+                counter = 0;
+
                 EndDialog();
             }
             else
@@ -143,6 +140,8 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialog()
     {
+        Debug.LogError("END");
+
         //SET INACTIVE
         textBoxObject.SetActive(false);
         InDialogEffect.SetActive(false);
@@ -154,12 +153,8 @@ public class DialogueManager : MonoBehaviour
         }
         if (manager.curState == GameManager.GameState.EvaluationState)
         {
-            manager.counter++;
             manager.ChangeGameState(GameManager.GameState.StartState);
         }
-
-        counter = 0;
-
         cookButton.SetActive(true);
         shopButton.SetActive(true);
     }
@@ -209,6 +204,7 @@ public class DialogueManager : MonoBehaviour
         line = CheckStringForLineBreak(line);
 
         line = line.Replace("\r", "").Replace("$playerName", player.PlayerName);
+
         return line;
     }
 

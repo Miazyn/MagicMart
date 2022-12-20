@@ -27,9 +27,6 @@ public class GameManager : MonoBehaviour
 
     SO_CookedFood resultFood;
 
-    bool delayStartDone = false;
-    bool delayEndDone = false;
-
     public delegate void OnStateChanged();
     public OnStateChanged onStateChangedCallback;
     public enum GameState
@@ -45,7 +42,8 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] public GameState curState { get; private set; }
-
+    [Range(0.1f, 10.0f)]
+    [SerializeField] float TimeBtwCustomers = 2.0f;
 
     private void Awake()
     {
@@ -79,64 +77,51 @@ public class GameManager : MonoBehaviour
     {
         if (curState == GameState.StartState)
         {
-            Debug.Log("Time to start again");
             counter++;
-            ChangeGameState(GameState.DialogState);
+            //DELAY HERE
+            StartCoroutine(CustomerSpacingDelay());
         }
-        if (curState == GameState.IdleState)
-        {
-            Debug.Log("Time to be idle");
-            
-        }
+        
         if (curState == GameState.DialogState)
         {
-            Debug.Log("Time to start some dialog");
-            Debug.Log(counter);
             dialogueManager = DialogueManager.instance;
             if (counter < CustomerCount - 1)
             {
-                if (!delayStartDone)
-                {
-                    StartCoroutine(DelayBeforeDialog());
-                }
-                else
-                {
-                    Debug.Log("Customer:" + Customers[counter]);
-                    dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[0]);
-                }
+                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[0]);
+
             }
             else
             {
-                Debug.Log("No more dialog, Done with the day");
+                //END OF THE DAY
             }
         }
-        if(curState == GameState.CookingState)
+        #region[Inactive Checks]
+        if (curState == GameState.CookingState)
         {
-            Debug.Log("Time to start Cooking");
         }
-        if(curState == GameState.MiniRhythmGameState)
+        if (curState == GameState.MiniRhythmGameState)
         {
-            Debug.Log("Time to rhythm");
         }
-        if(curState == GameState.ShoppingState)
+        if (curState == GameState.ShoppingState)
         {
-            Debug.Log("Time to shop");
         }
-        if(curState == GameState.EvaluationState)
+        if (curState == GameState.IdleState)
+        {
+
+        }
+        #endregion
+        if (curState == GameState.EvaluationState)
         {
             dialogueManager = DialogueManager.instance;
-            Debug.Log("Time to Evaluate");
             Evaluation();
-            
         }
+        
     }
 
-    IEnumerator DelayBeforeDialog()
+    IEnumerator CustomerSpacingDelay()
     {
-        yield return new WaitForSeconds(1.5f);
-        delayStartDone = true;
-        delayEndDone = false;
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter]);
+        yield return new WaitForSeconds(TimeBtwCustomers);
+        ChangeGameState(GameState.DialogState);
     }
 
     void Evaluation()
@@ -148,21 +133,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterQuestDialog()
     {
-        if (!delayEndDone)
-        {
-            StartCoroutine(DelayAfterDialog());
-        }
-        else
-        {
-            dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter]);
-        }
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[0]);
     }
 
-    IEnumerator DelayAfterDialog()
-    {
-        yield return new WaitForSeconds(1.5f);
-        delayStartDone = false;
-        delayEndDone = true;
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter]);
-    }
 }

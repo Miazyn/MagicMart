@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 
     [Header("Money")]
     [SerializeField] TextMeshProUGUI money;
+    [SerializeField] AudioSource clickButton;
     Player player;
 
     void Awake()
@@ -33,6 +34,7 @@ public class ShopManager : MonoBehaviour
 
             _shopTile.GetComponent<RectTransform>().anchoredPosition = parentTransform.GetComponent<RectTransform>().anchoredPosition;
             _shopTile.GetComponent<ShopTile>().Ingredient = allIngredients[i];
+            _shopTile.GetComponent<ShopTile>().buttonClick = clickButton;
 
             _shopTile.GetComponent<ShopTile>().SetUpTile();
         }
