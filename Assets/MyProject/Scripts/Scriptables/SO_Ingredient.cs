@@ -18,9 +18,12 @@ public class SO_Ingredient : ScriptableObject
 
     public bool CompareIngredient(SO_Ingredient compareTo)
     {
-        if (ingredientName == compareTo.ingredientName)
+        if (this.ingredientName == compareTo.ingredientName)
         {
-            return true;
+            if(this.ingredientSprite == compareTo.ingredientSprite)
+            {
+                return true;
+            }
         }
         return false;
     }

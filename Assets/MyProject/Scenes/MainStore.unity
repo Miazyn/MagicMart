@@ -1044,15 +1044,6 @@ MonoBehaviour:
   cookButton: {fileID: 1952913300}
   shopButton: {fileID: 329983781}
   typerRunning: 0
-  allTypeClips:
-  - {fileID: 8300000, guid: dad00faf59338b542b4ab7a7964719ef, type: 3}
-  - {fileID: 8300000, guid: 6f9dbbc89c068014084a8566d36734f9, type: 3}
-  - {fileID: 8300000, guid: 5ef339dd56039ba4897292d0decb4404, type: 3}
-  - {fileID: 8300000, guid: 09e1d833b52d8eb45a6fc0d08fa01d0d, type: 3}
-  - {fileID: 8300000, guid: 23c7cd730cfb4ed48b47afbf27dfbd5e, type: 3}
-  - {fileID: 8300000, guid: db4228b02875992458e6348acb4050f9, type: 3}
-  - {fileID: 8300000, guid: b168c5aa8dbd6ec429fca97ceb2d0755, type: 3}
-  - {fileID: 8300000, guid: a78c5886e00d5fd43b23dfd7bcbe6ad5, type: 3}
   manager: {fileID: 0}
 --- !u!4 &812405620
 Transform:
@@ -2688,7 +2679,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726365c6226a6c647a105853ab66aaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillerCustomers: {fileID: 11400000, guid: 93e67a11c2f449a49805f1f447821f9e, type: 2}
+  blueprint: {fileID: 11400000, guid: 228fc6746cdc99a418e96cbbbac865b9, type: 2}
+  mainChars:
+  - {fileID: 11400000, guid: 01c556b3e0fabbd49bc24a7aca34d345, type: 2}
+  - {fileID: 11400000, guid: f317c31dfee236742b8eeadcf2a2a15c, type: 2}
+  - {fileID: 11400000, guid: a364267a77c682b46b90f9f7597c11d7, type: 2}
 --- !u!4 &1899725498
 Transform:
   m_ObjectHideFlags: 0
@@ -2985,8 +2980,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.5269, y: 40.61753}
-  m_SizeDelta: {x: 829.8109, y: 174.3537}
+  m_AnchoredPosition: {x: 9.5269, y: 30.005302}
+  m_SizeDelta: {x: 829.8109, y: 207.0323}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079398574
 MonoBehaviour:

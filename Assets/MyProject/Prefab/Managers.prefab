@@ -66,11 +66,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4acf981eb640846ab2696a2025bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: Default
+  PlayerName: Aussie
   inventory: {fileID: 11400000, guid: 0d3c3f20c9df0fc4fb1c593a22519adf, type: 2}
   CurrentCookingQuest: {fileID: 0}
   CreatedFood: {fileID: 0}
   cursorNormal: {fileID: 2800000, guid: 1103c48783e8ee449909ea0bea1f3ae1, type: 3}
+  cursorDrag: {fileID: 0}
 --- !u!82 &5243368440919085150
 AudioSource:
   m_ObjectHideFlags: 0

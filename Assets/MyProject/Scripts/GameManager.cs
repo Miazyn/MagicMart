@@ -65,14 +65,11 @@ public class GameManager : MonoBehaviour
         dialogueManager = DialogueManager.instance;
         curState = GameState.DayStart;
     }
-
-
     public void ChangeGameState(GameState _newState)
     {
         curState = _newState;
         if(onStateChangedCallback != null) 
         {
-            Debug.Log("State has changed");
             onStateChangedCallback.Invoke();
         }
         CheckGameStateAction();
@@ -82,7 +79,8 @@ public class GameManager : MonoBehaviour
     {
         if (curState == GameState.StartState)
         {
-            Debug.Log("Time to be idle");
+            Debug.Log("Time to start again");
+            counter++;
             ChangeGameState(GameState.DialogState);
         }
         if (curState == GameState.IdleState)
@@ -103,7 +101,8 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+                    Debug.Log("Customer:" + Customers[counter]);
+                    dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[0]);
                 }
             }
             else
@@ -137,26 +136,25 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         delayStartDone = true;
         delayEndDone = false;
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0]);
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter]);
     }
+
     void Evaluation()
     {
         //Create Food For Player with stats for npc
         
-        Debug.Log("currently we finished all the quest stuff");
         AfterQuestDialog();
     }
 
     public void AfterQuestDialog()
     {
-        Debug.Log("Display after Dialog");
         if (!delayEndDone)
         {
             StartCoroutine(DelayAfterDialog());
         }
         else
         {
-            dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
+            dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter]);
         }
     }
 
@@ -165,6 +163,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         delayStartDone = false;
         delayEndDone = true;
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0]);
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter]);
     }
 }

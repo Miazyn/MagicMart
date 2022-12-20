@@ -19,7 +19,6 @@ public class SO_Inventory : ScriptableObject
                 return true;
             }
         }
-        Debug.Log("Enough room.");
         inventoryItems.Add(new InventorySlot(_item, _amount));
         return true;
 
@@ -27,7 +26,7 @@ public class SO_Inventory : ScriptableObject
 
     public (bool, int) FindItemInList(SO_Ingredient _ingredient)
     {
-        for(int i = 0; i < inventoryItems.Count -1; i++)
+        for(int i = 0; i < inventoryItems.Count; i++)
         {
             if (_ingredient.CompareIngredient(inventoryItems[i].item))
             {
@@ -35,7 +34,7 @@ public class SO_Inventory : ScriptableObject
             }
         }
         
-        return (false, 1);
+        return (false, -1);
     }
 }
 

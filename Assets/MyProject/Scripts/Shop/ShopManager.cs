@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
@@ -11,6 +11,11 @@ public class ShopManager : MonoBehaviour
 
     public Transform parentTransform;
 
+    [SerializeField] SceneMana sceneMana;
+
+    [Header("Money")]
+    [SerializeField] TextMeshProUGUI money;
+    Player player;
 
     void Awake()
     {
@@ -19,7 +24,9 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        
+        player = Player.instance;
+
+        player.onMoneyChangedCallback += UpdateMoneyUI;
         for(int i =0; i < allIngredients.Length; i++)
         {
             GameObject _shopTile = Instantiate(ShopTilePrefab, parentTransform);
@@ -29,10 +36,22 @@ public class ShopManager : MonoBehaviour
 
             _shopTile.GetComponent<ShopTile>().SetUpTile();
         }
+
+        UpdateMoneyUI();
+    }
+
+    void UpdateMoneyUI()
+    {
+        money.SetText("" + player.moneyAmount);
     }
 
     public void LeaveShop()
     {
-        SceneManager.LoadScene("MainStore", LoadSceneMode.Single);
+        sceneMana.LoadNextScene("MainStore");
+    }
+
+    void OnDisable()
+    {
+        player.onMoneyChangedCallback -= UpdateMoneyUI;
     }
 }

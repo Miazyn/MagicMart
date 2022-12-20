@@ -17,7 +17,7 @@ public class PlayerInventorySetUp : MonoBehaviour
         {
             playerInventory.AddItem((SO_Ingredient)item, 0);
         }
-        AssetDatabase.CreateAsset(playerInventory, $"Assets/MyProject/Scriptables/Inventory/{playerInventory.inventoryName}.asset");
+        AssetDatabase.CreateAsset(playerInventory, $"Assets/MyProject/Scriptables/Resources/Inventory/{playerInventory.inventoryName}.asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }

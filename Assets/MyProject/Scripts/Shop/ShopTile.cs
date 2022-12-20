@@ -14,31 +14,31 @@ public class ShopTile : MonoBehaviour
     [SerializeField] TextMeshProUGUI PlayerStock;
 
     Player CurrentPlayer;
-    SO_Inventory PlayerInventory;
-    private void Start()
-    {
-        CurrentPlayer = Player.instance;
-        PlayerInventory = CurrentPlayer.inventory;
-    }
+    [SerializeField]    SO_Inventory PlayerInventory;
 
     public void SetUpTile()
     {
+        CurrentPlayer = Player.instance;
+        PlayerInventory = CurrentPlayer.inventory;
+
         ItemImage.sprite = Ingredient.ingredientSprite;
         Name.SetText(Ingredient.ingredientName);
         Price.SetText(Ingredient.BuyPrice.ToString());
-        int playerStockOfItem;
-        if (PlayerInventory.FindItemInList(Ingredient).Item1) 
+        int playerStockOfItem = 0;
+
+        if (CurrentPlayer.inventory.inventoryItems.Count > 0)
         {
-            playerStockOfItem = 
+            playerStockOfItem =
                 PlayerInventory.inventoryItems
                 [PlayerInventory.FindItemInList(Ingredient).Item2].GetAmount();
+
             PlayerStock.SetText("Owned: " + playerStockOfItem.ToString());
         }
         else
         {
-            PlayerStock.SetText("Owned: " + "invalid_item");
+            Debug.LogWarning("NO Items in player");
+            PlayerStock.SetText("Owned: " + 0);
         }
-
 
     }
 }

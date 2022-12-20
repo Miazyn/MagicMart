@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
 
     [SerializeField] int maxCharPerLine = 43;
-    [SerializeField] float typingSpeedInSeconds = 0.05f;
+    [SerializeField] float typingSpeedInSeconds = 0.03f;
 
     [Header("Elements for Dialog")]
     [SerializeField] GameObject textBoxObject;
@@ -30,7 +30,9 @@ public class DialogueManager : MonoBehaviour
     Coroutine displayCoroutine;
     public bool typerRunning = false;
     AudioSource audioSource;
-    [SerializeField] AudioClip[] allTypeClips;
+    AudioClip[] allTypeClips;
+
+    bool IsNpcLine = false;
 
     Player player;
     [SerializeField] GameManager manager;
@@ -57,7 +59,6 @@ public class DialogueManager : MonoBehaviour
 
         if(manager.curState == GameManager.GameState.MiniRhythmGameState)
         {
-            Debug.Log("Into Eval");
             manager.ChangeGameState(GameManager.GameState.EvaluationState);
         }
     }
@@ -82,9 +83,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetUpDialog(SO_Dialog _currentDialog)
+    public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc)
     {
-        Debug.Log(_currentDialog);
+        allTypeClips = _dialogNpc.voice.voiceClips;
+
         if (counter <= _currentDialog.lines.Count && !typerRunning)
         {
             TextReceived(_currentDialog);
@@ -106,6 +108,8 @@ public class DialogueManager : MonoBehaviour
             if (dialogue != null || dialogue.lines[counter] != "")
             {
                 //SET ACTIVE
+                Debug.Log("Activating windows");
+
                 textBoxObject.SetActive(true);
                 npc.SetActive(true);
                 InDialogEffect.SetActive(true);
@@ -121,22 +125,10 @@ public class DialogueManager : MonoBehaviour
             {
                 Debug.Log("Here would be logic for a dialog");
                 EndDialog();
-                //Code how to handle choices.
-               // dialogueBox.text = dialogue.dialogueChoices[0].choiceLine;
             }
             else
             {
-                string line = "";
-                if (dialogue.lines[counter].Contains("$playerName")) 
-                {
-                    line = dialogue.lines[counter].Replace("$playerName", player.PlayerName);
-                }
-                else
-                {
-                    line = dialogue.lines[counter];
-                }
-
-                line = CheckStringForLineBreak(line);
+                string line = CleanString(dialogue.lines[counter]);
 
                 if (displayCoroutine != null)
                 {
@@ -178,15 +170,17 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         for (int i = 0; i < line.ToCharArray().Length; i++)
         {
-
+            
             dialogueText.text += line.ToCharArray()[i];
-
-            if (line.ToCharArray()[i] != '.' || line.ToCharArray()[i] != ' ' || line.ToCharArray()[i] != '\n')
+            
+            if (IsNpcLine)
             {
-                audioSource.clip = allTypeClips[UnityEngine.Random.Range(0, allTypeClips.Length - 1)];
-                audioSource.Play();
+                if (line.ToCharArray()[i] != '.' || line.ToCharArray()[i] != ' ' || line.ToCharArray()[i] != '\n')
+                {
+                    audioSource.clip = allTypeClips[UnityEngine.Random.Range(0, allTypeClips.Length - 1)];
+                    audioSource.Play();
+                }
             }
-
 
             yield return new WaitForSeconds(typingSpeedInSeconds);
 
@@ -200,9 +194,22 @@ public class DialogueManager : MonoBehaviour
         {
             StopCoroutine(displayCoroutine);
         }
-        dialogueText.text = dialogue.lines[counter - 1];
+
+        string line = CleanString(dialogue.lines[counter - 1]);
+
+        dialogueText.text = line;
         typerRunning = false;
 
+    }
+
+    private string CleanString(string lineToClean)
+    {
+        string line = lineToClean;
+
+        line = CheckStringForLineBreak(line);
+
+        line = line.Replace("\r", "").Replace("$playerName", player.PlayerName);
+        return line;
     }
 
     void DisplayCharacterSprite(SO_Dialog dialogue)
@@ -252,6 +259,7 @@ public class DialogueManager : MonoBehaviour
             {
                 nameText.SetText(dialogue.nameOfSpeaker[0]);
             }
+            IsNpcLine = dialogue.nameOfSpeaker[0] != "$playerName" ? true : false;
             
         }
         else
@@ -271,6 +279,9 @@ public class DialogueManager : MonoBehaviour
                         {
                             nameText.SetText(savedName);
                         }
+
+                        IsNpcLine = savedName != "$playerName" ? true : false;
+
                         break;
                     }
                     else
@@ -285,6 +296,7 @@ public class DialogueManager : MonoBehaviour
                             {
                                 nameText.SetText(savedName);
                             }
+                            IsNpcLine = savedName != "$playerName" ? true : false;
                         }
                         else
                         {

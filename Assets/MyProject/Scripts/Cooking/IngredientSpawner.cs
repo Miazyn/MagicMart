@@ -30,7 +30,6 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
     Color defaultColor;
     Vector2 currentpos;
 
-    [SerializeField] PullUpMenu pullUpItemMenu;
 
     void Awake()
     {
@@ -42,7 +41,6 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Start()
     {
-        pullUpItemMenu = GameObject.FindObjectOfType<PullUpMenu>();
         itemImage.sprite = ingredientToSpawn.ingredientSprite;
         Mana.SetText("" + ingredientToSpawn.mana);
         Health.SetText("" + ingredientToSpawn.health);
@@ -72,7 +70,6 @@ public class IngredientSpawner : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 
         eventData.pointerDrag = instantiatedObject;
-        pullUpItemMenu.MenuDown();
     }
 
     public void OnDrag(PointerEventData eventData)

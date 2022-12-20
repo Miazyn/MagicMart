@@ -10,4 +10,6 @@ public class SO_NPC : ScriptableObject
     public SO_QuestNPC[] quests;
     public int unlockDay;
     public SO_Quest unlockQuest;
+
+    public SO_Voice voice;
 }

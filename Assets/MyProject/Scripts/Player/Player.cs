@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     CursorMode cursorMode;
     Vector2 hotspot;
 
+    public delegate void OnMoneyChanged();
+    public OnMoneyChanged onMoneyChangedCallback;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -44,7 +46,17 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        moneyAmount = 0;
+        inventory = Resources.Load<SO_Inventory>("Inventory/Player Inventory");
+
+        if (Resources.Load<SO_Inventory>("Inventory/SavedInventory").inventoryItems.Count > 0)
+        {
+            foreach(var item in Resources.Load<SO_Inventory>("Inventory/SavedInventory").inventoryItems)
+            {
+                inventory.AddItem(item.item, item.GetAmount());
+            }
+        }
+
+        moneyAmount = 10000;
         manager = GameManager.Instance;
 
         //CURSOR
@@ -81,14 +93,25 @@ public class Player : MonoBehaviour
     public void SetMoneyAmount(int _addedMoney)
     {
         moneyAmount += _addedMoney;
+        if (onMoneyChangedCallback != null)
+        {
+            onMoneyChangedCallback.Invoke();
+        }
     }
+
 
     void OnApplicationQuit()
     {
-        //B4 clear, save inventory
-        if (inventory.inventoryItems.Count > 0)
+        SO_Inventory saveInventory = Resources.Load<SO_Inventory>("Inventory/SavedInventory");
+
+        saveInventory.inventoryItems.Clear();
+
+        foreach(var item in inventory.inventoryItems)
         {
-            inventory.inventoryItems.Clear();
+            saveInventory.AddItem(item.item, item.GetAmount());
         }
+
+        Debug.Log("Saved the inventory");
+        //inventory.inventoryItems.Clear();
     }
 }

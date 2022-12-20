@@ -176,7 +176,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     IEnumerator DelayUntilDeactivation()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.55f);
         glowEffect.SetActive(false);
     }
 

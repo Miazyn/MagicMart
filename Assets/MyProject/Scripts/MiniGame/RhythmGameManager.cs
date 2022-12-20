@@ -30,6 +30,8 @@ public class RhythmGameManager : MonoBehaviour
     [SerializeField] SceneMana sceneMana;
 
     bool IsGameFinished = false;
+
+    [SerializeField] GameObject Panel;
     private void Awake()
     {
         instance = this;
@@ -54,6 +56,7 @@ public class RhythmGameManager : MonoBehaviour
         {
             if (!StartPlaying)
             {
+                Panel.SetActive(false);
                 StartPlaying = true;
                 rhythmMusic.Play();
                 StartCoroutine(noteSpawn.CreateNotes(NotesToBeMade));

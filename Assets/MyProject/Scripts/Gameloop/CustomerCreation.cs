@@ -9,7 +9,19 @@ public class CustomerCreation : MonoBehaviour
     int customerAmount;
     int dayCounter;
 
-    [SerializeField] SO_NPC fillerCustomers;
+    [SerializeField] SO_NPC blueprint;
+    [SerializeField] SO_NPC[] mainChars;
+
+    Sprite[] sprites;
+    SO_Voice[] voices;
+    SO_Recipe[] allRecipes;
+
+    void Awake()
+    {
+        sprites = Resources.LoadAll<Sprite>("GenericSprites");
+        voices = Resources.LoadAll<SO_Voice>("Generic/Voices");
+        allRecipes = Resources.LoadAll<SO_Recipe>("Recipes");
+    }
 
     private void Start()
     {
@@ -18,16 +30,23 @@ public class CustomerCreation : MonoBehaviour
         if (gameManager.curState == GameManager.GameState.DayStart)
         {
             customerAmount = Random.Range(5, 7);
-            StartCoroutine(CreatingCustomer());
+            StartCoroutine(CreatingCustomers());
         }
     }
 
-    IEnumerator CreatingCustomer()
+    IEnumerator CreatingCustomers()
     {
         gameManager.Customers = new SO_NPC[customerAmount];
         for(int i = 0; i < customerAmount; i++)
         {
-            gameManager.Customers[i] = fillerCustomers;
+            if(i == 0)
+            {
+                gameManager.Customers[i] = mainChars[Random.Range(0, mainChars.Length)];
+            }
+            else
+            {
+                gameManager.Customers[i] = CreateCustomer();
+            }
         }
         yield return null;
         Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
@@ -35,5 +54,13 @@ public class CustomerCreation : MonoBehaviour
         gameManager.ChangeGameState(GameManager.GameState.DialogState);
     }
 
+    SO_NPC CreateCustomer()
+    {
+        blueprint.voice = voices[Random.Range(0, voices.Length)];
+        blueprint.quests[0].ReqRecipe = allRecipes[Random.Range(0, allRecipes.Length)];
+        blueprint.quests[0].QuestDialogBeforeCompletion[0].spriteForCharacterDisplay[0] = sprites[Random.Range(0, sprites.Length)];
+        blueprint.quests[0].QuestDialogAfterCompletion[0].spriteForCharacterDisplay[0] = sprites[Random.Range(0, sprites.Length)];
 
+        return blueprint;
+    }
 }
