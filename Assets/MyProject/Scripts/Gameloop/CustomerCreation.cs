@@ -40,6 +40,18 @@ public class CustomerCreation : MonoBehaviour
         }
     }
 
+    public void DayStart()
+    {
+        if (gameManager.curState == GameManager.GameState.DayStart)
+        {
+            customerAmount = Random.Range(5, 7);
+
+            npcOfTheDay = Random.Range(0, customerAmount);
+
+            StartCoroutine(CreatingCustomers());
+        }
+    }
+
     IEnumerator CreatingCustomers()
     {
         gameManager.Customers = new SO_NPC[customerAmount];
@@ -59,7 +71,7 @@ public class CustomerCreation : MonoBehaviour
         yield return null;
         Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
         gameManager.CustomerCount = customerAmount;
-        gameManager.ChangeGameState(GameManager.GameState.DialogState);
+        gameManager.ChangeGameState(GameManager.GameState.StartState);
     }
 
     SO_NPC CreateCustomer()

@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public string PlayerName = "Aussie";
+    public string StoreName = "Magic Mart";
 
     public SO_Inventory inventory;
     public int moneyAmount { get; private set; }

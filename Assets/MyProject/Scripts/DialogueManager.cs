@@ -23,6 +23,8 @@ public class DialogueManager : MonoBehaviour
     [Header("Disabling Buttons etc")]
     [SerializeField] GameObject cookButton;
     [SerializeField] GameObject shopButton;
+    [SerializeField] GameObject playerMoney;
+
 
     Sprite savedSprite;
     string savedName;
@@ -38,6 +40,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] GameManager manager;
 
     int counter = 0;
+
+    SO_Recipe recipe;
 
     private void Awake()
     {
@@ -83,10 +87,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc)
+    public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc, SO_Recipe _questRecipe)
     {
         allTypeClips = _dialogNpc.voice.voiceClips;
-
+        recipe = _questRecipe;
 
         if (counter <= _currentDialog.lines.Count && !typerRunning)
         {
@@ -95,7 +99,12 @@ public class DialogueManager : MonoBehaviour
         }
         else if (typerRunning)
         {
+            DisplayCharacterSprite(_currentDialog);
+            DisplayCharacterName(_currentDialog);
+
             StopTypeEffect(_currentDialog);
+
+            
         }
     }
 
@@ -116,11 +125,10 @@ public class DialogueManager : MonoBehaviour
 
                 cookButton.SetActive(false);
                 shopButton.SetActive(false);
+                playerMoney.SetActive(false);
             }
             if (counter > dialogue.lines.Count - 1 && dialogue.dialogueChoices.Count == 0)
             {
-                counter = 0;
-
                 EndDialog();
             }
             else
@@ -147,6 +155,8 @@ public class DialogueManager : MonoBehaviour
         InDialogEffect.SetActive(false);
         npc.SetActive(false);
 
+        counter = 0;
+
         if (manager.curState == GameManager.GameState.DialogState)
         {
             manager.ChangeGameState(GameManager.GameState.IdleState);
@@ -157,6 +167,7 @@ public class DialogueManager : MonoBehaviour
         }
         cookButton.SetActive(true);
         shopButton.SetActive(true);
+        playerMoney.SetActive(true);
     }
 
     IEnumerator TypeEffect(string line)
@@ -195,6 +206,10 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = line;
         typerRunning = false;
 
+        if (counter > dialogue.lines.Count)
+        {
+            EndDialog();
+        }
     }
 
     private string CleanString(string lineToClean)
@@ -203,7 +218,10 @@ public class DialogueManager : MonoBehaviour
 
         line = CheckStringForLineBreak(line);
 
-        line = line.Replace("\r", "").Replace("$playerName", player.PlayerName);
+        line = line.Replace("\r", "")
+            .Replace("$playerName", player.PlayerName)
+            .Replace("$recipeName", recipe.recipeName)
+            .Replace("$storeName", player.StoreName);
 
         return line;
     }

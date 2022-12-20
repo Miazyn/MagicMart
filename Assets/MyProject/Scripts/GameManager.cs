@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [Header("All Corelated Scripts")]
     [SerializeField] DialogueManager dialogueManager;
 
+    AudioSource gameplayMusic;
+
     SO_CookedFood resultFood;
 
     public delegate void OnStateChanged();
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        gameplayMusic = GetComponent<AudioSource>();
         dialogueManager = DialogueManager.instance;
         curState = GameState.DayStart;
     }
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
             dialogueManager = DialogueManager.instance;
             if (counter < CustomerCount - 1)
             {
-                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[0]);
+                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
 
             }
             else
@@ -127,13 +130,20 @@ public class GameManager : MonoBehaviour
     void Evaluation()
     {
         //Create Food For Player with stats for npc
-        
+        float maxScore = 200;
+
+        float playerScore = RhythymGameScore + CookingGameScore;
+        float overall = playerScore / (maxScore / 100);
+
+        OverallScore = overall;
+        Debug.Log("OVERALL SCORE: " + OverallScore);
+
         AfterQuestDialog();
     }
 
     public void AfterQuestDialog()
     {
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[0]);
+        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
     }
 
 }

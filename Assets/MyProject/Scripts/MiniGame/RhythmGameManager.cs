@@ -111,9 +111,23 @@ public class RhythmGameManager : MonoBehaviour
             }
 
             manager.RhythymGameScore = playerScore;
-            sceneMana.LoadNextScene("TransitionScene");
+            StartCoroutine(BreathTime());
         }
     }
+
+    IEnumerator BreathTime()
+    {
+        Debug.Log("Your final Score is: " + manager.RhythymGameScore);
+
+        sparkleEffect1.SetActive(true);
+        sparkleEffect2.SetActive(true);
+        sparkleEffect3.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        sceneMana.LoadNextScene("TransitionScene");
+    }
+
     public void NormalHit()
     {
         soundAudioSource.clip = hitSound;
@@ -153,7 +167,6 @@ public class RhythmGameManager : MonoBehaviour
         currentScore += scorePerPerfectNote;
         PercentageCalc();
     }
-
     private void DisableAllEffects()
     {
         if (disableSFX != null)
@@ -162,7 +175,6 @@ public class RhythmGameManager : MonoBehaviour
         }
         disableSFX = StartCoroutine(DisableEffects());
     }
-
     public void NoteMiss()
     {
         PercentageCalc();
@@ -171,7 +183,6 @@ public class RhythmGameManager : MonoBehaviour
         sparkleEffect3.SetActive(false);
         glow.SetActive(false);
     }
-
     IEnumerator DisableEffects()
     {
         yield return new WaitForSeconds(timeUntilSFXDisable);

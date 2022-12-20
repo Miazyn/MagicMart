@@ -72,20 +72,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         }
     }
 
-    public float GiveScore()
-    {
-        float inBtwManaScore = curMana / (currentRecipe.mana / 100.0f);
-        float inBtwHealthScore = curHealth / (currentRecipe.health / 100.0f);
-        float inBtwPowerScore = curPower / (currentRecipe.power / 100.0f);
-
-        Debug.Log("Mana" + inBtwManaScore + "\nHealth:" + inBtwHealthScore + "\nPower" + inBtwPowerScore);
-
-        float result = inBtwHealthScore + inBtwManaScore + inBtwPowerScore / (300 / 100.0f);
-
-        Debug.Log(result);
-
-        return result;
-    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -231,12 +217,119 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         }
     }
    
+    float Scoring()
+    {
+        float finalManaScore = 0f;
+        int manaDiff = Mathf.Abs(currentRecipe.mana - curMana);
+
+        if (manaDiff != 0)
+        {
+            float manaPercentageOff = (manaDiff / (currentRecipe.mana / 100.0f));
+            if (manaPercentageOff > 100)
+            {
+                finalManaScore = 100 - manaPercentageOff;
+            }
+            else if (manaPercentageOff < 0)
+            {
+                finalManaScore = manaPercentageOff;
+            }
+            else
+            {
+                finalManaScore = 100 - manaPercentageOff;
+            }
+        }
+        else
+        {
+            finalManaScore = 100.0f;
+        }
+
+        int healthDiff = Mathf.Abs(currentRecipe.health - curHealth);
+        float finalHealthScore = 0f;
+        if (healthDiff != 0)
+        {
+            float healthPercentageOff = (healthDiff / (currentRecipe.health / 100.0f));
+
+            if (healthPercentageOff > 100)
+            {
+                finalHealthScore = 100 - healthPercentageOff;
+            }
+            else if (healthPercentageOff < 0)
+            {
+                finalHealthScore = healthPercentageOff;
+            }
+            else
+            {
+                finalHealthScore = 100 - healthPercentageOff;
+            }
+        }
+        else
+        {
+            finalHealthScore = 100.0f;
+        }
+
+        int powerDiff = Mathf.Abs(currentRecipe.power - curPower);
+        float finalPowerScore = 0f;
+        if (powerDiff != 0)
+        {
+            float powerPercentageOff = (powerDiff / (currentRecipe.power / 100.0f));
+            
+            if (powerPercentageOff > 100)
+            {
+                finalPowerScore = 100 - powerPercentageOff;
+            }
+            else if (powerPercentageOff < 0)
+            {
+                finalPowerScore = powerPercentageOff;
+            }
+            else
+            {
+                finalPowerScore = 100 - powerPercentageOff;
+            }
+        }
+        else
+        {
+            finalPowerScore = 100;
+        }
+        float maxScore = 300.0f;
+        float onepercent = maxScore / 100.0f;
+        if (currentRecipe.mana < 0)
+        {
+            finalManaScore = Mathf.Abs(finalManaScore);
+        }
+        if (currentRecipe.health < 0)
+        {
+            finalHealthScore = Mathf.Abs(finalHealthScore);
+        }
+        if (currentRecipe.power < 0)
+        {
+            finalPowerScore = Mathf.Abs(finalPowerScore);
+        }
+
+        if(finalManaScore < 0) { finalManaScore = 0; }
+        if(finalHealthScore < 0) { finalHealthScore = 0; }
+        if(finalPowerScore < 0) { finalPowerScore = 0; }
+
+        float playerScore = finalHealthScore + finalManaScore + finalPowerScore;
+
+        playerScore = (maxScore + playerScore)/ onepercent;
+
+        playerScore = Mathf.Abs(100 - playerScore);
+
+        return playerScore;
+        //Debug.Log("Player Score Cooking: " + playerScore +
+        //    "\nMana: " + curMana + "/" + currentRecipe.mana + "Score: " + finalManaScore +
+        //    "\nPower: " + curPower + "/" + currentRecipe.power + "Score: " + finalPowerScore +
+        //    "\nHealth: " + curHealth + "/" + currentRecipe.health + "Score: " + finalHealthScore);
+    }
+
     public void StartCooking()
     {
         if (currentRecipe.ContainsRecipe(ingredients))
         { 
             Debug.Log("Cook the ingredient owo");
             //OverallScore = GiveScore();
+            OverallScore =  Scoring();
+            manager.CookingGameScore = OverallScore;
             sceneMana.LoadNextScene("TransitionScene");
         }
     }

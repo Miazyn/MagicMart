@@ -18,10 +18,6 @@ public class SceneMana : MonoBehaviour
     {
         SceneManager.LoadScene(_sceneName, LoadSceneMode.Single);
 
-        //Debug.Log("Load next scene " + _sceneName);
-        //FadePanel.gameObject.SetActive(true);
-        //FadePanel.SetTrigger("FadeOut");
-        //StartCoroutine(WaitForFade(_sceneName));
     }
 
     IEnumerator WaitForFade(string _sceneName)

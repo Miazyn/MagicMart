@@ -14,10 +14,6 @@ public class DebugCookingButtons : MonoBehaviour
     {
         recipes = Resources.LoadAll<SO_Recipe>("Recipes");
     }
-    public void ShowScore()
-    {
-        score.SetText("Score: " + cookingPot.GiveScore());
-    }
 
     public void NextRecipe()
     {
