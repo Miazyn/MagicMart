@@ -50,6 +50,7 @@ public class RhythmGameManager : MonoBehaviour
     [SerializeField] GameObject Panel;
 
     Coroutine disableSFX;
+    AudioSource managerMusic;
     private void Awake()
     {
         instance = this;
@@ -70,6 +71,7 @@ public class RhythmGameManager : MonoBehaviour
         scoreText.text = 100.00 + "%";
 
         manager.ChangeGameState(GameManager.GameState.MiniRhythmGameState);
+        managerMusic = manager.gameObject.GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -78,6 +80,7 @@ public class RhythmGameManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                managerMusic.volume = 0;
                 Panel.SetActive(false);
                 StartPlaying = true;
                 rhythmMusic.Play();

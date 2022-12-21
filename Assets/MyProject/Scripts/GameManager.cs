@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     [Range(0.1f, 10.0f)]
     [SerializeField] float TimeBtwCustomers = 2.0f;
 
+    float originalVolume;
+
     private void Awake()
     {
         if (Instance == null)
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         gameplayMusic = GetComponent<AudioSource>();
         dialogueManager = DialogueManager.instance;
         curState = GameState.DayStart;
+        originalVolume = gameplayMusic.volume;
     }
     public void ChangeGameState(GameState _newState)
     {
@@ -80,15 +83,13 @@ public class GameManager : MonoBehaviour
     {
         if (curState == GameState.StartState)
         {
-            counter++;
-            //DELAY HERE
             StartCoroutine(CustomerSpacingDelay());
         }
         
         if (curState == GameState.DialogState)
         {
             dialogueManager = DialogueManager.instance;
-            if (counter < CustomerCount - 1)
+            if (counter < CustomerCount)
             {
                 dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
 
@@ -96,13 +97,17 @@ public class GameManager : MonoBehaviour
             else
             {
                 //END OF THE DAY
+                Debug.Log("End of the day");
             }
         }
+
+        #region[Inactive Checks]
         if (curState == GameState.MiniRhythmGameState)
         {
-            StartCoroutine(TurnOffMusic());
+            //StartCoroutine(TurnOffMusic());
+
+
         }
-        #region[Inactive Checks]
         if (curState == GameState.CookingState)
         {
         }
@@ -116,20 +121,13 @@ public class GameManager : MonoBehaviour
         #endregion
         if (curState == GameState.EvaluationState)
         {
+            gameplayMusic.volume = originalVolume;
             dialogueManager = DialogueManager.instance;
             Evaluation();
         }
         
     }
 
-    IEnumerator TurnOffMusic()
-    {
-       for(float i = 0; i <= gameplayMusic.volume; i += Time.deltaTime)
-        {
-            gameplayMusic.volume -= i;
-            yield return null;
-        }
-    }
 
     IEnumerator CustomerSpacingDelay()
     {

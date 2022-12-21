@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
 
     SO_Recipe recipe;
 
+    SO_Dialog lastDialog;
     private void Awake()
     {
         if (instance == null)
@@ -91,6 +92,17 @@ public class DialogueManager : MonoBehaviour
     {
         allTypeClips = _dialogNpc.voice.voiceClips;
         recipe = _questRecipe;
+
+        if(lastDialog == null)
+        {
+            lastDialog = _currentDialog;
+        }
+        else if(_currentDialog != lastDialog)
+        {
+            Debug.LogError("Counter has been reset");
+            counter = 0;
+            lastDialog = _currentDialog;
+        }
 
         if (counter <= _currentDialog.lines.Count && !typerRunning)
         {
@@ -163,6 +175,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (manager.curState == GameManager.GameState.EvaluationState)
         {
+            manager.counter++;
             manager.ChangeGameState(GameManager.GameState.StartState);
         }
         cookButton.SetActive(true);
@@ -208,6 +221,7 @@ public class DialogueManager : MonoBehaviour
 
         if (counter > dialogue.lines.Count)
         {
+            Debug.LogError("END AT STOP TYPE");
             EndDialog();
         }
     }

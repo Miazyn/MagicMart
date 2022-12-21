@@ -1079,7 +1079,7 @@ MonoBehaviour:
   InDialogEffect: {fileID: 22411385}
   cookButton: {fileID: 1952913300}
   shopButton: {fileID: 329983781}
-  playerMoney: {fileID: 0}
+  playerMoney: {fileID: 1728343815}
   typerRunning: 0
   manager: {fileID: 0}
 --- !u!4 &812405620
