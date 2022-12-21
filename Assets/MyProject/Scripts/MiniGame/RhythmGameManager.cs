@@ -55,7 +55,7 @@ public class RhythmGameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    void Start()
     {
         soundAudioSource.clip = hitSound;
         rhythmMusic.clip = audioClips[Random.Range(0, audioClips.Length)];

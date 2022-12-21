@@ -98,11 +98,12 @@ public class GameManager : MonoBehaviour
                 //END OF THE DAY
             }
         }
+        if (curState == GameState.MiniRhythmGameState)
+        {
+            StartCoroutine(TurnOffMusic());
+        }
         #region[Inactive Checks]
         if (curState == GameState.CookingState)
-        {
-        }
-        if (curState == GameState.MiniRhythmGameState)
         {
         }
         if (curState == GameState.ShoppingState)
@@ -119,6 +120,15 @@ public class GameManager : MonoBehaviour
             Evaluation();
         }
         
+    }
+
+    IEnumerator TurnOffMusic()
+    {
+       for(float i = 0; i <= gameplayMusic.volume; i += Time.deltaTime)
+        {
+            gameplayMusic.volume -= i;
+            yield return null;
+        }
     }
 
     IEnumerator CustomerSpacingDelay()
