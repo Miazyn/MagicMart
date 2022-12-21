@@ -17,7 +17,7 @@ MonoBehaviour:
   - longneck cat
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 1a77de0cf2eec9b4f8f05a5c84ccdb18, type: 3}
   lines:
   - Hi, could you make me $recipeName?
   dialogueChoices: []

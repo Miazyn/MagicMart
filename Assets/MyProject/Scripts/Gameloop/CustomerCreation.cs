@@ -16,6 +16,8 @@ public class CustomerCreation : MonoBehaviour
     SO_Voice[] voices;
     SO_Recipe[] allRecipes;
 
+    [SerializeField] SO_NPC[] allNPCs;
+
     [SerializeField] GameObject cookButton;
     [SerializeField] GameObject shopButton;
     [SerializeField] GameObject playerMoney;
@@ -23,9 +25,10 @@ public class CustomerCreation : MonoBehaviour
     int npcOfTheDay = 0;
     void Awake()
     {
-        sprites = Resources.LoadAll<Sprite>("GenericSprites");
-        voices = Resources.LoadAll<SO_Voice>("Generic/Voices");
-        allRecipes = Resources.LoadAll<SO_Recipe>("Recipes");
+        //sprites = Resources.LoadAll<Sprite>("GenericSprites");
+        //voices = Resources.LoadAll<SO_Voice>("Generic/Voices");
+        //allRecipes = Resources.LoadAll<SO_Recipe>("Recipes");
+        allNPCs = Resources.LoadAll<SO_NPC>("GenericNPC");
     }
 
     private void Start()
@@ -40,8 +43,7 @@ public class CustomerCreation : MonoBehaviour
 
             npcOfTheDay = Random.Range(0, customerAmount);
 
-            //StartCoroutine(CreatingCustomers());
-            StartCoroutine(VideoCreatingCustomers());
+            StartCoroutine(CreatingCustomers());
         }
         if(gameManager.curState == GameManager.GameState.IdleState)
         {
@@ -61,28 +63,6 @@ public class CustomerCreation : MonoBehaviour
         }
     }
 
-    IEnumerator VideoCreatingCustomers()
-    {
-        gameManager.Customers = new SO_NPC[customerAmount];
-        for (int i = 0; i < customerAmount; i++)
-        {
-            SO_NPC _npc = new SO_NPC();
-            if (i == 0)
-            {
-                gameManager.Customers[i] = mainChars[0];
-            }
-            else
-            {
-                _npc = CreateCustomer();
-                gameManager.Customers[i] = _npc;
-            }
-        }
-        yield return null;
-        Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
-        gameManager.CustomerCount = customerAmount;
-        gameManager.ChangeGameState(GameManager.GameState.StartState);
-    }
-
     IEnumerator CreatingCustomers()
     {
         gameManager.Customers = new SO_NPC[customerAmount];
@@ -95,24 +75,13 @@ public class CustomerCreation : MonoBehaviour
             }
             else
             {
-                _npc = CreateCustomer();
-                gameManager.Customers[i] = _npc;
+                gameManager.Customers[i] = allNPCs[Random.Range(0, allNPCs.Length)];
             }
         }
         yield return null;
         Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
         gameManager.CustomerCount = customerAmount;
         gameManager.ChangeGameState(GameManager.GameState.StartState);
-    }
-
-    SO_NPC CreateCustomer()
-    {
-        blueprint.voice = voices[Random.Range(0, voices.Length)];
-        blueprint.quests[0].ReqRecipe = allRecipes[Random.Range(0, allRecipes.Length)];
-        blueprint.quests[0].QuestDialogBeforeCompletion[0].spriteForCharacterDisplay[0] = sprites[Random.Range(0, sprites.Length)];
-        blueprint.quests[0].QuestDialogAfterCompletion[0].spriteForCharacterDisplay[0] = sprites[Random.Range(0, sprites.Length)];
-
-        return blueprint;
     }
 
     void EnableItems()
