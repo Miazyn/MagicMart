@@ -15,7 +15,7 @@ public class PlayerInventorySetUp : MonoBehaviour
         playerInventory.inventoryName = "Player Inventory";
         foreach(var item in invItems)
         {
-            playerInventory.AddItem((SO_Ingredient)item, 0);
+            playerInventory.AddItem((SO_Ingredient)item, 5);
         }
         AssetDatabase.CreateAsset(playerInventory, $"Assets/MyProject/Scriptables/Resources/Inventory/{playerInventory.inventoryName}.asset");
         AssetDatabase.SaveAssets();

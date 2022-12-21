@@ -36,5 +36,26 @@ public class StarAssigner : MonoBehaviour
         {
             star1.enabled = true;
         }
+
+        //StartCoroutine(WaitFirstStar());
+    }
+
+    IEnumerator WaitFirstStar()
+    {
+        yield return new WaitForSeconds(1.5f);
+        star1.enabled = true;
+        StartCoroutine(WaitSecondStar());
+    }
+
+    IEnumerator WaitSecondStar()
+    {
+        yield return new WaitForSeconds(0.5f);
+        star2.enabled = true;
+        StartCoroutine(WaitThirdStar());
+    }
+    IEnumerator WaitThirdStar()
+    {
+        yield return new WaitForSeconds(0.5f);
+        star3.enabled = true;
     }
 }

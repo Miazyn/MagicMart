@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        moneyAmount = 10000;
         manager = GameManager.Instance;
 
         //CURSOR
@@ -65,6 +64,7 @@ public class Player : MonoBehaviour
         hotspot = Vector2.zero;
 
         Cursor.SetCursor(cursorNormal, hotspot, cursorMode);
+        SetMoneyAmount(10000);
     }
 
 
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
 
     public bool CanBuy(int _buyPrice)
     {
-        if (moneyAmount > _buyPrice) return true;
+        if (moneyAmount >= _buyPrice) return true;
         return false;
     }
 
@@ -97,8 +97,6 @@ public class Player : MonoBehaviour
             onMoneyChangedCallback.Invoke();
         }
     }
-
-
     void OnApplicationQuit()
     {
         SO_Inventory saveInventory = Resources.Load<SO_Inventory>("Inventory/SavedInventory");

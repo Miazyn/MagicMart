@@ -10,7 +10,6 @@ public class SO_Inventory : ScriptableObject
     public List<InventorySlot> inventoryItems = new List<InventorySlot>();
     public bool AddItem(SO_Ingredient _item, int _amount)
     {
-
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             if (inventoryItems[i].item == _item)
@@ -21,7 +20,6 @@ public class SO_Inventory : ScriptableObject
         }
         inventoryItems.Add(new InventorySlot(_item, _amount));
         return true;
-
     }
 
     public (bool, int) FindItemInList(SO_Ingredient _ingredient)

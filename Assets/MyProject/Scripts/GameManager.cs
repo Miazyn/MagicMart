@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void OnStateChanged();
     public OnStateChanged onStateChangedCallback;
+    
+    public delegate void OnNextCustomer();
+    public OnNextCustomer onNextCustomerCallback;
     public enum GameState
     {
         DayStart,
@@ -88,6 +91,11 @@ public class GameManager : MonoBehaviour
         
         if (curState == GameState.DialogState)
         {
+            if(onNextCustomerCallback != null)
+            {
+                onNextCustomerCallback.Invoke();
+            }
+
             dialogueManager = DialogueManager.instance;
             if (counter < CustomerCount)
             {
