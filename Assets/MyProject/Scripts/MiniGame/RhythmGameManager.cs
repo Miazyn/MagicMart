@@ -120,7 +120,6 @@ public class RhythmGameManager : MonoBehaviour
 
     IEnumerator BreathTime()
     {
-        Debug.Log("Your final Score is: " + manager.RhythymGameScore);
 
         sparkleEffect1.SetActive(true);
         sparkleEffect2.SetActive(true);

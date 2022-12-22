@@ -17,4 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf677f62a1ed81543b4c8ef695069282, type: 2}
   unlockDay: 0
   unlockQuest: {fileID: 0}
-  voice: {fileID: 11400000, guid: 4eaf3067fa8fd7e46b8ccd1de845f1f1, type: 2}
+  voice: {fileID: 11400000, guid: de8a3d9c2b45df64fa83b15d52fb601a, type: 2}

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    Player player;
     //[Header("Dialog")]
     //DialogueManager dialogManager;
     //[SerializeField] SO_Dialog currentDialog;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public float RhythymGameScore;
     public float CookingGameScore;
     public float OverallScore;
+    [SerializeField] AudioSource moneySound;
 
     [Header("All Corelated Scripts")]
     [SerializeField] DialogueManager dialogueManager;
@@ -34,6 +36,9 @@ public class GameManager : MonoBehaviour
     
     public delegate void OnNextCustomer();
     public OnNextCustomer onNextCustomerCallback;
+
+    public delegate void OnDayChanged();
+    public OnDayChanged onDayChangedCallback;
     public enum GameState
     {
         DayStart,
@@ -43,7 +48,8 @@ public class GameManager : MonoBehaviour
         MiniRhythmGameState,
         ShoppingState,
         IdleState,
-        EvaluationState
+        EvaluationState,
+        AfterDialog
     }
 
     [SerializeField] public GameState curState { get; private set; }
@@ -67,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        player = Player.instance;
         gameplayMusic = GetComponent<AudioSource>();
         dialogueManager = DialogueManager.instance;
         curState = GameState.DayStart;
@@ -84,6 +91,13 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameStateAction()
     {
+        if (curState == GameState.DayStart) 
+        {
+            if (onDayChangedCallback != null)
+            {
+                onDayChangedCallback.Invoke();
+            }
+        }
         if (curState == GameState.StartState)
         {
             StartCoroutine(CustomerSpacingDelay());
@@ -99,13 +113,15 @@ public class GameManager : MonoBehaviour
             dialogueManager = DialogueManager.instance;
             if (counter < CustomerCount)
             {
+                CurrentRecipe = Customers[counter].quests[0].ReqRecipe;
                 dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
-
             }
             else
             {
                 //END OF THE DAY
                 Debug.Log("End of the day");
+                day++;
+                ChangeGameState(GameState.DayStart);
             }
         }
 
@@ -113,7 +129,6 @@ public class GameManager : MonoBehaviour
         if (curState == GameState.MiniRhythmGameState)
         {
             //StartCoroutine(TurnOffMusic());
-
 
         }
         if (curState == GameState.CookingState)
@@ -129,14 +144,50 @@ public class GameManager : MonoBehaviour
         #endregion
         if (curState == GameState.EvaluationState)
         {
-            gameplayMusic.volume = originalVolume;
-            dialogueManager = DialogueManager.instance;
+            Debug.Log("Eval");
+            ResetMusic();
             Evaluation();
+        }
+        if(curState == GameState.AfterDialog)
+        {
+            dialogueManager = DialogueManager.instance;
+
+            moneySound = GameObject.Find("MoneySound").GetComponent<AudioSource>();
+            player.SetMoneyAmount(MoneyForPlayer());
+            moneySound.Play();
+            AfterQuestDialog();
         }
         
     }
 
+    int MoneyForPlayer()
+    {
+        int _money = 0;
 
+        if(OverallScore > 80)
+        {
+            _money = CurrentRecipe.perfectSellPrice;
+        }
+        else if(OverallScore > 50)
+        {
+            _money = CurrentRecipe.goodSellPrice;
+
+        }
+        else if(OverallScore > 20)
+        {
+            _money = CurrentRecipe.normalSellPrice;
+        }
+        else
+        {
+            _money = CurrentRecipe.terribleSellPrice;
+        }
+        return _money;
+    }
+
+    public void ResetMusic()
+    {
+        gameplayMusic.volume = originalVolume;
+    }
     IEnumerator CustomerSpacingDelay()
     {
         yield return new WaitForSeconds(TimeBtwCustomers);
@@ -154,7 +205,7 @@ public class GameManager : MonoBehaviour
         OverallScore = overall;
         Debug.Log("OVERALL SCORE: " + OverallScore);
 
-        AfterQuestDialog();
+        //AfterQuestDialog();
     }
 
     public void AfterQuestDialog()

@@ -4,58 +4,56 @@ using UnityEngine;
 
 public class StarAssigner : MonoBehaviour
 {
-    [SerializeField] Animator star1;
-    [SerializeField] Animator star2;
-    [SerializeField] Animator star3;
+    [SerializeField] GameObject star1;
+    [SerializeField] GameObject star2;
+    [SerializeField] GameObject star3;
 
     GameManager manager;
     float score;
 
+    bool IsJudging = false;
+    [SerializeField] SceneMana sceneMana;
     void Start()
     {
         manager = GameManager.Instance;
+
+        manager.ChangeGameState(GameManager.GameState.EvaluationState);
         score = manager.OverallScore;
 
-        Judge();
+        StartCoroutine(Judge());
     }
 
-    void Judge()
+    void Update()
     {
+        if (IsJudging)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                sceneMana.LoadNextScene("MainStore");
+            }
+        }
+        
+    }
+
+    IEnumerator Judge()
+    {
+        yield return new WaitForSeconds(1f);
         if(score > 80)
         {
-            star1.enabled = true;
-            star2.enabled = true;
-            star3.enabled = true;
+            star1.GetComponent<Animator>().enabled = true;
+            star2.GetComponent<Animator>().enabled = true;
+            star3.GetComponent<Animator>().enabled = true;
         }
         else if(score > 50)
         {
-            star1.enabled = true;
-            star2.enabled = true;
+            star1.GetComponent<Animator>().enabled = true;
+            star2.GetComponent<Animator>().enabled = true;
         }
         else if(score > 20)
         {
-            star1.enabled = true;
+            star1.GetComponent<Animator>().enabled = true;
         }
-
-        //StartCoroutine(WaitFirstStar());
+        IsJudging = true;
     }
 
-    IEnumerator WaitFirstStar()
-    {
-        yield return new WaitForSeconds(1.5f);
-        star1.enabled = true;
-        StartCoroutine(WaitSecondStar());
-    }
-
-    IEnumerator WaitSecondStar()
-    {
-        yield return new WaitForSeconds(0.5f);
-        star2.enabled = true;
-        StartCoroutine(WaitThirdStar());
-    }
-    IEnumerator WaitThirdStar()
-    {
-        yield return new WaitForSeconds(0.5f);
-        star3.enabled = true;
-    }
 }

@@ -12,6 +12,8 @@ public class MainStoreUpdating : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerMoney;
     [SerializeField] TextMeshProUGUI customersleft;
 
+    [SerializeField] TextMeshProUGUI dayNum;
+
     void Start()
     {
         player = Player.instance;
@@ -19,8 +21,15 @@ public class MainStoreUpdating : MonoBehaviour
 
         player.onMoneyChangedCallback += UpdateMoney;
         manager.onNextCustomerCallback += UpdateUI;
+        manager.onDayChangedCallback += UpdateDayUI;
         UpdateMoney();
         UpdateUI();
+        UpdateDayUI();
+    }
+
+    void UpdateDayUI()
+    {
+        dayNum.text = manager.day.ToString();
     }
 
     void UpdateUI()
@@ -37,5 +46,6 @@ public class MainStoreUpdating : MonoBehaviour
     {
         player.onMoneyChangedCallback -= UpdateMoney;
         manager.onNextCustomerCallback -= UpdateUI;
+        manager.onDayChangedCallback -= UpdateDayUI;
     }
 }

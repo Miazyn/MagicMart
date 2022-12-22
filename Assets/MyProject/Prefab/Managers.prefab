@@ -54,6 +54,7 @@ MonoBehaviour:
   CookingGameScore: 0
   OverallScore: 0
   dialogueManager: {fileID: 0}
+  TimeBtwCustomers: 2
 --- !u!114 &188653861965027704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: Aussie
+  StoreName: Magic Mart
   inventory: {fileID: 11400000, guid: 0d3c3f20c9df0fc4fb1c593a22519adf, type: 2}
   CurrentCookingQuest: {fileID: 0}
   CreatedFood: {fileID: 0}

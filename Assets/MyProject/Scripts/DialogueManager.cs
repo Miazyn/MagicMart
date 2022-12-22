@@ -66,6 +66,10 @@ public class DialogueManager : MonoBehaviour
         {
             manager.ChangeGameState(GameManager.GameState.EvaluationState);
         }
+        if (manager.curState == GameManager.GameState.EvaluationState)
+        {
+            manager.ChangeGameState(GameManager.GameState.AfterDialog);
+        }
     }
     private void WarnCheck()
     {
@@ -87,7 +91,6 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("No Default SpriteBox is defined.");
         }
     }
-
     public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc, SO_Recipe _questRecipe)
     {
         allTypeClips = _dialogNpc.voice.voiceClips;
@@ -119,7 +122,6 @@ public class DialogueManager : MonoBehaviour
             
         }
     }
-
     void TextReceived(SO_Dialog dialogue)
     {
         DisplayCharacterSprite(dialogue);
@@ -157,7 +159,6 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
-
     void EndDialog()
     {
         Debug.LogError("END");
@@ -173,7 +174,7 @@ public class DialogueManager : MonoBehaviour
         {
             manager.ChangeGameState(GameManager.GameState.IdleState);
         }
-        if (manager.curState == GameManager.GameState.EvaluationState)
+        if (manager.curState == GameManager.GameState.AfterDialog)
         {
             manager.counter++;
             manager.ChangeGameState(GameManager.GameState.StartState);
@@ -182,7 +183,6 @@ public class DialogueManager : MonoBehaviour
         shopButton.SetActive(true);
         playerMoney.SetActive(true);
     }
-
     IEnumerator TypeEffect(string line)
     {
         typerRunning = true;
@@ -206,7 +206,6 @@ public class DialogueManager : MonoBehaviour
         }
         typerRunning = false;
     }
-
     void StopTypeEffect(SO_Dialog dialogue)
     {
         if (displayCoroutine != null)
@@ -225,7 +224,6 @@ public class DialogueManager : MonoBehaviour
             EndDialog();
         }
     }
-
     private string CleanString(string lineToClean)
     {
         string line = lineToClean;
@@ -239,7 +237,6 @@ public class DialogueManager : MonoBehaviour
 
         return line;
     }
-
     void DisplayCharacterSprite(SO_Dialog dialogue)
     {
         if (dialogue.keyForCharacterDisplay == null && dialogue.spriteForCharacterDisplay != null)
@@ -274,7 +271,6 @@ public class DialogueManager : MonoBehaviour
 
         }
     }
-    
     void DisplayCharacterName(SO_Dialog dialogue)
     {
         if (dialogue.keyForName == null && dialogue.nameOfSpeaker != null)
@@ -336,7 +332,6 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-
     string CheckStringForLineBreak(string line)
     {
         char[] a = line.ToCharArray();

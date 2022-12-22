@@ -11,6 +11,11 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     [SerializeField] GameObject glowEffect;
     Animator glowAnimator;
 
+    [Header("Anims")]
+    [SerializeField] GameObject ManaAnim;
+    [SerializeField] GameObject PowerAnim;
+    [SerializeField] GameObject HealthAnim;
+
     [SerializeField] List<SO_Ingredient> ingredients = new List<SO_Ingredient>();
     [SerializeField] int ingredientsLimit = 10;
     [SerializeField] TextMeshProUGUI currentIngredients;

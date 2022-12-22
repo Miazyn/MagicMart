@@ -15,7 +15,7 @@ public class ModeTransitions : MonoBehaviour
     {
         manager = GameManager.Instance;
         StartCoroutine(LateStart());
-
+        manager.ResetMusic();
         //DISPLAY CORRECT ANIM
         if(manager.curState == GameManager.GameState.IdleState)
         {
@@ -57,7 +57,7 @@ public class ModeTransitions : MonoBehaviour
             if (manager.curState == GameManager.GameState.MiniRhythmGameState)
             {
                 //Into Evaluation
-                sceneMana.LoadNextScene("MainStore");
+                sceneMana.LoadNextScene("Score");
             }
         }
     }

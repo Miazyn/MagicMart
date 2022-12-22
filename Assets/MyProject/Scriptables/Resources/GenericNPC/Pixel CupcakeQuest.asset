@@ -17,6 +17,6 @@ MonoBehaviour:
   CookedFood: {fileID: 0}
   _IsFullFilled: 0
   QuestDialogBeforeCompletion:
-  - {fileID: 11400000, guid: fd27c1395c735e949b30ae8e381e0caa, type: 2}
+  - {fileID: 11400000, guid: c547de3f693672a4abfb23ef9cbcc0c8, type: 2}
   QuestDialogAfterCompletion:
-  - {fileID: 11400000, guid: 23a7f55480aedaf45a36f9e42db69957, type: 2}
+  - {fileID: 11400000, guid: 28867db57aac9144a9ccac30ebff459d, type: 2}

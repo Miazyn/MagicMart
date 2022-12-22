@@ -27,8 +27,6 @@ public class Player : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    public delegate void OnHotbarScroll();
-    public OnItemChanged onHotbarScrollCallback;
 
     public delegate void OnInventoryToggle();
     public OnItemChanged onInventoryToggleCallback;
@@ -76,11 +74,41 @@ public class Player : MonoBehaviour
             {
                 manager.CheckGameStateAction();
             }
-            if(manager.curState == GameManager.GameState.EvaluationState)
+            if(manager.curState == GameManager.GameState.AfterDialog)
             {
                 manager.AfterQuestDialog();
             }
         }    
+    }
+
+    public bool CanCookRecipe(SO_Recipe _recipe)
+    {
+        int length = _recipe.ingredients.Length;
+        int counter = 0;
+        foreach (var ingredient in _recipe.ingredients)
+        {
+            if (inventory.FindItemInList(ingredient).Item1)
+            {
+                if (inventory.inventoryItems[inventory.FindItemInList(ingredient).Item2].GetAmount() > 0)
+                {
+                    Debug.Log("Player has enough of ingredient.");
+                    counter++;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if(counter == length)
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool CanBuy(int _buyPrice)
