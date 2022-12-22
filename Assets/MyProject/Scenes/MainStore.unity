@@ -3848,7 +3848,7 @@ RectTransform:
   m_Children:
   - {fileID: 2092630359}
   m_Father: {fileID: 2014273510}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4276,8 +4276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726365c6226a6c647a105853ab66aaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minCustomers: 5
-  maxCustomers: 7
+  minCustomers: 1
+  maxCustomers: 1
   blueprint: {fileID: 11400000, guid: 228fc6746cdc99a418e96cbbbac865b9, type: 2}
   mainChars:
   - {fileID: 11400000, guid: 01c556b3e0fabbd49bc24a7aca34d345, type: 2}
@@ -4555,8 +4555,8 @@ RectTransform:
   - {fileID: 1384091412}
   - {fileID: 2128197631}
   - {fileID: 329983782}
-  - {fileID: 1481126797}
   - {fileID: 1822137700}
+  - {fileID: 1481126797}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

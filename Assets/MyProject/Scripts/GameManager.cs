@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     {
         if (curState == GameState.DayStart) 
         {
+            counter = 0;
             if (onDayChangedCallback != null)
             {
                 onDayChangedCallback.Invoke();
