@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     //[Header("Dialog")]
     //DialogueManager dialogManager;
     //[SerializeField] SO_Dialog currentDialog;
-    public int counter = 0;
+    public int CustomerCounter = 0;
 
     public SO_NPC[] Customers;
     public SO_Recipe CurrentRecipe;
     public int day = 1;
-    public int CustomerCount;
+    public int ExpectedCustomerAmount;
 
     [Header("Scores")]
     public float RhythymGameScore;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     {
         if (curState == GameState.DayStart) 
         {
-            counter = 0;
+            CustomerCounter = 0;
             if (onDayChangedCallback != null)
             {
                 onDayChangedCallback.Invoke();
@@ -112,10 +112,10 @@ public class GameManager : MonoBehaviour
             }
 
             dialogueManager = DialogueManager.instance;
-            if (counter < CustomerCount)
+            if (CustomerCounter < ExpectedCustomerAmount)
             {
-                CurrentRecipe = Customers[counter].quests[0].ReqRecipe;
-                dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogBeforeCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
+                CurrentRecipe = Customers[CustomerCounter].quests[0].ReqRecipe;
+                dialogueManager.SetUpDialog(Customers[CustomerCounter].quests[0].QuestDialogBeforeCompletion[0], Customers[CustomerCounter], Customers[CustomerCounter].quests[0].ReqRecipe);
             }
             else
             {
@@ -127,21 +127,21 @@ public class GameManager : MonoBehaviour
         }
 
         #region[Inactive Checks]
-        if (curState == GameState.MiniRhythmGameState)
-        {
-            //StartCoroutine(TurnOffMusic());
+        //if (curState == GameState.MiniRhythmGameState)
+        //{
+        //    //StartCoroutine(TurnOffMusic());
 
-        }
-        if (curState == GameState.CookingState)
-        {
-        }
-        if (curState == GameState.ShoppingState)
-        {
-        }
-        if (curState == GameState.IdleState)
-        {
+        //}
+        //if (curState == GameState.CookingState)
+        //{
+        //}
+        //if (curState == GameState.ShoppingState)
+        //{
+        //}
+        //if (curState == GameState.IdleState)
+        //{
 
-        }
+        //}
         #endregion
         if (curState == GameState.EvaluationState)
         {
@@ -163,26 +163,24 @@ public class GameManager : MonoBehaviour
 
     int MoneyForPlayer()
     {
-        int _money = 0;
-
         if(OverallScore > 80)
         {
-            _money = CurrentRecipe.perfectSellPrice;
+            return CurrentRecipe.perfectSellPrice;
         }
-        else if(OverallScore > 50)
+
+        if(OverallScore > 50)
         {
-            _money = CurrentRecipe.goodSellPrice;
+            return CurrentRecipe.goodSellPrice;
 
         }
-        else if(OverallScore > 20)
+
+        if(OverallScore > 20)
         {
-            _money = CurrentRecipe.normalSellPrice;
+            return CurrentRecipe.normalSellPrice;
         }
-        else
-        {
-            _money = CurrentRecipe.terribleSellPrice;
-        }
-        return _money;
+
+        return CurrentRecipe.terribleSellPrice;
+
     }
 
     public void ResetMusic()
@@ -211,7 +209,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterQuestDialog()
     {
-        dialogueManager.SetUpDialog(Customers[counter].quests[0].QuestDialogAfterCompletion[0], Customers[counter], Customers[counter].quests[0].ReqRecipe);
+        dialogueManager.SetUpDialog(Customers[CustomerCounter].quests[0].QuestDialogAfterCompletion[0], Customers[CustomerCounter], Customers[CustomerCounter].quests[0].ReqRecipe);
     }
 
 }

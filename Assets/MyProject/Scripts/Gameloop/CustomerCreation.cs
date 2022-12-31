@@ -88,7 +88,7 @@ public class CustomerCreation : MonoBehaviour
 
         yield return null;
         Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
-        gameManager.CustomerCount = customerAmount;
+        gameManager.ExpectedCustomerAmount = customerAmount;
         gameManager.ChangeGameState(GameManager.GameState.StartState);
     }
 

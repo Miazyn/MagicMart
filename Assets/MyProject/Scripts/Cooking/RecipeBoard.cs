@@ -18,7 +18,7 @@ public class RecipeBoard : MonoBehaviour
         manager = GameManager.Instance;
         if (manager.Customers.Length > 0)
         {
-            recipe = manager.Customers[manager.counter].quests[0].ReqRecipe;
+            recipe = manager.Customers[manager.CustomerCounter].quests[0].ReqRecipe;
         }
 
         CreateRecipeBoard();

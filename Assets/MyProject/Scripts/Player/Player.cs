@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
-    public string PlayerName = "Aussie";
+    public string PlayerName = "Aubrey";
     public string StoreName = "Magic Mart";
 
     public SO_Inventory inventory;
@@ -87,22 +87,18 @@ public class Player : MonoBehaviour
         int counter = 0;
         foreach (var ingredient in _recipe.ingredients)
         {
-            if (inventory.FindItemInList(ingredient).Item1)
-            {
-                if (inventory.inventoryItems[inventory.FindItemInList(ingredient).Item2].GetAmount() > 0)
-                {
-                    Debug.Log("Player has enough of ingredient.");
-                    counter++;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
+            if (!inventory.FindItemInList(ingredient).Item1)
             {
                 return false;
             }
+            if (inventory.inventoryItems[inventory.FindItemInList(ingredient).Item2].GetAmount() <= 0)
+            {
+                return false;
+            }
+
+            Debug.Log("Player has enough of ingredient.");
+            counter++;
+
         }
         if(counter == length)
         {

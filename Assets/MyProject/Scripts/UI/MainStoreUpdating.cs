@@ -34,7 +34,7 @@ public class MainStoreUpdating : MonoBehaviour
 
     void UpdateUI()
     {
-        customersleft.SetText("" + (manager.CustomerCount - manager.counter));
+        customersleft.SetText("" + (manager.ExpectedCustomerAmount - manager.CustomerCounter));
     }
 
     void UpdateMoney()

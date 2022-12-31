@@ -176,7 +176,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (manager.curState == GameManager.GameState.AfterDialog)
         {
-            manager.counter++;
+            manager.CustomerCounter++;
             manager.ChangeGameState(GameManager.GameState.StartState);
         }
         cookButton.SetActive(true);
