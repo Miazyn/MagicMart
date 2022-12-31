@@ -161,7 +161,6 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialog()
     {
-        Debug.LogError("END");
 
         //SET INACTIVE
         textBoxObject.SetActive(false);

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Data
 {
-    int money;
+    public int money;
 
     public Data(Player player)
     {

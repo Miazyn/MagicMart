@@ -78,7 +78,18 @@ public class Player : MonoBehaviour
             {
                 manager.AfterQuestDialog();
             }
-        }    
+        }
+
+
+        //TEMP
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SaveData();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadData();
+        }
     }
 
     public bool CanCookRecipe(SO_Recipe _recipe)
@@ -121,18 +132,22 @@ public class Player : MonoBehaviour
             onMoneyChangedCallback.Invoke();
         }
     }
+
+    void LoadData()
+    {
+        Data _data = SaveSystem.LoadData();
+
+        Debug.LogWarning("Player last had: " +  _data.money + " Coins.");
+    }
+
+    void SaveData()
+    {
+        SaveSystem.SaveData(this);
+        Debug.Log("Saved Data");
+    }
+
     void OnApplicationQuit()
     {
-        SO_Inventory saveInventory = Resources.Load<SO_Inventory>("Inventory/SavedInventory");
-
-        saveInventory.inventoryItems.Clear();
-
-        foreach(var item in inventory.inventoryItems)
-        {
-            saveInventory.AddItem(item.item, item.GetAmount());
-        }
-
-        Debug.Log("Saved the inventory");
-        //inventory.inventoryItems.Clear();
+        SaveSystem.SaveData(this);
     }
 }

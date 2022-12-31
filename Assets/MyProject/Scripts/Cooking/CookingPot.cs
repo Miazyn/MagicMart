@@ -175,16 +175,16 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     bool CheckForCookIngredientOnPot(PointerEventData _eventData)
     {
-        if (_eventData.pointerDrag != null)
+        if (_eventData.pointerDrag == null)
+        { 
+            return false; 
+        }
+        if (_eventData.pointerDrag.GetComponent<CookIngredient>() == null)
         {
-            if (_eventData.pointerDrag.GetComponent<CookIngredient>() != null)
-            {
-                return true;
-            }
             return false;
         }
 
-        return false;
+        return true;
     }
 
     bool IngredientHasBeenAddedBefore()
@@ -224,79 +224,19 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
    
     float Scoring()
     {
-        float finalManaScore = 0f;
         int manaDiff = Mathf.Abs(currentRecipe.mana - curMana);
-
-        if (manaDiff != 0)
-        {
-            float manaPercentageOff = (manaDiff / (currentRecipe.mana / 100.0f));
-            if (manaPercentageOff > 100)
-            {
-                finalManaScore = 100 - manaPercentageOff;
-            }
-            else if (manaPercentageOff < 0)
-            {
-                finalManaScore = manaPercentageOff;
-            }
-            else
-            {
-                finalManaScore = 100 - manaPercentageOff;
-            }
-        }
-        else
-        {
-            finalManaScore = 100.0f;
-        }
+        float finalManaScore = CalculateFinalScore(manaDiff);
 
         int healthDiff = Mathf.Abs(currentRecipe.health - curHealth);
-        float finalHealthScore = 0f;
-        if (healthDiff != 0)
-        {
-            float healthPercentageOff = (healthDiff / (currentRecipe.health / 100.0f));
-
-            if (healthPercentageOff > 100)
-            {
-                finalHealthScore = 100 - healthPercentageOff;
-            }
-            else if (healthPercentageOff < 0)
-            {
-                finalHealthScore = healthPercentageOff;
-            }
-            else
-            {
-                finalHealthScore = 100 - healthPercentageOff;
-            }
-        }
-        else
-        {
-            finalHealthScore = 100.0f;
-        }
-
+        float finalHealthScore = CalculateFinalScore(healthDiff);
+        
         int powerDiff = Mathf.Abs(currentRecipe.power - curPower);
-        float finalPowerScore = 0f;
-        if (powerDiff != 0)
-        {
-            float powerPercentageOff = (powerDiff / (currentRecipe.power / 100.0f));
-            
-            if (powerPercentageOff > 100)
-            {
-                finalPowerScore = 100 - powerPercentageOff;
-            }
-            else if (powerPercentageOff < 0)
-            {
-                finalPowerScore = powerPercentageOff;
-            }
-            else
-            {
-                finalPowerScore = 100 - powerPercentageOff;
-            }
-        }
-        else
-        {
-            finalPowerScore = 100;
-        }
+        float finalPowerScore = CalculateFinalScore(powerDiff);
+        
+
         float maxScore = 300.0f;
         float onepercent = maxScore / 100.0f;
+
         if (currentRecipe.mana < 0)
         {
             finalManaScore = Mathf.Abs(finalManaScore);
@@ -325,6 +265,26 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         //    "\nMana: " + curMana + "/" + currentRecipe.mana + "Score: " + finalManaScore +
         //    "\nPower: " + curPower + "/" + currentRecipe.power + "Score: " + finalPowerScore +
         //    "\nHealth: " + curHealth + "/" + currentRecipe.health + "Score: " + finalHealthScore);
+    }
+
+    float CalculateFinalScore(float _scoreDifference)
+    {
+        if (_scoreDifference <= 0)
+        {
+            return 100;
+        }
+        float _scorePercentage = (_scoreDifference / (currentRecipe.power / 100.0f));
+
+        if (_scorePercentage > 100)
+        {
+            return 100 - _scorePercentage;
+        }
+
+        if (_scorePercentage < 0)
+        {
+            return _scorePercentage;
+        }
+        return 100 - _scorePercentage;
     }
 
     public void StartCooking()
