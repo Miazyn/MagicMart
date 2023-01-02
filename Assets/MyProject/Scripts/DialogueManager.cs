@@ -336,7 +336,6 @@ public class DialogueManager : MonoBehaviour
         char[] a = line.ToCharArray();
         int charCounter = 0;
         int curCheck = 0;
-        int lastCheck = 0;
 
         List<int> spaces = new List<int>();
 

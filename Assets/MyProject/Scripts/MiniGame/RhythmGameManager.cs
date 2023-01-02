@@ -45,7 +45,7 @@ public class RhythmGameManager : MonoBehaviour
 
     [SerializeField] SceneMana sceneMana;
 
-    bool IsGameFinished = false;
+    //bool IsGameFinished = false;
 
     [SerializeField] GameObject Panel;
 
@@ -106,7 +106,7 @@ public class RhythmGameManager : MonoBehaviour
 
         if(NotesLeft == 0)
         {
-            IsGameFinished = true;
+            //IsGameFinished = true;
 
             for(int i = 0; i < noteSpawn.spawnedNotes.Count; i++)
             {

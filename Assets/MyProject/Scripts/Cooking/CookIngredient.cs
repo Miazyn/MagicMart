@@ -29,7 +29,6 @@ public class CookIngredient : MonoBehaviour, IDropHandler, IBeginDragHandler, IE
 
     bool IsDragged = false;
 
-    bool IsOnSelf = false;
 
     private void Awake()
     {

@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-
     public delegate void OnInventoryToggle();
     public OnItemChanged onInventoryToggleCallback;
     void Awake()

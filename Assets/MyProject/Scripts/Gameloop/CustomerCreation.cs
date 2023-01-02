@@ -13,7 +13,6 @@ public class CustomerCreation : MonoBehaviour
     [SerializeField] int maxCustomers = 7;
 
     int customerAmount;
-    int dayCounter;
 
     [SerializeField] SO_NPC blueprint;
     [SerializeField] SO_NPC[] mainChars;
@@ -39,7 +38,6 @@ public class CustomerCreation : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        dayCounter = 1;
         player = Player.instance;
         playerInventory = player.inventory;
 
