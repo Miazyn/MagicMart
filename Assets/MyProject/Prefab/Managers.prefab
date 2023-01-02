@@ -45,14 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7552a1f9885164e4ba405cc7e1c5fe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter: 0
+  CustomerCounter: 0
   Customers: []
   CurrentRecipe: {fileID: 0}
   day: 1
-  CustomerCount: 0
+  ExpectedCustomerAmount: 0
   RhythymGameScore: 0
   CookingGameScore: 0
   OverallScore: 0
+  moneySound: {fileID: 0}
   dialogueManager: {fileID: 0}
   TimeBtwCustomers: 2
 --- !u!114 &188653861965027704

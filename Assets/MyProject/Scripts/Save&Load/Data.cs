@@ -15,12 +15,13 @@ public class Data
         money = player.moneyAmount;
         IngredientAmount = new int[player.inventory.inventoryItems.Count];
         IngredientName = new string[player.inventory.inventoryItems.Count];
-        int counter = 0;
+
+        int _counter = 0;
         foreach (var item in player.inventory.inventoryItems)
         {
-            IngredientName[counter] = item.item.ingredientName;
-            IngredientAmount[counter] = item.amount;
-            counter++;
+            IngredientName[_counter] = item.item.ingredientName;
+            IngredientAmount[_counter] = item.amount;
+            _counter++;
         }
     }
 }
