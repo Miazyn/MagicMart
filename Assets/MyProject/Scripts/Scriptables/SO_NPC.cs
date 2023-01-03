@@ -12,4 +12,17 @@ public class SO_NPC : ScriptableObject
     public SO_Quest unlockQuest;
 
     public SO_Voice voice;
+
+    public NPCType Type;
+
+    public enum NPCType
+    {
+        Story,
+        Normal
+    }
+
+    void Awake()
+    {
+        Type = NPCType.Normal;    
+    }
 }

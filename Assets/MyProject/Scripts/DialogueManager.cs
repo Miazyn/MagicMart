@@ -118,8 +118,6 @@ public class DialogueManager : MonoBehaviour
             DisplayCharacterName(_currentDialog);
 
             StopTypeEffect(_currentDialog);
-
-            
         }
     }
     void TextReceived(SO_Dialog dialogue)

@@ -6,6 +6,9 @@ using UnityEngine;
 public class Data
 {
     public bool FirstTimePlayed;
+
+    public int[] QuestID;
+
     public int money;
     public int[] IngredientAmount;
     public string[] IngredientName;

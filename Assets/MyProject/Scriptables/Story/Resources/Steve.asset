@@ -20,3 +20,4 @@ MonoBehaviour:
   unlockDay: 0
   unlockQuest: {fileID: 0}
   voice: {fileID: 11400000, guid: 2a946b638ddc7a345812c81ef5c7a3c4, type: 2}
+  Type: 0

@@ -8,15 +8,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     Player player;
-    //[Header("Dialog")]
-    //DialogueManager dialogManager;
-    //[SerializeField] SO_Dialog currentDialog;
     public int CustomerCounter = 0;
 
     public SO_NPC[] Customers;
     public SO_Recipe CurrentRecipe;
-    public int day = 1;
+
+    public int day;
     public int ExpectedCustomerAmount;
+    public int questNPC; //Num of QuestNPC
+
+    public List<SO_Quest> storyQuests;
 
     [Header("Scores")]
     public float RhythymGameScore;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     float originalVolume;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        day = 1;
         player = Player.instance;
         gameplayMusic = GetComponent<AudioSource>();
         dialogueManager = DialogueManager.instance;
@@ -88,16 +90,11 @@ public class GameManager : MonoBehaviour
         }
         CheckGameStateAction();
     }
-
     public void CheckGameStateAction()
     {
-        if (curState == GameState.DayStart) 
+        if (curState == GameState.DayStart)
         {
-            CustomerCounter = 0;
-            if (onDayChangedCallback != null)
-            {
-                onDayChangedCallback.Invoke();
-            }
+            StartNextDay();
         }
         if (curState == GameState.StartState)
         {
@@ -119,9 +116,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                //END OF THE DAY
-                Debug.Log("End of the day");
-                day++;
                 ChangeGameState(GameState.DayStart);
             }
         }
@@ -161,6 +155,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    void StartNextDay()
+    {
+        day++;
+        CustomerCounter = 0;
+        if (onDayChangedCallback != null)
+        {
+            onDayChangedCallback.Invoke();
+        }
+    }
+
     int MoneyForPlayer()
     {
         if(OverallScore > 80)
@@ -182,7 +186,6 @@ public class GameManager : MonoBehaviour
         return CurrentRecipe.terribleSellPrice;
 
     }
-
     public void ResetMusic()
     {
         gameplayMusic.volume = originalVolume;
@@ -192,10 +195,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(TimeBtwCustomers);
         ChangeGameState(GameState.DialogState);
     }
-
     void Evaluation()
     {
-        //Create Food For Player with stats for npc
         float maxScore = 200;
 
         float playerScore = RhythymGameScore + CookingGameScore;
@@ -204,12 +205,29 @@ public class GameManager : MonoBehaviour
         OverallScore = overall;
         Debug.Log("OVERALL SCORE: " + OverallScore);
 
-        //AfterQuestDialog();
-    }
+        storyQuests.Add(Customers[CustomerCounter].quests[0]);
 
+    }
     public void AfterQuestDialog()
     {
         dialogueManager.SetUpDialog(Customers[CustomerCounter].quests[0].QuestDialogAfterCompletion[0], Customers[CustomerCounter], Customers[CustomerCounter].quests[0].ReqRecipe);
+    }
+
+    public void OnSave()
+    {
+        //QuestNpc = INT
+        //DayNum = Day
+        //StoryQuest
+        if(CustomerCounter == questNPC)
+        {
+            Debug.Log("On Quest Npc during save");
+        }
+        Debug.Log("On Day: " + day);
+        int[] _questID = new int[storyQuests.Count];
+        for(int i = 0; i <= storyQuests.Count - 1; i++)
+        {
+            _questID[i] = storyQuests[i].QuestID;
+        }
     }
 
 }

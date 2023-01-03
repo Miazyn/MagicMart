@@ -6,12 +6,8 @@ using UnityEngine;
 public class SO_Quest : ScriptableObject
 {
     public string QuestName;
+    public int QuestID;
     public SO_Recipe ReqRecipe;
     public SO_CookedFood CookedFood;
 
-    public bool _IsFullFilled;
-    public void SetQuestStatus(bool _isFullFilled)
-    {
-        _IsFullFilled = _isFullFilled;
-    }
 }

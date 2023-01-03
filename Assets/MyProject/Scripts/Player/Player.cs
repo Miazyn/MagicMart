@@ -79,7 +79,12 @@ public class Player : MonoBehaviour
             }
         }
 
+        DebugSave();
+        
+    }
 
+    void DebugSave()
+    {
         //TEMP
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -136,16 +141,21 @@ public class Player : MonoBehaviour
     {
         Data _data = SaveSystem.LoadData();
 
-        Debug.LogWarning("Player last had: " +  _data.money + " Coins.");
+        moneyAmount = _data.money;
 
+        LoadInventory(_data);
+    }
+
+    void LoadInventory(Data _data)
+    {
         SO_Ingredient[] _allIngredients = Resources.LoadAll<SO_Ingredient>("CookingIngredients");
         ClearInventory();
 
         for (int i = 0; i <= _data.IngredientAmount.Length - 1; i++)
         {
-            foreach(var _ingredient in _allIngredients)
+            foreach (var _ingredient in _allIngredients)
             {
-                if(_data.IngredientName[i] == _ingredient.ingredientName)
+                if (_data.IngredientName[i] == _ingredient.ingredientName)
                 {
                     inventory.AddItem(_ingredient, _data.IngredientAmount[i]);
                     Debug.Log("Added: " + _ingredient + " X: " + _data.IngredientAmount);

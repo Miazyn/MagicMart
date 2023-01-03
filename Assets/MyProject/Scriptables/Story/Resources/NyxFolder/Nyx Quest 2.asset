@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a1bab3b3e43e2e4b853821bff1b4c19, type: 3}
-  m_Name: 02Quest
+  m_Name: Nyx Quest 2
   m_EditorClassIdentifier: 
-  QuestName: 
-  ReqRecipe: {fileID: 11400000, guid: 41e02282040866e488b9451f600ad8c2, type: 2}
+  QuestName: Nyx Quest 2
+  QuestID: 4
+  ReqRecipe: {fileID: 11400000, guid: 47a589e7329b0ba438c96f5848bb78bc, type: 2}
   CookedFood: {fileID: 0}
   _IsFullFilled: 0
   QuestDialogBeforeCompletion:
-  - {fileID: 11400000, guid: fd2bd36c07de58c45a3df353b812cddd, type: 2}
-  - {fileID: 11400000, guid: ede7ed242ff06ba4abcedc8cc2c01fc2, type: 2}
-  - {fileID: 11400000, guid: 98e9e82d0b017014781d3057795d8802, type: 2}
+  - {fileID: 11400000, guid: 1787a73c602511d4eb3804b452ba57af, type: 2}
+  - {fileID: 11400000, guid: 111ea43bd45d17a478207717c9b5d980, type: 2}
+  - {fileID: 11400000, guid: 4f081747d4ba6b2469c812e0f28c31cc, type: 2}
   QuestDialogAfterCompletion:
-  - {fileID: 11400000, guid: 2d32318996c75044d80d5954d9d9b146, type: 2}
+  - {fileID: 11400000, guid: 999269cfe9e476e4bb190b483d3c5857, type: 2}
