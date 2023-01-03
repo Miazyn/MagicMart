@@ -82,7 +82,7 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     {
         CookIngredient currentIngredient = eventData.pointerDrag.GetComponent<CookIngredient>();
 
-        Debug.Log("Dropped: " + currentIngredient.ingredient.ingredientName);
+        //Debug.Log("Dropped: " + currentIngredient.ingredient.ingredientName);
 
         currentIngredient.IsOnTheke = true;
 
@@ -118,7 +118,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     private void AddToScore(CookIngredient currentIngredient)
     {
-        Debug.Log("Added to score");
         curHealth += currentIngredient.ingredient.health;
         curMana += currentIngredient.ingredient.mana;
         curPower += currentIngredient.ingredient.power;
@@ -291,8 +290,6 @@ public class CookingPot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     {
         if (currentRecipe.ContainsRecipe(ingredients))
         { 
-            Debug.Log("Cook the ingredient owo");
-            //OverallScore = GiveScore();
             OverallScore =  Scoring();
             manager.CookingGameScore = OverallScore;
             sceneMana.LoadNextScene("TransitionScene");

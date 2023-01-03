@@ -58,7 +58,6 @@ public class CustomerCreation : MonoBehaviour
             customerAmount = Random.Range(minCustomers, maxCustomers);
 
             npcOfTheDay = Random.Range(0, customerAmount);
-            gameManager.questNPC = npcOfTheDay;
             StartCoroutine(CreatingCustomers());
         }
     }

@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
 
     public int day;
     public int ExpectedCustomerAmount;
-    public int questNPC; //Num of QuestNPC
+    bool HasFinishedNPC;
 
-    public List<SO_Quest> storyQuests;
+    public int[] QuestID;
+    [SerializeField] List<SO_Quest> storyQuests;
 
     [Header("Scores")]
     public float RhythymGameScore;
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
 
     AudioSource gameplayMusic;
 
-    SO_CookedFood resultFood;
 
     public delegate void OnStateChanged();
     public OnStateChanged onStateChangedCallback;
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        HasFinishedNPC = false;
         day = 1;
         player = Player.instance;
         gameplayMusic = GetComponent<AudioSource>();
@@ -100,7 +101,6 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(CustomerSpacingDelay());
         }
-        
         if (curState == GameState.DialogState)
         {
             if(onNextCustomerCallback != null)
@@ -119,27 +119,8 @@ public class GameManager : MonoBehaviour
                 ChangeGameState(GameState.DayStart);
             }
         }
-
-        #region[Inactive Checks]
-        //if (curState == GameState.MiniRhythmGameState)
-        //{
-        //    //StartCoroutine(TurnOffMusic());
-
-        //}
-        //if (curState == GameState.CookingState)
-        //{
-        //}
-        //if (curState == GameState.ShoppingState)
-        //{
-        //}
-        //if (curState == GameState.IdleState)
-        //{
-
-        //}
-        #endregion
         if (curState == GameState.EvaluationState)
         {
-            Debug.Log("Eval");
             ResetMusic();
             Evaluation();
         }
@@ -152,19 +133,18 @@ public class GameManager : MonoBehaviour
             moneySound.Play();
             AfterQuestDialog();
         }
-        
     }
 
     void StartNextDay()
     {
         day++;
         CustomerCounter = 0;
+        HasFinishedNPC = false;
         if (onDayChangedCallback != null)
         {
             onDayChangedCallback.Invoke();
         }
     }
-
     int MoneyForPlayer()
     {
         if(OverallScore > 80)
@@ -203,31 +183,64 @@ public class GameManager : MonoBehaviour
         float overall = playerScore / (maxScore / 100);
 
         OverallScore = overall;
-        Debug.Log("OVERALL SCORE: " + OverallScore);
 
-        storyQuests.Add(Customers[CustomerCounter].quests[0]);
 
+        if (IsAnNPC())
+        {
+            storyQuests.Add(Customers[CustomerCounter].quests[0]);
+            HasFinishedNPC = true;
+        }
     }
     public void AfterQuestDialog()
     {
         dialogueManager.SetUpDialog(Customers[CustomerCounter].quests[0].QuestDialogAfterCompletion[0], Customers[CustomerCounter], Customers[CustomerCounter].quests[0].ReqRecipe);
     }
 
-    public void OnSave()
+    bool IsAnNPC()
     {
-        //QuestNpc = INT
-        //DayNum = Day
-        //StoryQuest
-        if(CustomerCounter == questNPC)
+        switch (Customers[CustomerCounter].NpcName)
         {
-            Debug.Log("On Quest Npc during save");
-        }
-        Debug.Log("On Day: " + day);
-        int[] _questID = new int[storyQuests.Count];
-        for(int i = 0; i <= storyQuests.Count - 1; i++)
-        {
-            _questID[i] = storyQuests[i].QuestID;
+            case "Claw":
+                return true;
+            case "Nyx":
+                return true;
+            case "Steve":
+                return true;
+            default:
+                return false;
         }
     }
 
+    public void OnSave()
+    {
+        //Debug.Log("Has finished an npc: " + HasFinishedNPC);
+
+        QuestID = new int[storyQuests.Count];
+        for(int i = 0; i < storyQuests.Count; i++)
+        {
+            QuestID[i] = storyQuests[i].QuestID;
+        }
+
+        storyQuests.Clear();
+    }
+
+    public void LoadData()
+    {
+        SO_Quest[] _allQuests = Resources.LoadAll<SO_Quest>("Story Quest");
+        Data _data = SaveSystem.LoadData();
+
+        day = _data.InGameDay;
+        storyQuests = new List<SO_Quest>();
+        for(int i = 0; i < _data.QuestID.Length; i++)
+        {
+            foreach(var _quest in _allQuests)
+            {
+                if(_quest.QuestID == _data.QuestID[i])
+                {
+                    storyQuests.Add(_quest);
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -144,6 +144,7 @@ public class Player : MonoBehaviour
         moneyAmount = _data.money;
 
         LoadInventory(_data);
+        manager.LoadData();
     }
 
     void LoadInventory(Data _data)
@@ -172,13 +173,14 @@ public class Player : MonoBehaviour
 
     void SaveData()
     {
-        SaveSystem.SaveData(this);
+        manager.OnSave();
+        SaveSystem.SaveData(this, manager);
         Debug.Log("Saved Data");
     }
 
     void OnApplicationQuit()
     {
-        SaveSystem.SaveData(this);
+        SaveSystem.SaveData(this, manager);
         ClearInventory();
     }
 }

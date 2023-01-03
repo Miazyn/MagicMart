@@ -8,12 +8,13 @@ public class Data
     public bool FirstTimePlayed;
 
     public int[] QuestID;
+    public int InGameDay;
 
     public int money;
     public int[] IngredientAmount;
     public string[] IngredientName;
 
-    public Data(Player player)
+    public Data(Player player, GameManager manager)
     {
         money = player.moneyAmount;
         IngredientAmount = new int[player.inventory.inventoryItems.Count];
@@ -26,5 +27,10 @@ public class Data
             IngredientAmount[_counter] = item.amount;
             _counter++;
         }
+
+        this.QuestID = new int[manager.QuestID.Length];
+        this.QuestID = manager.QuestID;
+
+        InGameDay = manager.day;
     }
 }

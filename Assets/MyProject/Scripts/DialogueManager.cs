@@ -102,7 +102,6 @@ public class DialogueManager : MonoBehaviour
         }
         else if(_currentDialog != lastDialog)
         {
-            Debug.LogError("Counter has been reset");
             counter = 0;
             lastDialog = _currentDialog;
         }
@@ -373,7 +372,6 @@ public class DialogueManager : MonoBehaviour
 
             if (addSpace)
             {
-                Debug.Log("Add break");
                 newString += "\n";
             }
             else
