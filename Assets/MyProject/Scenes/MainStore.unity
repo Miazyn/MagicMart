@@ -4280,9 +4280,9 @@ MonoBehaviour:
   maxCustomers: 1
   blueprint: {fileID: 11400000, guid: 228fc6746cdc99a418e96cbbbac865b9, type: 2}
   mainChars:
-  - {fileID: 11400000, guid: 01c556b3e0fabbd49bc24a7aca34d345, type: 2}
   - {fileID: 11400000, guid: f317c31dfee236742b8eeadcf2a2a15c, type: 2}
   - {fileID: 11400000, guid: a364267a77c682b46b90f9f7597c11d7, type: 2}
+  - {fileID: 11400000, guid: 01c556b3e0fabbd49bc24a7aca34d345, type: 2}
   allNPCs: []
   cookButton: {fileID: 1952913300}
   shopButton: {fileID: 329983781}

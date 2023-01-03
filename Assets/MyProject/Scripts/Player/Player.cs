@@ -44,16 +44,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        inventory = Resources.Load<SO_Inventory>("Inventory/Player Inventory");
-
-        if (Resources.Load<SO_Inventory>("Inventory/SavedInventory").inventoryItems.Count > 0)
-        {
-            foreach(var item in Resources.Load<SO_Inventory>("Inventory/SavedInventory").inventoryItems)
-            {
-                inventory.AddItem(item.item, item.GetAmount());
-            }
-        }
-
         manager = GameManager.Instance;
 
         //CURSOR
@@ -78,23 +68,8 @@ public class Player : MonoBehaviour
                 manager.AfterQuestDialog();
             }
         }
-
-        DebugSave();
-        
     }
 
-    void DebugSave()
-    {
-        //TEMP
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            SaveData();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadData();
-        }
-    }
 
     public bool CanCookRecipe(SO_Recipe _recipe)
     {
@@ -137,50 +112,40 @@ public class Player : MonoBehaviour
         }
     }
 
-    void LoadData()
+    public void LoadData()
     {
         Data _data = SaveSystem.LoadData();
 
         moneyAmount = _data.money;
 
         LoadInventory(_data);
-        manager.LoadData();
     }
-
     void LoadInventory(Data _data)
     {
         SO_Ingredient[] _allIngredients = Resources.LoadAll<SO_Ingredient>("CookingIngredients");
         ClearInventory();
 
-        for (int i = 0; i <= _data.IngredientAmount.Length - 1; i++)
+        for (int i = 0; i < _data.IngredientAmount.Length; i++)
         {
             foreach (var _ingredient in _allIngredients)
             {
                 if (_data.IngredientName[i] == _ingredient.ingredientName)
                 {
                     inventory.AddItem(_ingredient, _data.IngredientAmount[i]);
-                    Debug.Log("Added: " + _ingredient + " X: " + _data.IngredientAmount);
                     break;
                 }
             }
         }
     }
-
     void ClearInventory()
     {
         inventory.inventoryItems.Clear();
     }
-
-    void SaveData()
-    {
-        manager.OnSave();
-        SaveSystem.SaveData(this, manager);
-        Debug.Log("Saved Data");
-    }
-
     void OnApplicationQuit()
     {
-        SaveSystem.SaveData(this, manager);
-        ClearInventory();
+        if (SaveSystem.HasSaveData())
+        {
+            ClearInventory();
+        }
     }
 }

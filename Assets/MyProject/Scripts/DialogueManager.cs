@@ -121,9 +121,9 @@ public class DialogueManager : MonoBehaviour
     }
     void TextReceived(SO_Dialog dialogue)
     {
-        DisplayCharacterSprite(dialogue);
-        DisplayCharacterName(dialogue);
-        //nameText.text = dialogue.nameOfSpeaker;
+        npcSprite.GetComponent<Image>().sprite = DisplayCharacterSprite(dialogue);
+        nameText.SetText(DisplayCharacterName(dialogue));
+
         if (!typerRunning)
         {
             if (dialogue != null || dialogue.lines[counter] != "")
@@ -212,6 +212,7 @@ public class DialogueManager : MonoBehaviour
         string line = CleanString(dialogue.lines[counter - 1]);
 
         dialogueText.text = line;
+
         typerRunning = false;
 
         if (counter > dialogue.lines.Count)
@@ -233,100 +234,83 @@ public class DialogueManager : MonoBehaviour
 
         return line;
     }
-    void DisplayCharacterSprite(SO_Dialog dialogue)
+    Sprite DisplayCharacterSprite(SO_Dialog dialogue)
     {
         if (dialogue.keyForCharacterDisplay == null && dialogue.spriteForCharacterDisplay != null)
         {
-            Debug.LogWarning("Cannot have a sprite without a key number");
+            Debug.LogError($"Mising a sprite key for sprite in dialog {dialogue}");
+            return null;
         }
-
-        if (dialogue.keyForCharacterDisplay != null && dialogue.spriteForCharacterDisplay != null)
+        if (dialogue.keyForCharacterDisplay == null && dialogue.spriteForCharacterDisplay == null)
         {
-            for (int i = 0; i < dialogue.keyForCharacterDisplay.Count; i++)
-            {
-                if (dialogue.keyForCharacterDisplay[i] == counter)
-                {
-                    savedSprite = dialogue.spriteForCharacterDisplay[i];
-                    npcSprite.GetComponent<Image>().sprite = savedSprite;
-                    npc.SetActive(true);
-
-                    break;
-                }
-                else
-                {
-                    if (savedSprite)
-                    {
-                        npcSprite.GetComponent<Image>().sprite = savedSprite;
-                    }
-                    else
-                    {
-                        Debug.LogWarning("THERE IS NO SPRITE FOR THIS CHARACTER YET SET.");
-                    }
-                }
-            }
-
+            Debug.LogError($"No Sprite has been found for this dialog {dialogue}");
+            return null;
         }
+
+
+        for (int i = 0; i < dialogue.keyForCharacterDisplay.Count; i++)
+        {
+            if (dialogue.keyForCharacterDisplay[i] == counter)
+            {
+                savedSprite = dialogue.spriteForCharacterDisplay[i];
+                //npcSprite.GetComponent<Image>().sprite = savedSprite;
+                npc.SetActive(true);
+
+                return savedSprite;
+            }
+        }
+        if (savedSprite)
+        {
+            //npcSprite.GetComponent<Image>().sprite = savedSprite;
+            return savedSprite;
+        }
+
+
+        Debug.LogError($"No Sprite has been found for this dialog {dialogue}");
+        return null;
     }
-    void DisplayCharacterName(SO_Dialog dialogue)
+    string DisplayCharacterName(SO_Dialog dialogue)
     {
+        if (dialogue.keyForName == null && dialogue.nameOfSpeaker == null)
+        {
+            Debug.LogError($"No Name has been found on Dialog {dialogue}.");
+            return null;
+        }
+
         if (dialogue.keyForName == null && dialogue.nameOfSpeaker != null)
         {
-            if (dialogue.nameOfSpeaker[0] == "$playerName")
-            {
-                nameText.SetText(player.PlayerName);
-            }
-            else
-            {
-                nameText.SetText(dialogue.nameOfSpeaker[0]);
-            }
-            IsNpcLine = dialogue.nameOfSpeaker[0] != "$playerName" ? true : false;
-            
+            savedName = dialogue.nameOfSpeaker[0];
+
+            return CheckDisplayName();
         }
-        else
+
+        for (int i = 0; i < dialogue.keyForName.Count; i++)
         {
-            if (dialogue.keyForName != null && dialogue.nameOfSpeaker != null)
+            if (dialogue.keyForName[i] == counter)
             {
-                for (int i = 0; i < dialogue.keyForName.Count; i++)
-                {
-                    if (dialogue.keyForName[i] == counter)
-                    {
-                        savedName = dialogue.nameOfSpeaker[i];
-                        if (savedName == "$playerName")
-                        {
-                            nameText.SetText(player.PlayerName);
-                        }
-                        else
-                        {
-                            nameText.SetText(savedName);
-                        }
-
-                        IsNpcLine = savedName != "$playerName" ? true : false;
-
-                        break;
-                    }
-                    else
-                    {
-                        if (savedName != "")
-                        {
-                            if (savedName == "$playerName")
-                            {
-                                nameText.SetText(player.PlayerName);
-                            }
-                            else
-                            {
-                                nameText.SetText(savedName);
-                            }
-                            IsNpcLine = savedName != "$playerName" ? true : false;
-                        }
-                        else
-                        {
-                            Debug.LogWarning("THERE IS NO NAME FOR THIS CHARACTER YET SET.");
-                        }
-                    }
-                }
+                savedName = dialogue.nameOfSpeaker[i];
+                return CheckDisplayName();
 
             }
         }
+
+        if(savedName == "")
+        {
+            Debug.LogError($"No Name has been found on Dialog {dialogue}.");
+            return null;
+        }
+
+        return CheckDisplayName();
+    }
+    string CheckDisplayName()
+    {
+        IsNpcLine = savedName != "$playerName" ? true : false;
+
+        if (savedName == "$playerName")
+        {
+            return player.PlayerName;
+        }
+        return savedName;
     }
     string CheckStringForLineBreak(string line)
     {

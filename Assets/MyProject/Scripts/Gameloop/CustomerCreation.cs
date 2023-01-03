@@ -65,10 +65,6 @@ public class CustomerCreation : MonoBehaviour
 
     IEnumerator CreatingCustomers()
     {
-        //possibleNPC = CheckForCompatibleNPCQuest();
-        ////
-        //foreach(var item in possibleNPC) Debug.Log(item);
-        ////
         gameManager.Customers = new SO_NPC[customerAmount];
         for(int i = 0; i < customerAmount; i++)
         {
@@ -84,25 +80,9 @@ public class CustomerCreation : MonoBehaviour
 
 
         yield return null;
-        Debug.Log("Customers have been assigned" + "\nStart Dialog Status");
         gameManager.ExpectedCustomerAmount = customerAmount;
         gameManager.ChangeGameState(GameManager.GameState.StartState);
     }
-
-    //SO_NPC[] CheckForCompatibleNPCQuest()
-    //{
-    //    SO_NPC[] _Npcs = new SO_NPC[allNPCs.Length];
-
-    //    for(int i = 0; i < allNPCs.Length -1; i++)
-    //    {
-    //        if (player.CanCookRecipe(allNPCs[i].quests[0].ReqRecipe))
-    //        {
-    //            _Npcs[i] = allNPCs[i];
-    //        }
-    //    }
-
-    //    return _Npcs;
-    //}
 
     void EnableItems()
     {

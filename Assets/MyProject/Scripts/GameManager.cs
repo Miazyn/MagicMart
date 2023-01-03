@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     bool HasFinishedNPC;
 
     public int[] QuestID;
-    [SerializeField] List<SO_Quest> storyQuests;
+    public List<SO_Quest> storyQuests { get; private set; }
 
     [Header("Scores")]
     public float RhythymGameScore;
@@ -82,6 +82,22 @@ public class GameManager : MonoBehaviour
         curState = GameState.DayStart;
         originalVolume = gameplayMusic.volume;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SaveData();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (SaveSystem.HasSaveData())
+            {
+                LoadData();
+            }
+        }
+    }
+
     public void ChangeGameState(GameState _newState)
     {
         curState = _newState;
@@ -134,7 +150,6 @@ public class GameManager : MonoBehaviour
             AfterQuestDialog();
         }
     }
-
     void StartNextDay()
     {
         day++;
@@ -195,7 +210,6 @@ public class GameManager : MonoBehaviour
     {
         dialogueManager.SetUpDialog(Customers[CustomerCounter].quests[0].QuestDialogAfterCompletion[0], Customers[CustomerCounter], Customers[CustomerCounter].quests[0].ReqRecipe);
     }
-
     bool IsAnNPC()
     {
         switch (Customers[CustomerCounter].NpcName)
@@ -210,20 +224,20 @@ public class GameManager : MonoBehaviour
                 return false;
         }
     }
-
     public void OnSave()
     {
-        //Debug.Log("Has finished an npc: " + HasFinishedNPC);
-
         QuestID = new int[storyQuests.Count];
         for(int i = 0; i < storyQuests.Count; i++)
         {
             QuestID[i] = storyQuests[i].QuestID;
         }
-
         storyQuests.Clear();
     }
-
+    void SaveData()
+    {
+        OnSave();
+        SaveSystem.SaveData(player, this);
+    }
     public void LoadData()
     {
         SO_Quest[] _allQuests = Resources.LoadAll<SO_Quest>("Story Quest");
@@ -242,5 +256,12 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        player.LoadData();
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveData();
     }
 }

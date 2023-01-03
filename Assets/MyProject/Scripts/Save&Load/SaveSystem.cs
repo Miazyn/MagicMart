@@ -15,7 +15,6 @@ public static class SaveSystem
         _formatter.Serialize(_stream, _data);
         _stream.Close();
     }
-
     public static Data LoadData()
     {
         string _path = Application.persistentDataPath + "/saveData.save";
@@ -29,10 +28,19 @@ public static class SaveSystem
 
             return _data;
         }
-        else
+
+        Debug.LogError("Save File not found in " + _path);
+        return null;
+
+    }
+    public static bool HasSaveData()
+    {
+        string _path = Application.persistentDataPath + "/saveData.save";
+
+        if (File.Exists(_path))
         {
-            Debug.LogError("Save File not found in " + _path);
-            return null;
+            return true;
         }
+        return false;
     }
 }

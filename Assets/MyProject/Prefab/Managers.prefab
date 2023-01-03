@@ -50,6 +50,8 @@ MonoBehaviour:
   CurrentRecipe: {fileID: 0}
   day: 1
   ExpectedCustomerAmount: 0
+  QuestID: 
+  storyQuests: []
   RhythymGameScore: 0
   CookingGameScore: 0
   OverallScore: 0
