@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         dialogueManager = DialogueManager.instance;
         curState = GameState.DayStart;
         originalVolume = gameplayMusic.volume;
+        storyQuests = new List<SO_Quest>();
     }
 
     private void Update()
