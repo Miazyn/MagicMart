@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
     public List<SO_Quest> storyQuests { get; private set; }
 
     [Header("Scores")]
-    public float RhythymGameScore;
+    public float RhythmGameScore;
     public float CookingGameScore;
     public float OverallScore;
     [SerializeField] AudioSource moneySound;
 
-    [Header("All Corelated Scripts")]
+    [Header("All Correlated Scripts")]
     [SerializeField] DialogueManager dialogueManager;
 
     AudioSource gameplayMusic;
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
     {
         float maxScore = 200;
 
-        float playerScore = RhythymGameScore + CookingGameScore;
+        float playerScore = RhythmGameScore + CookingGameScore;
         float overall = playerScore / (maxScore / 100);
 
         OverallScore = overall;

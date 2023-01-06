@@ -113,7 +113,7 @@ public class RhythmGameManager : MonoBehaviour
                 Destroy(noteSpawn.spawnedNotes[i]);
             }
 
-            manager.RhythymGameScore = playerScore;
+            manager.RhythmGameScore = playerScore;
             StartCoroutine(BreathTime());
         }
     }

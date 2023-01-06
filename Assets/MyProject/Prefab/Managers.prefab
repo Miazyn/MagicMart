@@ -51,7 +51,6 @@ MonoBehaviour:
   day: 1
   ExpectedCustomerAmount: 0
   QuestID: 
-  storyQuests: []
   RhythymGameScore: 0
   CookingGameScore: 0
   OverallScore: 0
@@ -70,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4acf981eb640846ab2696a2025bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: Aussie
+  PlayerName: Aubrey
   StoreName: Magic Mart
   inventory: {fileID: 11400000, guid: 0d3c3f20c9df0fc4fb1c593a22519adf, type: 2}
   CurrentCookingQuest: {fileID: 0}
