@@ -66,6 +66,7 @@ public class CookIngredient : MonoBehaviour, IDropHandler, IBeginDragHandler, IE
         IsCurrentlyDragged = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+
         if (!IsOnTheke && HasBeenOnTheke) 
         {
             Debug.Log("I am not on a theke: " + ingredient.ingredientName);
